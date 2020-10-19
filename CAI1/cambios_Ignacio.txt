@@ -1,0 +1,10 @@
+Informe Final
+
+Queda plasmado con evidencia gráfica y textual que se está cometiendo una violación de los términos de la política de seguridad de la empresa. Los tres usuarios examinados no cumplen con los requisitos solicitados por la compañía, algunos incurriendo en un uso de contraseñas notorias por su facilidad para ser trasgredidas. Se sugiere a la empresa una reforma tanto en recursos humanos como en tecnológicos a efectos de mejora de productividad. Estas reformas incluyen:
+
+	- Cambio inmediato de las contraseñas de los usuarios comprometidos.
+	- Concienciación por parte de algún departamento a los empleados sobre consejos de seguridad en el entorno laboral y en internet.
+	- Inclusión de software generador de contraseñas seguras. (véase Análisis de Generadores y Gestores de Contraseñas)
+	- Inclusión de software gestor de contraseñas para mejora de la eficiencia laboral y evitar la "password fatigue"(véase Análisis de Generadores y Gestores de Contraseñas).
+	- Modificar el cifrado de contraseñas con Hash SHA-1. Se ha probado inseguro y es recomendable el uso de otros algoritmos como SHA 224 o SHA 256.
+
