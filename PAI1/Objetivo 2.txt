@@ -1,2 +1,40 @@
  
 TODO// 
+
+Para la instalación de Wazuh seguiremos la documentación que ofrece
+la propia pagina ("https://documentation.wazuh.com/3.11/installation-guide/index.html")
+
+Para instalar Wazuh en Windows, tendríamos que descargar el instalador de
+de la lista de paquetes, en nuestro caso vamos a utilizar la version
+3.11.4 
+Para instalarlo se pueden seguir dos opciones, los pasos de la GUI o
+usando comandos.
+
+Con comandos:
+
+Para instalar el agente de Windows desde la linea de comandos, se ejecuta 
+el instalador con el siguiente comando:
+-CMD: wazuh-agent-3.11.4-1.msi /q
+-PowerShell: .\wazuh-agent-3.11.4-1.msi /q
+Necesitaremos definir las variables ADDRESS y AUTHD_SERVER. El agente 
+usará esos valores para registrar y asignar un administrador de Wazuh
+para reenviar eventos.
+-CMD:wazuh-agent-3.11.4-1.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2"
+-PowerShell: .\wazuh-agent-3.11.4-1.msi /q WAZUH_MANAGER="10.0.0.2" WAZUH_REGISTRATION_SERVER="10.0.0.2"
+
+Con la GUI:
+
+Hay que ejecutar el archivo descargado y seguir los pasos del 
+asistente de instalación. Si no está seguro de cómo responder a 
+algunas de las indicaciones, simplemente use las respuestas 
+predeterminadas.
+
+Una vez instalado, el agente utiliza una interfaz gráfica de usuario 
+para la configuración, abrir el archivo de registro o iniciar y 
+detener el servicio
+
+[windows-agent1.png]
+
+
+Ahora que el agente está instalado, el siguiente paso es registrarse 
+y configurarlo para que se comunique con el administrador. 
