@@ -54,5 +54,22 @@ luego los envía a un "escondite", como Elasticsearch. Kibana permite
 a los usuarios visualizar los datos en cuadros y gráficos con 
 Elasticsearch.
 
+·Tripwire
+Tripwire es un programa que proporciona una herramienta de seguridad 
+e integridad de datos, desarrollado de forma Open Source. 
+Sus principales características comprenden: la monitorización y alerta 
+de cambios en ficheros de un sistema de ficheros; comparar la firma 
+digital de directorios y archivos frente a una base de datos de esos 
+mismos ficheros, creada previamente; y crear la propia base de datos 
+ya mencionada, que contendrá una copia de la información necesaria para 
+comprobar la integridad de los archivos, accesible mediante contraseña cifrada.
+Puesto que la base de datos se crea a partir de los ficheros y directorios 
+que se encuentran en el sistema tras su instalación, en el caso de que 
+estos datos estén ya corruptos, no podría detectarse tal infección y la 
+herramienta perdería su efectividad. 
+Por tanto, se recomienda encarecidamente la instalación del programa y la 
+creación de la base de datos previamente al primer acceso de la máquina a 
+la red.
+
 
 
