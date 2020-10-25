@@ -1,5 +1,6 @@
 #!/bin/bash
-encryption=256
+
+encryption=sha256
 function usage()
 {
     cat<<USAGE
@@ -67,7 +68,7 @@ function encrypt()
     esac
 }
 
-while true; do
+while [ ! -d "$1" ]; do
     case $1 in
         -h|--help)
             usage
@@ -107,7 +108,6 @@ while true; do
             break 2
         ;;
     esac
-    shift
 done
 
 echo "$1">>Hashes.txt
