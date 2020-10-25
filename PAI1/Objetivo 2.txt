@@ -38,3 +38,30 @@ detener el servicio
 
 Ahora que el agente está instalado, el siguiente paso es registrarse 
 y configurarlo para que se comunique con el administrador. 
+
+* Instalacion Tripwire*
+
+A continuación, se detalla el proceso de instalación en el sistema operativo Ubuntu
+de la herramienta Tripwire, mediante un par de comandos y una interfaz gráfica muy simple:
+1. Instalar Tripwire en el sistema operativo, actualizando el repositorio.
+	sudo apt update
+	sudo apt install -y Tripwire
+2. Se nos pregunta el servidor de correo para recibir notificaciones, elegimos el que más nos convenga. 
+   En nuestro caso, Sitio de Internet.
+3. Dejamos el nombre del sistema de correos por defecto.
+4. Aceptamos crear una clave de sitio para Tripwire.
+5. También aceptamos crear una clave local.
+6. En la siguiente ventana, seleccionamos Si, para reconstruir el fichero de configuración de Tripwire, 
+   debido a las modificaciones que acabamos de realizar.
+7. Le damos a Si de nuevo, para reconstruir el fichero de directrices.
+8. Ahora, definimos una clave de sitio, como marcamos anteriormente. Es importante recordar esta contraseña 
+   por falta de mecanismos de recuperación.
+9. Confirmamos la contraseña.
+10. Creamos una clave local.
+11. La confirmamos.
+12. El proceso de instalación ha terminado.
+
+Tras esto, las siguientes pautas a tomar para poder utilizar Tripwire serían configurar las políticas de 
+Tripwire, y modificar los directorios mediante el archivo de configuración. Hecho todo el proceso, podremos 
+utilizar la herramienta para detectar modificaciones y, además añadir notificaciones que nos lleguen al 
+correo electrónico.
