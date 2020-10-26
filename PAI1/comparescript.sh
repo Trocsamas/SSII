@@ -2,7 +2,7 @@
 
 if [ "$1" == "-h" ]; 
 then
-	echo "Usage: `$0` fichero1 fichero2";
+	echo "Usage: `basename $0` fichero1 fichero2";
 	exit 0;
 else
 	antiguo=$1;
