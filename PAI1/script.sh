@@ -10,8 +10,9 @@ Este es un script que maneja de forma automática un hids
 usage: ${0##*/} [options] [path]
 
   Options:
-   -h, --help               display this help
-   -V, --version            display version information
+   -h, --help               Display this help
+   -V, --version            Display version information
+   -v, --verbose            Display information while the script is running
    --encryption==HASH       Use the name as encryption
    --md5                    Use of MD5 as encryption method
    --sha1                   Use of SHA1 as encryption method
@@ -37,11 +38,11 @@ function operacion_recursiva()
         if [ ! -d "${file}" ] ; then
             nombre=$(basename "$file")
             encrypt "$encryption" "${file}"
-            echo "$nombre:$hash">>Hashes.txt
+            echo "$nombre,${hash%% *},"${file}"">>hashesNuevos.csv
             if $verbose; then echo -e "\t ${hash%% *}\t:\t$nombre"
             fi
         else
-            echo "$file">>Hashes.txt
+            echo "$file">>directorios.txt
             if $verbose; then echo "Entering path: $file/"
             fi
             operacion_recursiva "${file}/"
@@ -128,7 +129,7 @@ while [ ! -d "$1" ]; do
         ;;
     esac
 done
-if $verbose; then echo "Iniciando el script donde se analizará el path $1"
+if $verbose; then echo "Iniciando el script donde se analizará el path $1 y se usará $encryption"
 fi
-echo "$1">>Hashes.txt
+echo "$1">>directorios.txt
 operacion_recursiva $1
