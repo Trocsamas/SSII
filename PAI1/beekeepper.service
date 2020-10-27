@@ -1,0 +1,13 @@
+[Unit]
+#Aquí entran algunos parámetros básicos como Description, que proporciona
+#una descripción del servicio. After indica qué servicios deben correrse 
+#antes de ejecutar el servicio este en cuestión. Requires and Wants 
+#marcan respectivamente qué servicios necesitan obligatoriamente para 
+#funcionar y cuales son necesarias pero no cruciales respectivamente.
+Description= This service runs as a service version of the script Apicultor.
+[Service]
+#ExecStart= /path/to/apciultor.sh
+#Sería conveniente usar la opción ExecReload en caso de reiniciar el 
+#servicio de forma que se vuelva a lanzar el mismo script
+#ExecReload=/path/to/apciultor.sh
+[Install]
