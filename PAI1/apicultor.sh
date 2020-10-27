@@ -10,7 +10,7 @@ hashesAntiguos=$HOME/.apicultor/hashesAntiguos.csv
 directoriosNuevos=$HOME/.apicultor/directoriosNuevos.csv
 directoriOSAntiguo=$HOME/.apicultor/directoriOSAntiguo.csv
 diffHashes=$HOME/.apicultor/diffHashes.csv
-diffDirectorio=$HOME/.apicultor/diffDirectorio.csv
+diffDirectorios=$HOME/.apicultor/diffDirectorios.csv
 
 function usage()
 {
@@ -118,16 +118,16 @@ function main()
     nCambios=$(wc -l < "$diffHashes")
     if [ $nCambios -ne 0 ]; then
         zenity --notification --text "Ha habido cambios en $nCambios archivos"
-        mail -s "Cambios en ficheros de $1" root -a $diffHashes
+        echo "Ha habido cambios en los archivos adjuntos" | mail -s "Cambios en ficheros de $1" root
     fi
-    rm $diffHashes
+    #rm $diffHashes
     
     nCambios=$(wc -l < "$diffDirectorios")
     if [ $nCambios -ne 0 ]; then
         zenity --notification --text "Ha habido un cambio en la estructura de directorios"
-        mail -s "Cambios en directorios de $1" root -a $diffDirectorios
+        echo "Ha habido cambios en los directorios adjuntos" | mail -s "Cambios en directorios de $1" root
     fi
-    rm $diffDirectorio
+    #rm $diffDirectorio
 }
 
 while [ ! -d "$1" ]; do
