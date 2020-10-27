@@ -3,10 +3,19 @@
 encryption=sha256
 verbose=false
 
+mkdir -p $HOME/.apicultor/
+
+hashesNuevos=$HOME/.apicultor/hashesNuevos.csv
+hashesAntiguos=$HOME/.apicultor/hashesAntiguos.csv
+directoriosNuevos=$HOME/.apicultor/directoriosNuevos.csv
+directoriOSAntiguo=$HOME/.apicultor/directoriOSAntiguo.csv
+diffHashes=$HOME/.apicultor/diffHashes.csv
+diffDirectorio=$HOME/.apicultor/diffDirectorio.csv
+
 function usage()
 {
     cat<<USAGE
-Este es un script que maneja de forma automática un hids
+Apicultor es un script que maneja de forma automática un hids para detectar cambios en archivos y directorios
 usage: ${0##*/} [options] [path]
 
   Options:
@@ -27,7 +36,7 @@ USAGE
 function version()
 {
     cat<<version
-    script 0.1
+    Apicultor 0.2
 version
 }
 
@@ -35,14 +44,14 @@ function operacion_recursiva()
 {
     for file in "$1"*
     do
-        if [ ! -d "${file}" ] ; then
+        if [ -f "${file}" ] ; then
             nombre=$(basename "$file")
             encrypt "$encryption" "${file}"
-            echo "$nombre,${hash%% *},"${file}"">>hashesNuevos.csv
+            echo "$nombre,${hash%% *},"${file}"">>$hashesNuevos
             if $verbose; then echo -e "\t ${hash%% *}\t:\t$nombre"
             fi
-        else
-            echo "$file">>directorios.txt
+            elif [ -d "${file}" ] ; then
+            echo "$file">>$directoriosNuevos
             if $verbose; then echo "Entering path: $file/"
             fi
             operacion_recursiva "${file}/"
@@ -79,6 +88,46 @@ function encrypt()
     esac
 }
 
+function comparador()
+{
+    antiguo=$1;
+    nuevo=$2;
+    output=$3
+    
+    diff -W999 --side-by-side $antiguo $nuevo | sed '/^[^\t]*\t\s*|\t\(.*\)/{s//\1 U/;b};/^\([^\t]*\)\t*\s*<$/{s//\1,CREADO/;b};/^.*>\t\(.*\)/{s//\1,ELIMINADO/;b};d' > $output;
+}
+
+function main()
+{
+    
+    if $verbose; then echo "Iniciando Apicultor donde se analizará el path $1 y se usará $encryption"
+    fi
+    
+    cp $hashesNuevos $hashesAntiguos
+    rm $hashesNuevos
+    
+    cp $directoriosNuevos $directoriOSAntiguo
+    rm $directoriosNuevos
+    
+    echo "$1">>$directoriosNuevos
+    operacion_recursiva $1
+    
+    comparador "$hashesNuevos" "$hashesAntiguos" "$diffHashes"
+    comparador "$directoriosNuevos" "$directoriOSAntiguo" "$diffDirectorio"
+    
+    nCambios=$(wc -l < "$diffHashes")
+    if [ $nCambios -ne 0 ]; then
+        kdialog --title "Ha habido un cambio en los hashes" --passivepopup "Ha habido $nCambios cambios en los archivos"
+        
+    fi
+    rm $diffHashes
+    
+    nCambios=$(wc -l < "$diffDirectorio")
+    if [ $nCambios -ne 0 ]; then
+        kdialog --title "Ha habido un cambio en la estructura de directorios" --passivepopup "Han cambiado $nCambios directorios"
+    fi
+    rm $diffDirectorio
+}
 
 while [ ! -d "$1" ]; do
     case $1 in
@@ -129,7 +178,5 @@ while [ ! -d "$1" ]; do
         ;;
     esac
 done
-if $verbose; then echo "Iniciando el script donde se analizará el path $1 y se usará $encryption"
-fi
-echo "$1">>directorios.txt
-operacion_recursiva $1
+
+main $1
