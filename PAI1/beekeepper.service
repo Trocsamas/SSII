@@ -10,4 +10,6 @@ Description= This service runs as a service version of the script Apicultor.
 #Sería conveniente usar la opción ExecReload en caso de reiniciar el 
 #servicio de forma que se vuelva a lanzar el mismo script
 #ExecReload=/path/to/apciultor.sh
+#Type= ??? explorar 
 [Install]
+WantedBy=multi-user.target
