@@ -113,18 +113,19 @@ function main()
     operacion_recursiva $1
     
     comparador "$hashesNuevos" "$hashesAntiguos" "$diffHashes"
-    comparador "$directoriosNuevos" "$directoriOSAntiguo" "$diffDirectorio"
+    comparador "$directoriosNuevos" "$directoriOSAntiguo" "$diffDirectorios"
     
     nCambios=$(wc -l < "$diffHashes")
     if [ $nCambios -ne 0 ]; then
-        kdialog --title "Ha habido un cambio en los hashes" --passivepopup "Ha habido $nCambios cambios en los archivos"
-        
+        zenity --notification --text "Ha habido cambios en $nCambios archivos"
+        mail -s "Cambios en ficheros de $1" root -a $diffHashes
     fi
     rm $diffHashes
     
-    nCambios=$(wc -l < "$diffDirectorio")
+    nCambios=$(wc -l < "$diffDirectorios")
     if [ $nCambios -ne 0 ]; then
-        kdialog --title "Ha habido un cambio en la estructura de directorios" --passivepopup "Han cambiado $nCambios directorios"
+        zenity --notification --text "Ha habido un cambio en la estructura de directorios"
+        mail -s "Cambios en directorios de $1" root -a $diffDirectorios
     fi
     rm $diffDirectorio
 }
