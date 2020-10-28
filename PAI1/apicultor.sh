@@ -8,7 +8,7 @@ mkdir -p $HOME/.apicultor/
 hashesNuevos=$HOME/.apicultor/hashesNuevos.csv
 hashesAntiguos=$HOME/.apicultor/hashesAntiguos.csv
 directoriosNuevos=$HOME/.apicultor/directoriosNuevos.csv
-directoriOSAntiguo=$HOME/.apicultor/directoriOSAntiguo.csv
+directoriOSAntiguo=$HOME/.apicultor/directoriosAntiguo.csv
 diffHashes=$HOME/.apicultor/diffHashes.csv
 diffDirectorios=$HOME/.apicultor/diffDirectorios.csv
 
@@ -22,7 +22,7 @@ usage: ${0##*/} [options] [path]
    -h, --help               Display this help
    -V, --version            Display version information
    -v, --verbose            Display information while the script is running
-   --encryption==HASH       Use the name as encryption
+   --encryption=HASH        Use the name as encryption
    --md5                    Use of MD5 as encryption method
    --sha1                   Use of SHA1 as encryption method
    --sha224                 Use of SHA224 as encryption method
@@ -94,7 +94,7 @@ function comparador()
     nuevo=$2;
     output=$3
     
-    diff -W999 --side-by-side $antiguo $nuevo | sed '/^[^\t]*\t\s*|\t\(.*\)/{s//\1 U/;b};/^\([^\t]*\)\t*\s*<$/{s//\1,CREADO/;b};/^.*>\t\(.*\)/{s//\1,ELIMINADO/;b};d' > $output;
+    diff -W999 --side-by-side $antiguo $nuevo | sed '/^[^\t]*\t\s*|\t\(.*\)/{s//\1,MODIFICADO/;b};/^\([^\t]*\)\t*\s*<$/{s//\1,CREADO/;b};/^.*>\t\(.*\)/{s//\1,ELIMINADO/;b};d' > $output;
 }
 
 function main()
