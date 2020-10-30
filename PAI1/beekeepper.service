@@ -5,11 +5,12 @@
 #marcan respectivamente qué servicios necesitan obligatoriamente para 
 #funcionar y cuales son necesarias pero no cruciales respectivamente.
 Description= This service runs as a service version of the script Apicultor.
+
 [Service]
-#ExecStart= /path/to/apciultor.sh
+ExecStart= /home/SSII/Documentos/SSII/PAI1/apciultor.sh -v $HOME
 #Sería conveniente usar la opción ExecReload en caso de reiniciar el 
 #servicio de forma que se vuelva a lanzar el mismo script
-#ExecReload=/path/to/apciultor.sh
-#Type= ??? explorar 
+ExecReload=  /home/SSII/Documentos/SSII/PAI1/apciultor.sh -v $HOME
+Type= simple
 [Install]
 WantedBy=multi-user.target
