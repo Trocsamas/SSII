@@ -5,7 +5,6 @@
 #marcan respectivamente qué servicios necesitan obligatoriamente para 
 #funcionar y cuales son necesarias pero no cruciales respectivamente.
 Description= This service runs as a service version of the script Apicultor.
-Requires= Network.target
 After= Network.target
 OnFailure= /home/SSII/Documentos/SSII/PAI1/notify_failure
 [Service]
