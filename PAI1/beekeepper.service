@@ -5,9 +5,12 @@
 #marcan respectivamente qué servicios necesitan obligatoriamente para 
 #funcionar y cuales son necesarias pero no cruciales respectivamente.
 Description= This service runs as a service version of the script Apicultor.
-
+After= Network.target
+OnFailure= /home/ssii/Documentos/SSII/PAI1/notify_failure
 [Service]
-ExecStart="/home/SSII/Documentos/SSII/PAI1/apciultor.sh -v $HOME"
+ExecStart="/home/ssii/Documentos/SSII/PAI1/apicultor.sh $HOME"
+RemainAfterExit=yes
+
 #Sería conveniente usar la opción ExecReload en caso de reiniciar el 
 #servicio de forma que se vuelva a lanzar el mismo script
 #ExecReload=/home/SSII/Documentos/SSII/PAI1/apciultor.sh -v $HOME
