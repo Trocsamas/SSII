@@ -7,13 +7,18 @@ noMail=false
 mkdir -p $HOME/.apicultor/history
 
 historial=$HOME/.apicultor/history
+
 hashesNuevos=$HOME/.apicultor/hashesNuevos.csv
 hashesAntiguos=$HOME/.apicultor/hashesAntiguos.csv
+
 directoriosNuevos=$HOME/.apicultor/directoriosNuevos.csv
 directoriosAntiguo=$HOME/.apicultor/directoriosAntiguo.csv
+
 diffHashes=$HOME/.apicultor/diffHashes.csv
 diffDirectorios=$HOME/.apicultor/diffDirectorios.csv
 
+touch $hashesNuevos
+touch $directoriosNuevos
 function usage()
 {
     cat<<USAGE
