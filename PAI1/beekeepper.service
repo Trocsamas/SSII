@@ -2,7 +2,7 @@
 Description= This service runs as a service version of the script Apicultor.
 After= Network.target
 [Service]
-ExecStart="/home/ssii/Documentos/SSII/PAI1/apicultor.sh /home/ssii/Documentos/"
+ExecStart=/bin/bash /home/ssii/Documentos/SSII/PAI1/apicultor.sh /home/ssii/Documentos/
 RemainAfterExit=yes
 [Install]
 WantedBy=multi-user.target
