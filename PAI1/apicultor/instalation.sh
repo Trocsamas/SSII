@@ -150,6 +150,12 @@ function comparador()
 function main()
 {
 
+    cp \$hashesNuevos \$hashesAntiguos
+    mv \$hashesNuevos \$historial/\$(date +%F_%R)_hashes.csv
+
+    cp \$directoriosNuevos \$directoriosAntiguo
+    mv \$directoriosNuevos \$historial/\$(date +%F_%R)_directorios.csv
+
     if \$verbose; then echo "Initialization Apicultor, using \$encryption as encryption method"
     fi
 
@@ -182,11 +188,7 @@ function main()
     fi
     rm \$diffDirectorios
 
-    cp \$hashesNuevos \$hashesAntiguos
-    mv \$hashesNuevos \$historial/\$(date +%F_%R)_hashes.csv
 
-    cp \$directoriosNuevos \$directoriosAntiguo
-    mv \$directoriosNuevos \$historial/\$(date +%F_%R)_directorios.csv
 }
 
 if [ \$# -eq 0 ]; then
