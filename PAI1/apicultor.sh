@@ -2,21 +2,23 @@
 
 encryption=sha256
 verbose=false
+noMail=false
 
-mkdir -p $HOME/.apicultor/
+mkdir -p $HOME/.apicultor/history
 
+historial=$HOME/.apicultor/history
 hashesNuevos=$HOME/.apicultor/hashesNuevos.csv
 hashesAntiguos=$HOME/.apicultor/hashesAntiguos.csv
 directoriosNuevos=$HOME/.apicultor/directoriosNuevos.csv
-directoriOSAntiguo=$HOME/.apicultor/directoriosAntiguo.csv
+directoriosAntiguo=$HOME/.apicultor/directoriosAntiguo.csv
 diffHashes=$HOME/.apicultor/diffHashes.csv
 diffDirectorios=$HOME/.apicultor/diffDirectorios.csv
 
 function usage()
 {
     cat<<USAGE
-Apicultor es un script que maneja de forma automática un hids para detectar cambios en archivos y directorios
-usage: ${0##*/} [options] [path]
+Apicultor is a script which manages an automatic HIDS to detect changes in directories and files
+usage: ${0##*/} [options] [paths]
 
   Options:
    -h, --help               Display this help
@@ -29,6 +31,7 @@ usage: ${0##*/} [options] [path]
    --sha256(default)        Use of SHA256 as encryption method
    --sha384                 Use of SHA384 as encryption method
    --sha512                 Use of SHA512 as encryption method
+   --no-mail                Only use for Debugging
 
 USAGE
 }
@@ -66,7 +69,7 @@ function operacion_recursiva()
             fi
             elif [ -d "${file}" ] ; then
             echo "$file">>$directoriosNuevos
-            if $verbose; then echo "Entering path: $file/"
+            if $verbose; then echo -e "Entering path:\t $file/"
             fi
             operacion_recursiva "${file}/"
         fi
@@ -108,41 +111,55 @@ function comparador()
     nuevo=$2;
     output=$3
     
-    diff -W999 --side-by-side $antiguo $nuevo | sed '/^[^\t]*\t\s*|\t\(.*\)/{s//\1,MODIFICADO/;b};/^\([^\t]*\)\t*\s*<$/{s//\1,CREADO/;b};/^.*>\t\(.*\)/{s//\1,ELIMINADO/;b};d' > $output;
+    diff -W999 --side-by-side $antiguo $nuevo | sed '/^[^\t]*\t\s*|\t\(.*\)/{s//\1,MODIFIED/;b};/^\([^\t]*\)\t*\s*<$/{s//\1,NEW/;b};/^.*>\t\(.*\)/{s//\1,REMOVED/;b};d' > $output;
 }
 
 function main()
 {
     
-    if $verbose; then echo "Iniciando Apicultor donde se analizará el path $1 y se usará $encryption"
+    if $verbose; then echo "Initialization Apicultor, using $encryption as encryption method"
     fi
     
-    cp $hashesNuevos $hashesAntiguos
-    rm $hashesNuevos
-    
-    cp $directoriosNuevos $directoriOSAntiguo
-    rm $directoriosNuevos
-    
-    echo "$1">>$directoriosNuevos
-    operacion_recursiva $1
+    for arg in "$@"; do
+        if $verbose; then echo -e "Entering path:\t $1"
+        fi
+        echo "$1">>$directoriosNuevos
+        operacion_recursiva $1
+        shift
+    done
     
     comparador "$hashesNuevos" "$hashesAntiguos" "$diffHashes"
-    comparador "$directoriosNuevos" "$directoriOSAntiguo" "$diffDirectorios"
+    comparador "$directoriosNuevos" "$directoriosAntiguo" "$diffDirectorios"
     
     nCambios=$(wc -l < "$diffHashes")
     if [ $nCambios -ne 0 ]; then
         print_notification "Ha habido cambios en $nCambios archivos"
-        echo "Ha habido cambios en los archivos adjuntos" | mail -s "Cambios en ficheros de $1" root --attach=$diffHashes
+        if ! $noMail; then
+            echo "Ha habido cambios en los archivos adjuntos" | mail -s "Cambios en ficheros de $1" root --attach=$diffHashes
+        fi
     fi
     rm $diffHashes
     
     nCambios=$(wc -l < "$diffDirectorios")
     if [ $nCambios -ne 0 ]; then
         print_notification "Ha habido un cambio en la estructura de directorios"
-        echo "Ha habido cambios en los directorios adjuntos" | mail -s "Cambios en directorios de $1" root --attach=$diffDirectorios
+        if ! $noMail; then
+            echo "Ha habido cambios en los directorios adjuntos" | mail -s "Cambios en directorios de $1" root --attach=$diffDirectorios
+        fi
     fi
     rm $diffDirectorios
+    
+    cp $hashesNuevos $hashesAntiguos
+    mv $hashesNuevos $historial/$(date +%F_%R)_hashes.csv
+    
+    cp $directoriosNuevos $directoriosAntiguo
+    mv $directoriosNuevos $historial/$(date +%F_%R)_directorios.csv
 }
+
+if [ $# -eq 0 ]; then
+    usage
+    exit 1
+fi
 
 while [ ! -d "$1" ]; do
     case $1 in
@@ -153,6 +170,10 @@ while [ ! -d "$1" ]; do
         -V|--version)
             version
             exit 0
+        ;;
+        --no-mail)
+            noMail=true
+            shift
         ;;
         -v|--verbose)
             verbose=true
@@ -194,4 +215,4 @@ while [ ! -d "$1" ]; do
     esac
 done
 
-main $1
+main "$@"
