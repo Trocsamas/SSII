@@ -276,6 +276,52 @@ usage: ${0##*/} [options] [paths]
 USAGE
 }
 
+function install_dependencies()
+{
+    echo "Comprobando dependencias necesarias:"
+    #Instalación para Ubuntu debian, kali y raspbian
+    if which apt-get>/dev/null; then
+        echo -e "\t- libdigest-sha-perl"
+        if which sha1sum>/dev/null; then
+            echo "Instalando libdigest-sha-perl"
+            apt-get install libdigest-sha-perl;
+        fi
+        echo -e "\t- mailutils"
+        if which mailutils>/dev/null; then
+            echo "Instalando mailutils"
+            apt-get install mailutils
+        fi
+        echo -e "\t- coreutils"
+        if which md5sum>/dev/null; then
+            echo "Instalando coreutils"
+            #No tenías este paquete???
+            apt-get install coreutils;
+        fi
+        
+        #Instalación para Arch Linux
+        elif which pacman>/dev/null; then
+        echo -e "\t- perl"
+        if which sha1sum>/dev/null; then
+            echo "Instalando perl"
+            pacman -S perl
+        fi
+        if which mailutils>/dev/null; then
+            echo "Instalando mailutils"
+            pacman -S mailutils
+        fi
+        if which md5sum>/dev/null; then
+            #No tenías este paquete???
+            echo "Instalando coreutils"
+            pacman -S coreutils;
+        fi
+        
+    else
+        #Lo siento Fedora, no encontré mailutils
+        echo "This Operatin System is not supported"
+        exit
+    fi
+}
+
 function main()
 {
     if [ "$EUID" -ne 0 ]; then
@@ -283,16 +329,28 @@ function main()
         exit
     fi
     
-    #write_script>>/usr/sbin/apicultor
-    write_script>>/home/trocsamas/Escritorio/apicultor
-    #chmod 700 /usr/sbin/apicultor
+    install_dependencies
     
-    #write_service "$@">>/etc/systemd/system/system/apicultor.service
-    write_service "$@">>/home/trocsamas/Escritorio/apicultor.service
-    #systemctl daemon-reload
-    #sudo systemctl start apicultor.service
-    #sudo systemctl enable apicultor.service
-    #systemctl status apicultor.service
+    echo "Escribiendo script en /usr/sbin/apicultor"
+    write_script>>/usr/sbin/apicultor
+    
+    echo "Concediendo privilegios a apicultor"
+    chmod 700 /usr/sbin/apicultor
+    
+    echo "Escribiendo el servicio en /etc/systemd/system/system/apicultor.service"
+    
+    write_service "$@">>/etc/systemd/system/system/apicultor.service
+    echo "Recargando servicios"
+    systemctl daemon-reload
+    
+    echo "Iniciando apicultor.service"
+    sudo systemctl start apicultor.service
+    
+    echo "Habilitando apicultor.service al inicio del sistema"
+    sudo systemctl enable apicultor.service
+    
+    echo "Mostrando status de apicultor.service"
+    systemctl status apicultor.service
 }
 
 if [ $# -eq 0 ]; then
