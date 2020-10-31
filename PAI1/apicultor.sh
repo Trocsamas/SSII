@@ -33,6 +33,20 @@ usage: ${0##*/} [options] [path]
 USAGE
 }
 
+function print_notification()
+{
+    if which zenity >/dev/null; then zenity --notification --text="$1" &>/dev/null;
+        elif which kdialog >/dev/null; then kdialog --passivepopup 30 "$1" &>/dev/null;
+    fi
+}
+
+function print_error()
+{
+    if which zenity >/dev/null; then zenity --error --text="$1" &>/dev/null;
+        elif which kdialog >/dev/null; then kdialog --error "$1" &>/dev/null;
+    fi
+}
+
 function version()
 {
     cat<<version
@@ -83,7 +97,7 @@ function encrypt()
             return 1
         ;;
         *)
-            echo "The encryption method is not a valid one"
+            print_error "The encryption method is not a valid one"
             exit 1
     esac
 }
@@ -117,14 +131,14 @@ function main()
     
     nCambios=$(wc -l < "$diffHashes")
     if [ $nCambios -ne 0 ]; then
-        zenity --notification --text "Ha habido cambios en $nCambios archivos"
+        print_notification "Ha habido cambios en $nCambios archivos"
         echo "Ha habido cambios en los archivos adjuntos" | mail -s "Cambios en ficheros de $1" root --attach=$diffHashes
     fi
     rm $diffHashes
     
     nCambios=$(wc -l < "$diffDirectorios")
     if [ $nCambios -ne 0 ]; then
-        zenity --notification --text "Ha habido un cambio en la estructura de directorios"
+        print_notification "Ha habido un cambio en la estructura de directorios"
         echo "Ha habido cambios en los directorios adjuntos" | mail -s "Cambios en directorios de $1" root --attach=$diffDirectorios
     fi
     rm $diffDirectorios
