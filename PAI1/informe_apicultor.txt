@@ -1,0 +1,22 @@
+Estado del servicio
+
+El servicio de apicultor funciona correctamente con respecto a sus tareas
+de recolección de hashes y redacción de csvs con los mismos. Esto se puede
+comprobar con un rápido sudo ls -la /root/.apicultor/history:
+
+2020-11-01_12:47_directorios.csv  2020-11-01_13:02_directorios.csv
+2020-11-01_12:47_hashes.csv       2020-11-01_13:02_hashes.csv
+2020-11-01_12:52_directorios.csv  2020-11-01_13:07_directorios.csv
+2020-11-01_12:52_hashes.csv       2020-11-01_13:07_hashes.csv
+2020-11-01_12:57_directorios.csv  2020-11-01_13:12_directorios.csv
+2020-11-01_12:57_hashes.csv       2020-11-01_13:12_hashes.csv
+
+Tras más de 20 minutos de prueba, podemos comprobar que el servicio
+devuelve correctamente cada 5 minutos (pues se ha configurado el 
+parámetro de temporizador a 300 segundos) un csv con los directorios
+del sistema y otro con los hashes de los distintos ficheros que se 
+encuentran en el mismo.
+
+Funcionamiento contra ataques
+
+
