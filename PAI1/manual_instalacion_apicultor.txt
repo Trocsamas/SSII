@@ -1,0 +1,138 @@
+Manual de Instalación
+
+Requisitos previos:
+- Sistema Operativo Linux Like que habilite systemd por defecto.
+Esto incluye Sistemas Operativos como Debian GNU/Linux, Fedora, Ubuntu,
+Frugalware, Mageia, Mandriva, openSUSE, Archlinux o RedHat entre otros.
+
+Método de Instalación:
+
+Para la instalación del servicio Apicultor.service, es necesario disponer
+de los siguientes ficheros:
+ - instalation.sh
+ - uninstall.sh
+
+Estos dos ficheros son scripts en bash que se encargan de los procesos de 
+instalación y desinstalación del servicio. Para el correcto uso de los 
+mismos, es necesario modificar los permisos de ambos scirpts para que sean
+ejecutables. Usted tendrá que abrir una terminal y ejecutar el siguiente 
+comando:
+
+	[sudo] chmod 700 /path/to/instalation.sh /path/to/uninstall.sh
+
+Donde /path/to/ se refiere a la ruta donde se ubiquen los ficheros ya 
+mencionados. En caso de que con la consola se ubique dentro del directorio
+que contiene ambos ficheros, con chmod 700 instalation.sh uninstall.sh 
+será suficiente.
+
+Una vez que haya conseguido configurar los permisos correctamente, el
+siguiente paso a seguir es comenzar la instalación. Los desarrolladores
+recomiendan ejecutar primer el script de desinstalación para asegurar un
+funcionamiento correcto y limpio. Para ello, ejecute el siguiente comando:
+	
+	sudo ./path/to/uninstall.sh
+
+
+Si no ha utilizado este programa antes, es casi seguro que obtendrá la 
+siguiente salida:
+
+ "Procediendo a la eliminación de archivos y directorios de apicultor y su 
+servicio
+rm: no se puede borrar '/usr/sbin/apicultor': No existe el archivo o 
+el directorio"
+
+Esto es buena señal, no es necesario alarmarse por la salida de error. 
+Es momento de pasar al siguiente paso, la instalación del servicio. Para
+ello, tendrá que ejecutar en la consola el siguiente comando:
+
+	sudo ./path/to/instalation [--timer=XX] /path/to/watch
+
+Vamos a desglosar este comando. Siguiendo el standard explicado previamente,
+path/to/instalation marca la ruta del fichero ejecutable de instalación. Los
+parámetros siguientes son sin embargo más cruciales. --timer=XX indica la
+frecuencia en segundos con la que se revisará que se han producido cambios
+en los resúmenes (hashes) de los ficheros, es decir, que se hayan alterado, 
+ya sea de manera ajena o determinada por el usuario. En caso de no incluir 
+este parámetro en la ejecución, se configurará por defecto a 3600 segundos,
+es decir, una hora de intervalo entre comprobación y comprobación. Por 
+último, el parámetro /path/to/watch describe la ruta del directorio en el 
+que el servicio deberá enfocar su recolección de hashes. Sin este parámetro,
+el script le mostrará una pantalla de ayuda con parámetros extra del
+servicio, pero no se instalará.
+
+Una vez que haya introducido todos los parámetros deseados, deje que 
+termine de su sistema operativo se encargue de instalar todos los paquetes
+necesarios para que pueda disfrutar del servicio. La consola desplegará
+un texto similar a este por pantalla:
+
+Leyendo lista de paquetes... Hecho
+Creando árbol de dependencias       
+Leyendo la información de estado... Hecho
+Los paquetes indicados a continuación se instalaron de forma automática y ya no son necesarios.
+  libfprint-2-tod1 libllvm9 python3-click python3-colorama
+Utilice «sudo apt autoremove» para eliminarlos.
+Se instalarán los siguientes paquetes adicionales:
+  git-man liberror-perl
+Paquetes sugeridos:
+  git-daemon-run | git-daemon-sysvinit git-doc git-el git-email git-gui gitk
+  gitweb git-cvs git-mediawiki git-svn
+Se instalarán los siguientes paquetes NUEVOS:
+  git git-man liberror-perl
+0 actualizados, 3 nuevos se instalarán, 0 para eliminar y 37 no actualizados.
+Se necesita descargar 5.464 kB de archivos.
+Se utilizarán 38,4 MB de espacio de disco adicional después de esta operación.
+¿Desea continuar? [S/n] 
+
+Introduzca la letra S por consola y deje que el sistema termine con la
+instalación. 
+
+Una vez que termine la instalación, el sistema le mostrará el estado del 
+servicio y algunos datos adicionales por pantalla, dando por concluida la
+instalación. Para comprobar que el servicio está activo, introduzca el 
+siguiente comando por consola
+
+	sudo systemctl status apicultor.service | more
+
+Este comando le permitirá comprobar si el servicio está operativo en el
+sistema. La salida que obtendrá es la siguiente:
+
+● apicultor.service - HIDS service that manages the integrity of files and dire
+ctories in the given paths
+     Loaded: loaded (/etc/systemd/system/apicultor.service; enabled; vendor pre
+set: enabled)
+     Active: activating (auto-restart) since Sun 2020-11-01 18:37:42 CET; 3min 
+14s ago
+    Process: 23159 ExecStart=/usr/bin/apicultor /home (code=exited, status=0/SU
+CCESS)
+   Main PID: 23159 (code=exited, status=0/SUCCESS)
+
+nov 01 18:37:42 ssii-VirtualBox systemd[1]: apicultor.service: Succeeded.
+
+Si en el apartado Loaded aparece como loaded y en Active está activating,
+su servicio está operativo y funcional. En caso de no ser así, probablemente
+tendrá que reiniciar el proceso. Si tuviera más dificultades, pongase en 
+contacto con su servicio técnico o con los desarrolladores escribiendo al 
+correo mailtodevus@gmail.com
+
+
+Instalación de Mailutils
+
+Una parte esencial del servicio es la notificación mediante un servicio de 
+correo local si se han producido cambios en los ficheros a revisar en el 
+sistema. Para ello, el servicio Apicultor.service se basa en la herramienta 
+mailutils para el envío de correos. Por defecto, si toda la instalación
+previa ha ido correctamente, mailutils debería haberse instalado con éxito.
+Sin embargo, para asegurar que todo funciona correctamente, le recomendamos
+que comrpuebe si tiene instalado dicho software. En caso de no poseerlo, 
+procedemos a describirle cómo instalarlo. 
+
+En primer lugar, abra una consola de comandos. Una vez abierta, teclee el 
+siguiente comando:
+
+	sudo apt-get install mailutils
+
+De manera similar al servicio, le mostrará los paquetes a instalar y le 
+solicitará continuar con la instalación. Tras esto, el programa se instalará
+con éxito. Tras esto
+
+
