@@ -17,6 +17,8 @@ directoriosAntiguo=$HOME/.apicultor/directoriosAntiguo.csv
 diffHashes=$HOME/.apicultor/diffHashes.csv
 diffDirectorios=$HOME/.apicultor/diffDirectorios.csv
 
+logHashes=$HOME/.apicultor/history/hash.log
+
 touch $hashesNuevos
 touch $directoriosNuevos
 function usage()
@@ -119,6 +121,14 @@ function comparador()
     diff -W999 --side-by-side $antiguo $nuevo | sed '/^[^\t]*\t\s*|\t\(.*\)/{s//\1,MODIFIED/;b};/^\([^\t]*\)\t*\s*<$/{s//\1,NEW/;b};/^.*>\t\(.*\)/{s//\1,REMOVED/;b};d' > $output;
 }
 
+function write_log()
+{
+    #Recibe fichero y num de diferencias
+    nHashes=$(wc -l < "$1")
+    xx=$2; yy=$nHashes; porcentaje=$(echo "scale=4; ($xx/$yy*100)" | bc)
+    echo "Se han producido $porcentaje% de cambios en $1">>$logHashes
+}
+
 function main()
 {
     
@@ -149,6 +159,7 @@ function main()
             echo "Ha habido cambios en los archivos adjuntos" | mail -s "Cambios en ficheros de $1" root --attach=$diffHashes
         fi
     fi
+    write_log $hashesAntiguos $nCambios
     rm $diffHashes
     
     nCambios=$(wc -l < "$diffDirectorios")
