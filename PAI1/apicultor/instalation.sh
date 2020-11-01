@@ -381,4 +381,6 @@ while [ ! -d "$1" ]; do
     
 done
 
+mkdir -p /root/.apicultor/
+
 main $@
