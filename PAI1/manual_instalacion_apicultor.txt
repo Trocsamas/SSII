@@ -131,8 +131,24 @@ siguiente comando:
 
 	sudo apt-get install mailutils
 
-De manera similar al servicio, le mostrará los paquetes a instalar y le 
+De manera similar al servicio anterior, le mostrará los paquetes a instalar y le 
 solicitará continuar con la instalación. Tras esto, el programa se instalará
-con éxito. Tras esto
+con éxito. Tras un breve proceso de instalación, le saldrá una pantalla con
+título Postfix Configuration. Aquí podrá elegir qué opción se ajusta más a 
+sus necesiadades de correo. Las opciones que se le ofrecen para sets
+de preconfiguración del software son:
 
+ - Sin configuración
+ - Sitio de Internet
+ - Internet con <<smarthost>>
+ - Sistema satélite
+ - Sólo correo local
 
+De todas las anteriores, solo debe elegir la opción "Sólo correo local". 
+Desplace la barra de selección sobre ésta y pulse aceptar. Esto le llevará
+a otra ventana, esta vez para preguntar qué nombre desea asignar a su 
+sistema de correo. Escirba cualquiera que le resulte conveniente. Por
+defecto le asignará el nombre de la máquina. Una vez introducido el nombre,
+pulse aceptar y espere a que el sistema termine de instalar el servicio. 
+Una vez terminada la instalación, ya podrá disfrutar de su sistema de 
+correo local, al que podrá acceder con sudo mail.mailutils.
