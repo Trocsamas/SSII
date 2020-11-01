@@ -331,15 +331,15 @@ function main()
     
     install_dependencies
     
-    echo "Escribiendo script en /usr/sbin/apicultor"
+    echo "Escribiendo script en /usr/bin/apicultor"
     write_script>>/usr/bin/apicultor
     
     echo "Concediendo privilegios a apicultor"
     chmod 700 /usr/bin/apicultor
     
-    echo "Escribiendo el servicio en /etc/systemd/system/system/apicultor.service"
+    echo "Escribiendo el servicio en /etc/systemd/system/apicultor.service"
     
-    write_service "$@">>/etc/systemd/system/system/apicultor.service
+    write_service "$@">>/etc/systemd/system/apicultor.service
     echo "Recargando servicios"
     systemctl daemon-reload
     sleep 2
