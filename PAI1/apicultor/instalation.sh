@@ -11,10 +11,15 @@ Description=HIDS service that manages the integrity of files and directories in 
 
 [Service]
 User=root
+Type=simple
 WorkingDirectory=/root/.apicultor
 ExecStart=/usr/bin/apicultor $@
-WatchdogSec=$periodo
+WatchdogSec=60
+NotifyAccess=1
 Restart=always
+RestartSec=$periodo
+StartLimitIntervalSec=$periodo
+StartLimitBurst=10
 
 [Install]
 WantedBy=multi-user.target
