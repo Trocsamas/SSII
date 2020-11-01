@@ -2,7 +2,9 @@ Estado del servicio
 
 El servicio de apicultor funciona correctamente con respecto a sus tareas
 de recolección de hashes y redacción de csvs con los mismos. Esto se puede
-comprobar con un rápido sudo ls -la /root/.apicultor/history:
+comprobar mediante el comando sudo ls -la /root/.apicultor/history, que nos
+muestra que a lo largo del tiempo se han ido generando csv de directorios
+y hashes de los ficheros:
 
 2020-11-01_12:47_directorios.csv  2020-11-01_13:02_directorios.csv
 2020-11-01_12:47_hashes.csv       2020-11-01_13:02_hashes.csv
@@ -35,17 +37,18 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ============================================================================
-Donde periodo está configurado a 300 segundos --> 5 minutos
+Donde periodo está configurado a 300 segundos --> 5 minutos y la carpeta a 
+vigilar ha sido configurada como /home/
 
-Una prueba sencilla para comprobar que el servicio funciona correcta es
+Una prueba sencilla para comprobar que el servicio funciona correctamente es
 realizar modificaciones en los ficheros de manera que el servicio nos 
 notifique que se han producido cambios en los ficheros. 
 
-El método será simple. Mostraremos la hora del sistema, empezaremos a
-modificar ficheros de una carpeta en la que tendremos acceso a varios,
-mostraremos los cambios realizados con git para dar constancia de esto 
-y posteriormente comprobaremos que todo ha ido en orden abriendo 
-mail.mailutils y comprobando el mensaje más reciente.
+El método consistirá de los siguientes apartados: Mostraremos la hora del 
+sistema, empezaremos a modificar ficheros de una carpeta en la que tendremos 
+acceso a varios,mostraremos los cambios realizados con git para dar 
+constancia de esto y posteriormente comprobaremos que todo ha ido en 
+orden abriendo mail.mailutils y comprobando el mensaje más reciente.
 
 ssii@ssii-VirtualBox:~/Documentos/SSII/PAI1$ w
  14:12:41 up  1:34,  1 user,  load average: 0,00, 0,03, 0,05
@@ -99,3 +102,26 @@ UEFJMS9pbmZvcm1lX2FwaWN1bHRvci50eHQsTU9ESUZJRUQK
 Como se puede comprobar, el sistema notifica con éxito los cambios 
 realizados pues el fichero que comprueba que se ha producido una variación
 entre los hashes. 
+
+Consideraciones y debilidades
+
+Todos los sistemas HIDS suelen presentar una debilidad en común. Cualquier
+vulneración de la integridad de la base de datos/ficheros encagrados de 
+controlar que los hashes de los ficheros se mantienen intacto provoca que
+su efectividad se vea reducida drásticamente. Partiendo de aquí, es
+necesario tomar ciertas precauciones. Lo más importante es proteger el acceso 
+a la carpeta /root: Tal y como está configurado el software Apicultor, la 
+carpeta donde se almacena toda la información esencial del servicio reside 
+en /root/.apicultor. Cualquier intento de entrar en ese directorio sin los 
+permisos adecuados debe ser deflectado inmediatamente. Para ello ofrecemos
+algunas ideas con las que empezar, aunque mayor seguridad debe ser aplicada:
+
+ - Configurar los permisos de /root: No se debe poder acceder a /root 
+a no ser que se tengan permisos de superusuario.
+ - Configurar permisos de usuarios: Relacionado con el consejo anterior, 
+todos los usuarios que utilicen el sistema que sean externos al usuario 
+administrador no deben de tener privilegios para modificar esa carpeta ni
+ - Configurar acceso en varios pasos: Adicionalmente a los pasos anteriores,
+es recomendable buscar una manera de cifrar/ bloquear esta carpeta de forma
+que se tenga que acceder en varios pasos, dificultando la intrusión en el 
+directorio en cuestión creando una capa extra de seguridad.
