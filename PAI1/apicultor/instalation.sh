@@ -6,20 +6,18 @@ periodo=3600
 function write_service()
 {
     cat<<write_service
-
 [Unit]
 Description=HIDS service that manages the integrity of files and directories in the given paths
 
 [Service]
 User=root
 WorkingDirectory=/root/.apicultor
-ExecStart=/usr/sbin/apicultor $@
+ExecStart=/usr/bin/apicultor $@
 WatchdogSec=$periodo
 Restart=always
 
 [Install]
 WantedBy=multi-user.target
-
 write_service
 }
 
@@ -334,16 +332,17 @@ function main()
     install_dependencies
     
     echo "Escribiendo script en /usr/sbin/apicultor"
-    write_script>>/usr/sbin/apicultor
+    write_script>>/usr/bin/apicultor
     
     echo "Concediendo privilegios a apicultor"
-    chmod 700 /usr/sbin/apicultor
+    chmod 700 /usr/bin/apicultor
     
     echo "Escribiendo el servicio en /etc/systemd/system/system/apicultor.service"
     
     write_service "$@">>/etc/systemd/system/system/apicultor.service
     echo "Recargando servicios"
     systemctl daemon-reload
+    sleep 2
     
     echo "Iniciando apicultor.service"
     sudo systemctl start apicultor.service
