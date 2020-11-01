@@ -96,3 +96,6 @@ UEFJMS9pbmZvcm1lX2FwaWN1bHRvci50eHQsTU9ESUZJRUQK
 --639821885-1604236347=:18389--
 
 
+Como se puede comprobar, el sistema notifica con éxito los cambios 
+realizados pues el fichero que comprueba que se ha producido una variación
+entre los hashes. 
