@@ -1,0 +1,50 @@
+Para ser considerada segura, una función MAC debe resistir la falsificación 
+existencial bajo ataques de texto plano elegido. Esto significa que incluso si 
+un atacante tiene acceso a un oráculo que posee la clave secreta y genera MAC 
+para los mensajes que elija el atacante, el atacante no puede adivinar el MAC 
+de otros mensajes (que no se utilizaron para consultar el oráculo) sin 
+realizar cantidades inviables de computación. 
+
+La posibilidad de un ataque de intermediario sigue siendo un problema 
+potencial de seguridad serio, incluso para muchos criptosistemas basados en 
+claves. Existen varios tipos de defensa contra estos ataques MitM que 
+emplean técnicas de autenticación basadas en:
+
+Autenticación mutua fuerte.
+Claves secretas (secretos con alta entropía).
+Contraseñas (secretos con baja entropía).
+Otros criterios, como el reconocimiento de voz u otras características 
+biométricas.
+Fijación de certificados
+La integridad de las claves públicas debe asegurarse de alguna manera, 
+pero éstas no exigen ser secretas, mientras que las contraseñas y las claves 
+de secreto compartido tienen el requerimiento adicional de la confidencialidad.
+
+Las claves públicas pueden ser verificadas por una autoridad de certificación 
+(CA), cuya clave sea distribuida a través de un canal seguro 
+(por ejemplo, integrada en el navegador web o en la instalación del sistema 
+operativo).
+
+Para evitar posibles ataques de man-in-the-middle o similares podemos utilizar 
+las siguientes herramientas y servicios:
+
+-Usar herramientas para navegar en HTTPS
+Al navegar por paginas HTTP la información que dejamos puede ser interceptada
+por terceros. Para evitar ser victimas de ataques de ese tipo, debe ser algo
+básico navegar solo a través de paginas HTTPS, que son aquellos sitios 
+cifrados.
+
+-Utilizar servicios VPN
+El uso de servicios VPN (res privada virtual) puede ayudar a prevenir los 
+ataques man-in-the-middle cuando navegamos por paginas que no esté cifradas
+o desde redes Wi-Fi públicas porque este servicio ofrece una conexión segura
+y crifrada entre dos redes o entre un usuario determinado y una red. Dicho de
+otra manera, esto permite ocultarse y usar la red de forma anónima.
+
+-Proteger las cuentas
+Con esto nos referimos q ue se utilicen contraseñas que sean fuertes y 
+complejas, pero tambien el uso de métodos como la autentificaión en dos pasos
+para evitar que alguien puediera acceder, como puede ser con una certificación
+de autoridad, firma digital o una contraseña en común que solo ellos sepan.
+
+
