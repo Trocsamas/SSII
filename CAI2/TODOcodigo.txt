@@ -1,0 +1,3 @@
+Funcionalidad ante ataque Replay
+El servidor muestra por consola el mensaje
+Posible mejora visual al introducir algoritmo y clave
