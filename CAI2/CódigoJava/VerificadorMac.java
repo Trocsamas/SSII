@@ -8,11 +8,11 @@ public class VerificadorMac {
 
 	static String alg = "HmacSHA512";
 	//Clave en formato String para comodidad
-	static String clave = " a6A";
+	//static String clave = " a6A";
 	
-	public static String generaMac(String mensaje){
+	public static String generaMac(String mensaje,String claveCliente){
 		String res = "";
-		byte[] key = claveEnByte(clave);
+		byte[] key = claveEnByte(claveCliente);
 		try {
 			Mac mac = Mac.getInstance(alg);
 			SecretKey sk = new SecretKeySpec(key, 0, key.length,alg);

@@ -30,7 +30,12 @@ public class IntegrityVerifierClient {
 			output.println(mensaje); // envio del mensaje al servidor
 			// habría que calcular el correspondiente MAC con la clave
 			// compartida por servidor/cliente
-			String macdelMensaje = VerificadorMac.generaMac(mensaje);
+			
+			//Hacemos que el cliente introduzca su clave propia para generar
+			// la mac del mensaje correspondiente.
+			String claveCliente = JOptionPane.showInputDialog(null,
+					"Introduzca su clave privada:");
+			String macdelMensaje = VerificadorMac.generaMac(mensaje,claveCliente);
 			
 			//Sello de tiempo para ataques por Replay TODO
 			Timestamp ts = new Timestamp(System.currentTimeMillis());

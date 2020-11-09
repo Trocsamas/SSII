@@ -2,6 +2,8 @@ package código;
 
 import java.io.*;
 import java.net.*;
+import java.util.Map;
+
 import javax.net.*;
 
 public class IntegrityVerifierServer {
@@ -9,6 +11,9 @@ public class IntegrityVerifierServer {
 	private ServerSocket serverSocket;
 	static int mensajesTotales = 0;
 	static int mensajesIntegros = 0;
+	//diccionario nºcuenta-clave. Queda rellenar para las pruebas. Convendría acceder
+	//a una BD o un csv
+	static Map<K, V> diccionarioCuentas = new HashMap<Integer, String>();
 	
 	// Constructor
 	public IntegrityVerifierServer() throws Exception {
@@ -43,12 +48,17 @@ public class IntegrityVerifierServer {
 				String mensaje = input.readLine();
 				String macdelMensajeEnviado = input.readLine();
 				String timestampEnviado = input.readLine();
+				//separamos el mensaje para obtener el número de cuenta
+				String[] diseccionMensaje = mensaje.split(" ");
+				Integer numeroCuenta = Integer.parseInt(diseccionMensaje[0]);
+				//buscamos la clave en el diccionario introduciendo la cuenta
+				String claveCliente = diccionarioCuentas.get(numeroCuenta);
 				
 				/*                           MODIFICACION                                */
 				
 				mensajesTotales++;
 				// a continuación habría que verificar el MAC
-				String macdelMensajeCalculado = VerificadorMac.generaMac(mensaje);
+				String macdelMensajeCalculado = VerificadorMac.generaMac(mensaje, claveCliente);
 				System.err.println(mensaje);
 				if (macdelMensajeEnviado.equals(macdelMensajeCalculado)) {
 					mensajesIntegros++;
