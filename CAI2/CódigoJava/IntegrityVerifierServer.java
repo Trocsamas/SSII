@@ -42,6 +42,7 @@ public class IntegrityVerifierServer {
 				// se lee del cliente el mensaje y el macdelMensajeEnviado
 				String mensaje = input.readLine();
 				String macdelMensajeEnviado = input.readLine();
+				String timestampEnviado = input.readLine();
 				
 				/*                           MODIFICACION                                */
 				
