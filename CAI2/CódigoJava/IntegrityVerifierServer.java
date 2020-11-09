@@ -2,6 +2,7 @@ package código;
 
 import java.io.*;
 import java.net.*;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.net.*;
@@ -13,7 +14,7 @@ public class IntegrityVerifierServer {
 	static int mensajesIntegros = 0;
 	//diccionario nºcuenta-clave. Queda rellenar para las pruebas. Convendría acceder
 	//a una BD o un csv
-	static Map<K, V> diccionarioCuentas = new HashMap<Integer, String>();
+	static Map<Integer, String> diccionarioCuentas = new HashMap<Integer, String>();
 	
 	// Constructor
 	public IntegrityVerifierServer() throws Exception {
@@ -31,6 +32,9 @@ public class IntegrityVerifierServer {
 				// Creacion directorio para almacenar el .log
 				File directorioLog = new File("C:/LogDirectory");
 				directorioLog.mkdir();
+				diccionarioCuentas.put(13579, "abcd");
+				diccionarioCuentas.put(24680, "qwer");
+				diccionarioCuentas.put(12345, "wasd");
 				/*							MODIFICACION								*/
 				
 		while (true) {
