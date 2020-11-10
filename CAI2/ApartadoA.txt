@@ -1,0 +1,60 @@
+Debido a que el cliente se cuestiona, si es seguro el tamaño de las claves que proporciona a sus clientes para la integridad de las transmisiones, 
+hemos decidido descifrar estas claves para así demostrar o no, su robustez. Para ello, se ha determinado el uso de una herramienta de libre acceso 
+llamada Hashcat, la cual mediante comandos en un terminal del sistema, es capaz de descifrar contraseñas dependiendo de los parámetros y ficheros 
+que le indiquemos.
+
+El cliente nos proporciona una tabla con los mensajes y Mac generados por diferentes clientes, así que vamos a usarlos para averiguar las claves 
+correspondientes. Para tal cometido, creamos un documento de texto (.txt) y escribrimos el mac y el mensaje del primer cliente, en el siguiente formato:
+
+(IMAGEN 1 Consultoria2_AyBsinRedactar)
+
+Es necesario que sea así, para que la herramienta detecte cada parámetro, a raiz del algoritmo de codificación que creemos que usa el resumen.
+A continuación, abrimos un terminal del sistema y escrimos el siguiente comando:
+
+(IMAGEN 2 Consultoria2_AyBsinRedactar)
+
+Vamos a detallar cada parámetro del programa, para que sea fácil de comprender.
+
+- Ruta de la herramienta -> Debemos abrir la ruta donde se encuentre instalada la herramienta y ejecutarla con hashcat.exe .
+- m 150 -> Tipo de algoritmo que se usa para generar el resumen Mac, junto con la clave. En este caso el algoritmo es HmacSHA1, cuyo indicador es 150.
+- a 3   -> Tipo de ataque que vamos a realizar. Vamos a usar fuerza bruta, y su indicador es el 3.
+- Ruta del documento -> Escribimos la ruta del documento que hemos creado anteriormente y que posee el Resumen Mac y el mensaje proporcionados.
+- ?b?b?b?b -> Con este parámetro, le indicamos a la herramienta que la contraseña a descifrar posee un tamaño de 4 carácteres. Además, al usar la b,
+              le decimos que cada carácter es un valor hexadecimal, partiendo del $00 hasta el $ff.
+
+Tras definir todos los parámetros, lanzamos la herramienta para ver si es posible averiguar las claves en poco tiempo. Obtenemos lo siguiente como 
+resultado:
+
+(IMAGEN 3 Consultoria2_AyBsinRedactar)
+
+Como podemos observar, hemos conseguido averiguar la clave en muy poco tiempo, tan solo 8 segundos. El estado de la clave es Cracked y su valor es
+" a6A".
+
+Obtenida la primera, pasamos al segundo grupo de mensaje y resumen, correspondiente a otro cliente. Realizamos el mismo procedimiento del resumen mac 
+y el mensaje en un documento de texto, y volvemos a llamar a la herramienta con los mismos parámetros, y cambiando la ruta del documento si hemos creado 
+otro en vez de sobreescribir el existente. Se muestra lo siguiente:
+
+(IMAGEN 4 Consultoria2_AyBsinRedactar)
+
+Observamos que de nuevo, se ha podido descrifrar la clave de otro cliente. En este caso ha tardado 7 segundos, la clave está Cracked y su valor se 
+obtiene en hexadecimal, con un valor de $21ae2d41. Al convertirla de hexadecimal a ASCII, tenemos "!®-A" como clave.
+
+Pasamos al tercer y ultimo grupo de mensaje y resumen, de un tercer cliente. Mismo procedimiento y parámetros que en los dos casos anteriores.
+
+(IMAGEN SUBIDA POR MARINA AL REPOSITORIO)
+
+Como las otras dos claves, hemos podido obtener el valor de la tercera. Se ha realizado la prueba en una máquina menos potente, para así poder comprobar 
+si existe un cambio sustancial, pero no es el caso en términos de seguridad. 
+La clave se ha obtenido tras 2 minutos y 8 segundos de ejecución, pasando al estado de Cracked y su valor en hexadecimal es de $24ae2053. Mediante conversión 
+conseguimos "$® S" como clave.
+
+Tras todos estas pruebas, y como podemos analizar, las tres claves suministradas por la entidad bancaria para asegurar la integridad de las transmisiones,
+son débiles y fácilmente descifrables. Su tamaño no es el indicado para la seguridad de transacciones bancarias y por supuesto, el tiempo necesario para averiguarlas
+es muy preocupante. En los apartados siguientes indicaremos tamaños, algoritmos de cifrado adecuados, y medidas a tomar que garanticen la seguridad de las
+operaciones entre entidad y cliente.
+
+
+
+
+
+
