@@ -65,11 +65,13 @@ public class IntegrityVerifierServer {
 				String macdelMensajeCalculado = VerificadorMac.generaMac(mensaje, claveCliente);
 				System.err.println(mensaje);
 				if (macdelMensajeEnviado.equals(macdelMensajeCalculado)) {
+					//comprobamos si existe
 					mensajesIntegros++;
-					//CreacionLog.creaLogIntegridad("C:/LogDirectory/logIntegridad.log", "", (double)mensajesIntegros/mensajesTotales);
-					output.println("Mensaje enviado integro ");
+					CreacionLog.creaLogIntegridad("C:/LogDirectory/logIntegridad.log", mensaje + " " + timestampEnviado, (double)mensajesIntegros/mensajesTotales);
+					output.println("Mensaje enviado integro.");
+					
 				} else {
-					CreacionLog.creaLogIntegridad("C:/LogDirectory/logIntegridad.log", mensaje,(double)mensajesIntegros/mensajesTotales);
+					CreacionLog.creaLogIntegridad("C:/LogDirectory/logIntegridad.log", mensaje + "",(double)mensajesIntegros/mensajesTotales);
 					output.println("Mensaje enviado no integro.");
 				}
 				
