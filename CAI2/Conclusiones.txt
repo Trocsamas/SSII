@@ -1,0 +1,21 @@
+Con las actividades que se han realizado antes, podemos llegar a las siguientes
+conclusiones.
+
+En primer lugar el tamaño de las claves que se están usando para la integidad
+de las transmisiones no es seguro, eso lo podemos ver en la utilización de
+la herramienta HashCat, que en cuestion de minutos hemos conseguido obtenerlas
+y el tiempo que se ha tardado en resolverlas no es suficientemente alto como 
+para garantizar esa seguridad en las claves.
+
+Para solucionar ese problema, con el algoritmo de encriptado le proprcionamos
+al cliente el numero de bytes que deberían tener esas claves para que lleguen
+a ser robustas y garantice su seguridad.
+
+Tambien le proporcionamos herramientas, tecnicas y servicios para que los 
+mensajes transmitidos entre cliente y servidor sean seguros, como pueden ser
+el uso de VPNs o herramientas para navegar por HTTPs ya que ambas dan una 
+conexion segura y cifrada.
+
+Pero consideramos que como medida de seguridad sea que el cliente 
+tenga su propia clave de cifrado y el servidor una copia, así no se generarían
+problemas, como intrusiones, en el intercambio de esas claves.
