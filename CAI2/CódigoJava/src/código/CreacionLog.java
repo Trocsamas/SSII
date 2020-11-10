@@ -55,7 +55,14 @@ public class CreacionLog {
 				String[] descomposicion = strLine.split(" ");
 				if (descomposicion[0]=="INFO:") {
 					if (isNumeric(descomposicion[1])) {
-						
+						String mensajeLog = descomposicion[1]+" "+descomposicion[2]+" "+descomposicion[3];
+						/*comprobamos si el mensaje coincide con el del log*/
+						if (mensaje==mensajeLog) {
+							System.out.println("Hay un match con este mensaje");
+						}
+						else {
+							continue;
+						}
 					}
 				}
 				else {
