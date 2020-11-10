@@ -44,8 +44,9 @@ public class CreacionLog {
 	}
 	
 	public static boolean compruebaLog (String ruta, String mensaje,String timestamp) {
+		boolean existeLog = false; 
 		try{
-			boolean existeLog = false; 
+			
 			FileInputStream fstream = new FileInputStream(ruta);
 			BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 			String strLine;
@@ -59,6 +60,7 @@ public class CreacionLog {
 						/*comprobamos si el mensaje coincide con el del log*/
 						if (mensaje==mensajeLog) {
 							System.out.println("Hay un match con este mensaje");
+							existeLog=true;
 						}
 						else {
 							continue;
@@ -75,6 +77,6 @@ public class CreacionLog {
 		} catch (Exception e) {
 			System.err.println("Error: " + e.getMessage());
 		}
-		return false;
+		return existeLog;
 	}
 }
