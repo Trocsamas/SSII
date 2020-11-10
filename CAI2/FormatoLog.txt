@@ -1,0 +1,33 @@
+public static void creaLogIntegridad(String ruta, String mensaje, Integer integros, Integer totales) {
+		FileHandler f;
+		Logger lg = Logger.getLogger("Log");
+		
+		try {
+			f = new FileHandler(ruta, true);
+			lg.addHandler(f);
+			
+			SimpleFormatter sf = new SimpleFormatter();
+			f.setFormatter(sf);
+			
+			lg.info("Información de la Integridad de los mensajes intercambiados");
+			lg.info(mensaje);
+			lg.info("Mensajes integros: " + integros + "\tMensajes totales: " + totales + "\tRatio:" + (integros/totales)*100 + "%\n");
+			f.close();
+			
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+
+
+SALIDA:
+
+nov. 10, 2020 1:35:26 A. M. código.CreacionLog creaLogIntegridad
+INFO: Información de la Integridad de los mensajes intercambiados
+nov. 10, 2020 1:35:26 A. M. código.CreacionLog creaLogIntegridad
+INFO: 24680 66665 70
+nov. 10, 2020 1:35:26 A. M. código.CreacionLog creaLogIntegridad
+INFO: Mensajes integros: 0	Mensajes totales: 1	Ratio:0%
