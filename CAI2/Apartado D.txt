@@ -48,3 +48,10 @@ para evitar que alguien puediera acceder, como puede ser con una certificación
 de autoridad, firma digital o una contraseña en común que solo ellos sepan.
 
 
+Con respecto a las medidas que se han tomado en la implementación, el equipo de desarollo ha implementado dos medidas principales contra ataques:
+
+- Implementación de Códigos de Autenticación de Mensajes (MAC) basados en algorítmo de cifrado SHA-512,
+de forma que el tiempo necesario para obtener la clave por fuerza bruta resulte muy costoso en tiempo y recursos, dificultando la entrada al sistema.
+
+- Implementación de Timestamps dentro de los mensajes. Un timestamp es una marca temporal que se genera cuando se crea el mensaje. Mediante esta medida, se asegura que el mensaje contiene una capa de identificación adicional. En caso de encontrarse ante un ataque de replay, en el que se envían varias peticiones identicas una vez capturada una petición correcta o se retrasa el envío de otra petición idéntica para confundir al sistema. 
+
