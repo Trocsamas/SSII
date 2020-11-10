@@ -44,6 +44,7 @@ public class CreacionLog {
 	}
 	
 	public static boolean compruebaLog (String ruta, String mensaje,String timestamp) {
+		/*Método que devuelve true en caso de que para el msg enviado exista un log con el mismo TS*/
 		boolean existeLog = false; 
 		try{
 			
@@ -60,7 +61,10 @@ public class CreacionLog {
 						/*comprobamos si el mensaje coincide con el del log*/
 						if (mensaje==mensajeLog) {
 							System.out.println("Hay un match con este mensaje");
-							existeLog=true;
+							String timestampLog= descomposicion[-2]+" "+descomposicion[-1];
+							/*comprobamos si el TS coincide con el del log*/
+							if(timestamp==timestampLog) {existeLog=true;}
+							else {existeLog=false;}
 						}
 						else {
 							continue;

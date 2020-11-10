@@ -66,10 +66,15 @@ public class IntegrityVerifierServer {
 				System.err.println(mensaje);
 				if (macdelMensajeEnviado.equals(macdelMensajeCalculado)) {
 					//comprobamos si existe en nuestro log
+					if(CreacionLog.compruebaLog("C:/LogDirectory/logIntegridad.log", mensaje, timestampEnviado)) {
+						CreacionLog.creaLogIntegridad("C:/LogDirectory/logIntegridad.log", mensaje + "",(double)mensajesIntegros/mensajesTotales);
+						output.println("Mensaje repetido. Situación de ataque");
+					}else {
+						mensajesIntegros++;
+						CreacionLog.creaLogIntegridad("C:/LogDirectory/logIntegridad.log", mensaje + " " + timestampEnviado, (double)mensajesIntegros/mensajesTotales);
+						output.println("Mensaje enviado integro.");
+					}
 					
-					mensajesIntegros++;
-					CreacionLog.creaLogIntegridad("C:/LogDirectory/logIntegridad.log", mensaje + " " + timestampEnviado, (double)mensajesIntegros/mensajesTotales);
-					output.println("Mensaje enviado integro.");
 					
 				} else {
 					CreacionLog.creaLogIntegridad("C:/LogDirectory/logIntegridad.log", mensaje + "",(double)mensajesIntegros/mensajesTotales);
