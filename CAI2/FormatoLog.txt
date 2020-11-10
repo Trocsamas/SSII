@@ -1,3 +1,9 @@
+Llamada:
+
+CreacionLog.creaLogIntegridad("C:/LogDirectory/logIntegridad.log", mensaje, mensajesIntegros, mensajesTotales);
+
+Clase:
+
 public static void creaLogIntegridad(String ruta, String mensaje, Integer integros, Integer totales) {
 		FileHandler f;
 		Logger lg = Logger.getLogger("Log");
