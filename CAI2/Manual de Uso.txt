@@ -1,0 +1,21 @@
+Para ejecutar de manera correcta el sistema cliente servidor, será necesario seguir los siguientes pasos:
+- Ejecutar el IntegrityVerifierServer. El servidor empezará a funcionar, creará la carpeta para almacenar 
+  el archivo log y se quedará esperando comunicaciones con el cliente. No hace falta volver a ejecutarlo, 
+  puesto que se quedará activado de manera pasiva, a la espera. Solo volver a ejecutar en caso de reinicar
+  el sistema.
+- A continuación, ejecutamos el IntegrityVerifierClient, con el que podremos empezar a comunicarnos con el servidor.
+  A diferencia de este, en cuanto la comunicación termina, se cierra y para volver a enviar un mensaje, hará 
+  falta ejecutarlo de nuevo.
+- Tras esto, le aparecerá una ventana al cliente. En ella deberá proporcionar un mensaje con el formato 
+  "Cuenta Origen Cuenta destino Cantidad", y al darle a OK o al botón Enter, aparecerá otra ventana que nos pedirá 
+  la clave de cliente. Ambas informaciones servirán para el cálculo del resumen Mac correspondiente.
+- Todo lo que hemos introducido será leido por el servidor, que empezará a verificar si la Mac es correcta, y no 
+  se ha producido modificaciones (Ataque Man-In-The-Middle) o repeticiones de transmisiones (Ataque Replay). 
+  Si se diese el caso de que el Mac asignado a un mensaje ha variado, o se detecta que ha llegado una copia de algún
+  mensaje con el mismo instante de tiempo de creación, el servidor nos mandará una aviso como clientes y nos aparecerá
+  una ventana que nos informará, de que el mensaje no ha llegado de manera íntegra al servidor.
+  En el caso de que no haya nigún problema en la comunicación, el aviso será simplemente otra ventana que nos indicará
+  de que el mensaje ha llegado de forma íntegra.
+- En la carpeta raiz del sistema (Windows), se nos debe haber creado una carpeta llamada LogDirectory, que contendrá el
+  archivo log. En su interior encontraremos las entradas correspondientes a los mensajes intercambiados, así como un
+  ratio de los mensajes integros respecto a los totales, de toda la comunicación efectuada.
