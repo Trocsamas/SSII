@@ -5,7 +5,9 @@ Dicho esto, vamos a mostrar una serie de cálculos y pruebas para que la entidad
 clave suficiente para proteger las transacciones durante un año completo, además de cambiar de algoritmo de cifrado.
 Para estos cálculos, vamos a tener en cuenta que el atacante posea una alta potencia para realizar operaciones por segundo, poseyendo una tarjeta
 gráfica acorde para tal cometido. Hemos supuesto que el atacante posee la gráfica más potente del mercado actualmente, la Nvidia Geforce RTX 3090,
-cuya potencia de cómputo asciende a los 705.5 MH/s(M Hashes/ segundos), lo que conlleva 7,055x10^8 Hashes por segundo.
+cuya potencia de cómputo asciende a los 705.5 MH/s(M Hashes/ segundos) para hashes con algoritmo HMacSHA512 según benchmarks, lo que conlleva 7,055x10^8 
+Hashes por segundo. El benchmark no es OFICIAL, pero muestra una mejora del 35% respecto a la generación anterior de gráficas, coincidiendo con el 40%
+anunciado por la compañía propietaria.
 
 A continuación aparece el tiempo necesario para obtener las claves de los clientes, con distinto tamaño, mediante desencriptado por fuerza bruta, es decir, probando 
 todas las combinaciones posibles. 
