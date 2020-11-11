@@ -7,8 +7,11 @@ Para ejecutar de manera correcta el sistema cliente servidor, será necesario se
   A diferencia de este, en cuanto la comunicación termina, se cierra y para volver a enviar un mensaje, hará 
   falta ejecutarlo de nuevo.
 - Tras esto, le aparecerá una ventana al cliente. En ella deberá proporcionar un mensaje con el formato 
-  "Cuenta Origen Cuenta destino Cantidad", y al darle a OK o al botón Enter, aparecerá otra ventana que nos pedirá 
-  la clave de cliente. Ambas informaciones servirán para el cálculo del resumen Mac correspondiente.
+  "Cuenta Origen Cuenta destino Cantidad". Las cuentas corresponden con las que proporcionó la entidad bancaria.
+  Al darle a OK o al botón Enter, aparecerá otra ventana que nos pedirá la clave de cliente. En el servidor se han
+  suministrado una clave nueva para cada cuenta, atendiendo al tamaño óptimo para ser seguras, el cual ya hemos analizado.
+  Ambas informaciones servirán para el cálculo del resumen Mac correspondiente. Si quisieramos cambiar el algoritmo de
+  cifrado, es necesario cambiarlo en VerificadorMac.
 - Todo lo que hemos introducido será leido por el servidor, que empezará a verificar si la Mac es correcta, y no 
   se ha producido modificaciones (Ataque Man-In-The-Middle) o repeticiones de transmisiones (Ataque Replay). 
   Si se diese el caso de que el Mac asignado a un mensaje ha variado, o se detecta que ha llegado una copia de algún
