@@ -5,17 +5,16 @@ Dicho esto, vamos a mostrar una serie de cálculos y pruebas para que la entidad
 clave suficiente para proteger las transacciones durante un año completo, además de cambiar de algoritmo de cifrado.
 Para estos cálculos, vamos a tener en cuenta que el atacante posea una alta potencia para realizar operaciones por segundo, poseyendo una tarjeta
 gráfica acorde para tal cometido. Hemos supuesto que el atacante posee la gráfica más potente del mercado actualmente, la Nvidia Geforce RTX 3090,
-cuya potencia de cómputo asciende a los 35,69 TFLOPS, lo que conlleva 35,69x10^12 operaciones en coma flotante por segundo.
+cuya potencia de cómputo asciende a los 705.5 MH/s(M Hashes/ segundos), lo que conlleva 7,055x10^8 Hashes por segundo.
 
 A continuación aparece el tiempo necesario para obtener las claves de los clientes, con distinto tamaño, mediante desencriptado por fuerza bruta, es decir, probando 
 todas las combinaciones posibles. 
 
-- Para un tamaño de clave de 48 bits -> 2^48 = 2,8147x10^14 combinaciones / 35,69x10^12 FLOPS = 7,887 segundos 				Clave insegura
-- Para un tamaño de clave de 64 bits -> 2^64 = 1,8447x10^19 combinaciones / 35,69x10^12 FLOPS = 516867,47 segundos = 5,98 dias		Clave insegura
-- Para un tamaño de clave de 72 bits -> 2^72 = 4,7224x10^21 combinaciones / 35,69x10^12 FLOPS = 132317175,58 segundos = 1531,44 dias = 4,19 años
-- Para un tamaño de clave de 80 bits -> 2^80 = 1,2089x10^24 combinaciones / 35,69x10^12 FLOPS = 33872233118,5 segundos = 1074 años
+- Para un tamaño de clave de 48 bits -> 2^48 = 2,8147x10^14 combinaciones / 7,055x10^8 Hashes = 398965,27 segundos = 4,68 dias 		Clave insegura
+- Para un tamaño de clave de 64 bits -> 2^64 = 1,8447x10^19 combinaciones / 7,055x10^8 Hashes = 516867,47 segundos = 829,12 años
+- Para un tamaño de clave de 72 bits -> 2^72 = 4,7224x10^21 combinaciones / 7,055x10^8 Hashes = 6,694x10^12 segundos = 212108,8 años
 
-En conclusión, a partir de claves cuya longitud superen los 72 bits, es decir 9 Bytes, el tiempo para descifrarlas será superior a un año natural, tiempo en el cual
+En conclusión, a partir de claves cuya longitud superen los 64 bits, es decir 8 Bytes, el tiempo para descifrarlas será superior a un año natural, tiempo en el cual
 se produce el cambio de clave por parte de la entidad bancaria y el cliente.
-Recomendariamos el uso de una clave de seguridad de 80 bits, 10 bytes, dado que su tiempo de vida en este caso corresponde a más de mil años, acompañada de un 
+Recomendariamos el uso de una clave de seguridad de 64 bits, 8 bytes, dado que su tiempo de vida en este caso corresponde a más de ochocientos años, acompañada de un 
 algoritmo de cifrado más fuerte que el usado, que es HmacSHA1, pasando a usar HmacSHA512. 	
