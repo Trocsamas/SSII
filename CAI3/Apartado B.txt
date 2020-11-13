@@ -1,0 +1,28 @@
+
+File Verifier++ es una aplicación portátil para Windows que comprueba la 
+integridad de los archivos que selecciones.
+Esta comprobación la realiza calculando el  hash de cada archivo elegido nada 
+mas arrancar la aplicación por primera vez y comparando ese hash inicial con 
+el de las siguientes comprobaciones. Si no coinciden los hash está claro que 
+el fichero se ha modificado.
+FileVerifier admite varios algoritmos mediante bibliotecas de hash cargables 
+dinámicamente.Utiliza la API de Windows y no tiene ninguna dependencia que no 
+sea la que viene con Windows (excluido WinFVC).
+
+Su funcionamiento es simple. Basta con añadir los archivos y directorios
+–simplemente con arrastrar y soltar– para que File Verifier++ realice de manera
+automática un hash de ellos y guardándolos en su base de datos, donde también 
+almacenará otra información como tamaño, fechas o ruta. El formato utilizado 
+para guardar la suma de comprobación es por defecto MD5 aunque también podemos 
+configurarlo para almacenar hashes CRC, SHA o el menos conocido RMD.
+
+A la hora de comparar y obtener resultados, los archivos idénticos aparecerán 
+resaltados en color verde y los que fallen la verificación en rojo. Si el color 
+mostrado es azul podremos saber que el archivo es idéntico pero que sus 
+propiedades son diferentes: tiene fecha de distinta, atributos diferentes, etc. 
+En todo momento tenemos acceso a un histórico con las acciones que se han 
+realizado, como el número de archivos procesados.
+
+[File_1.PNG]
+
+[File_2.PNG]
