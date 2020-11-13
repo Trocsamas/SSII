@@ -1,0 +1,49 @@
+
+BitLocker es una aplicación de cifrado que nos permite proteger nuestro disco
+duro de un posible robo de información. Encontramos esta herramienta 
+disponible desde Windows Vista, así que también la tenemos disponible en 
+Windows Server 2008, Windows 7, Windows 8 y Windows 10.
+BitLocker cifra volúmenes enteros. Esto quiere decir que puede cifrar todo el 
+disco duro o simplemente una parte de él. Utiliza un algoritmo de cifrado 
+AES en modo CBC con una clave de 128 bits, siendo AES un esquema de cifrado.
+e BitLocker no se encuentra disponible en Windows 10 Home. Para activarlo, 
+deberemos contar con la versión profesional del sistema operativo de Microsoft.
+Esto se debe a que BitLocker es una función pensada para entornos profesionales,
+donde el robo de información es mucho más común.
+
+ACTIVAR BITLOCKER
+-Inicia sesión en Windows con una cuenta que tenga privilegios de administrador.
+-En el cuadro de búsqueda de Windows, en la barra de tareas, escribe Administrar
+BitLocker. Selecciona dicha opción en los resultados de la búsqueda. También 
+puedes acceder a través de Panel de control, Sistema y Seguidad y, a 
+continuación, Cifrado de unidad BitLocker.
+-En este momento, simplemente debes seleccionar la opción Activar BitLocker, 
+que encontrarás junto a la unidad que quieras cifrar. Acto seguido, sigue las 
+instrucciones del asistente.
+
+Durante el proceso podemos escoger dónde queremos guardar la clave que abrirá 
+nuestra unidad
+
+[bitlocker_1.PNG]
+
+CIFRAR UN USB 
+Para cifrar un USB con BitLocker tan sólo debemos abrir la unidad en el 
+explorador de archivos, y en la sección de Herramientas de Unidad, seleccionar 
+BitLocker. En ese momento, el asistente nos guiará de la misma manera que lo 
+hizo con nuestro disco duro local. Cada vez que conectemos el lápiz USB a un 
+PC, nos pedirá la clave de cifrado.
+
+[bitlocker_2.PNG]
+
+DESACTIVAR BITLOCKER
+
+Si queremos desactivar la herramienta, ya sea en nuestro disco duro o en una 
+unidad USB, y así eliminar el cifrado, es posible. Sólo debemos dirigirnos al 
+Panel de Control, Sistema y Seguridad y seleccionar Cifrado de unidad de 
+BitLocker. Ahí encontramos la opción Desactivar BitLocker.
+
+Es importarte que recordemos que, si desactivamos BitLocker, nuestra 
+información será accesible de nuevo a cualquier usuario. Sólo debemos descifrar 
+una unidad si ya no la vamos a utilizar para almacenar información sensible.
+ 
+[bitlocker_3.PNG]
