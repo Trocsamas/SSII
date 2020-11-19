@@ -9,7 +9,7 @@ import socket, ssl
 import pprint
 
 context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-context.load_cert_chain(certfile="/home/trocsamas/certificate.pem", keyfile="/home/trocsamas/key.pem",password="pempass")
+context.load_cert_chain(certfile="/home/trocsamas/certificate.pem", keyfile="/home/trocsamas/key.pem"s)
 
 bindsocket = socket.socket()
 bindsocket.bind(('127.0.0.1', 10023))
