@@ -9,7 +9,7 @@ import socket, ssl
 import pprint
 
 context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-context.load_cert_chain(certfile="/home/trocsamas/certificate.pem", keyfile="/home/trocsamas/key.pem"s)
+context.load_cert_chain(certfile="/home/trocsamas/certificate.pem", keyfile="/home/trocsamas/key.pem")
 
 bindsocket = socket.socket()
 bindsocket.bind(('127.0.0.1', 10023))
@@ -33,7 +33,7 @@ def deal_with_client(connstream):
     password= str(data,'utf-8').replace("\n","")
     print(password)
     
-    if userDict[usuario] == password:
+    if usuario in userDict and userDict[usuario] == password:
          while data:
              message = ("Gracias "+ usuario +", ¿que transacción desea realizar?\n").encode('utf-8')
              connstream.send(message)
