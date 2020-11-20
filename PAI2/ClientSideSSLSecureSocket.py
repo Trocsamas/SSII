@@ -3,13 +3,17 @@
 """
 Created on Wed Nov 18 13:31:54 2020
 
-@author: trocsamas
+@author: Jaime Emilio Sala Mascort
 """
 import socket, ssl
+
+# La librería tkinter está en las librería básicas de python
 import tkinter as tk
 
-certPath="/home/trocsamas/certificate-client.pem"
-keyPath="/home/trocsamas/key-client.pem"
+# Idealmente los certificados deben estar guardados en un lugar seguro
+
+certPath="./certificate-client.pem"
+keyPath="./key-client.pem"
 
 root = tk.Tk()
 root.title('Entidad bancaria')
@@ -58,7 +62,7 @@ def aceptar():
 
 def inicializarConexion(context):
      conn = context.wrap_socket(socket.socket(socket.AF_INET),server_hostname="127.0.0.1")
-     conn.connect(("127.0.0.1", 10023))
+     conn.connect(("127.0.0.1", 7070))
      buffer = conn.recv(1024)
      data = str(buffer,'utf-8').replace("\n","")
      lbl.configure(text = data)
@@ -87,8 +91,6 @@ def enviar(conn, buttonEnviar):
 
 buttonAceptar = tk.Button(root, text="Aceptar", command=aceptar)
 buttonAceptar.pack()
-
-
 
 root.mainloop()
 

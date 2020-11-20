@@ -3,21 +3,24 @@
 """
 Created on Wed Nov 18 08:49:20 2020
 
-@author: trocsamas
+@author: Jaime Emilio Sala Mascort
 """
 import socket, ssl
 import pprint
 
 context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-context.load_cert_chain(certfile="/home/trocsamas/certificate.pem", keyfile="/home/trocsamas/key.pem")
+
+# Idealmente los certificados se almacenan en un lugar seguro
+context.load_cert_chain(certfile="./certificate.pem", keyfile="./key.pem")
 
 bindsocket = socket.socket()
-bindsocket.bind(('127.0.0.1', 10023))
+bindsocket.bind(('127.0.0.1', 7070))
 bindsocket.listen(5)
 
-userDict = {"30256459M":"Hola_1234"}
+# En este diccionario se encuentran los clientes del Banco y sus contraseñas
+userDict = {"21439092Y":"9nyup23r@|saf","89125124Q":"52_k~#jbñAS"}
 
-def deal_with_client(connstream):
+def comunicacionCliente(connstream):
     
     message = "Hola Cliente, envíe su usuario\n".encode('utf-8')
     connstream.send(message)
@@ -59,7 +62,9 @@ while True:
     newsocket, fromaddr = bindsocket.accept()
     connstream = context.wrap_socket(newsocket, server_side=True)
     try:
-        deal_with_client(connstream)
+        comunicacionCliente(connstream)
+    except:
+        print ("Se ha producido un fallo en la comunicacion con el cliente")
     finally:
         connstream.shutdown(socket.SHUT_RDWR)
         connstream.close()
