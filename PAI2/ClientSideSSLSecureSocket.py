@@ -10,20 +10,17 @@ import socket, ssl
 # La librería tkinter está en las librería básicas de python
 import tkinter as tk
 
-# Idealmente los certificados deben estar guardados en un lugar seguro
-
-certPath="./certificate-client.pem"
-keyPath="./key-client.pem"
 
 root = tk.Tk()
 root.title('Entidad bancaria')
 root.geometry("480x100")
 
 
-lbl = tk.Label(root, text="Introduce tu contraseña del certificado")
+lbl = tk.Label(root, text="Bienvenido a tu App Bancaria")
 lbl.pack()
 textEntry = tk.Entry(root, width=50)
-textEntry.pack()
+
+
 
 def botonEnviar(conn,si,no):
     if si==None:
@@ -42,22 +39,20 @@ def botonEnviar(conn,si,no):
     return 0
 
 def aceptar():
-    password = textEntry.get()
-    
-    context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-    try:
-        context.load_cert_chain(certfile=certPath, keyfile=keyPath,password=password)
+    try:    
+        context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+        conn = inicializarConexion(context)
     except:
         popUp = tk.Toplevel()
-        popUp.wm_title("Error de contraseña para el certificado")
-        errorText = tk.Label(popUp,text="Se ha producido un error al introducir la contraseña por favor inténtelo de nuevo")
+        popUp.wm_title("Error de conexión")
+        errorText = tk.Label(popUp,text="Se ha producido un error al realizar la conexión")
         errorText.pack()
         b = tk.Button(popUp, text="Vale", command=popUp.destroy)
         b.pack()
     else:
-       conn = inicializarConexion(context)
-       buttonAceptar.destroy()
-       botonEnviar(conn,None,None)
+        textEntry.pack()
+        buttonAceptar.destroy()
+        botonEnviar(conn,None,None)
 
 
 def inicializarConexion(context):
@@ -89,7 +84,7 @@ def enviar(conn, buttonEnviar):
         buttonSi.pack()
         buttonEnviar.destroy()
 
-buttonAceptar = tk.Button(root, text="Aceptar", command=aceptar)
+buttonAceptar = tk.Button(root, text="Entrar", command=aceptar)
 buttonAceptar.pack()
 
 root.mainloop()
