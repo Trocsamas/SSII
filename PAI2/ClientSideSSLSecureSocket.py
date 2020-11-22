@@ -40,7 +40,8 @@ def botonEnviar(conn,si,no):
 
 def aceptar():
     try:    
-        context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+        # context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2) Esto es para especificar el uso de tls 1.2 en el cliente
+        context = ssl.SSLContext(ssl.PROTOCOL_TLS)
         conn = inicializarConexion(context)
     except:
         popUp = tk.Toplevel()

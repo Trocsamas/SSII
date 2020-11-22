@@ -8,7 +8,12 @@ Created on Wed Nov 18 08:49:20 2020
 import socket, ssl
 import pprint
 
-context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+#context =ssl.SSLContext(ssl.PROTOCOL_TLSv1_2) Para especificar el uso de tls 1.2 en el servidor
+
+#De la siguiente forma se usa la versión de tls maxima soportada
+context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+
+
 
 # Idealmente los certificados se almacenan en un lugar seguro
 context.load_cert_chain(certfile="./certificate.pem", keyfile="./key.pem")
