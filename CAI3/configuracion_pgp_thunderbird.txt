@@ -1,0 +1,19 @@
+Thunderbird es un cliente de correo, calendario, noticias y chat opensource muy popular, resultando
+una de las alternativas más comunes a clientes de pago como Outlook. Actualmente se encuentra en la
+versión 78.5. Este dato es relevante de cara a las configuraciones que vamos a realizar para incluir
+el sistema de PGP, más concretamente openPGP. Thunderbird trae ioncorporado las tecnologías de
+cifrado openPGP desde la versión 78 en adelante. En caso de que se tuviera una versión previa del
+software, Thunderbird trae en su documentación una guía de cómo configurar pgp en versiones 68 y 
+anteriores.
+https://support.mozilla.org/en-US/kb/digitally-signing-and-encrypting-messages
+
+Una vez que el usuario ya tiene establecida una cuenta de correo, la manera más rápida de configurar 
+el sistema de openPGP en thunderbird es seguir los siguientes pasos:
+
+En la pestaña de inicio de thunderbird, arriba a la derecha, haga click en el botón "≡" y tras esto 
+"configuración de cuenta". En esta sección tendrá que elegir en qué cuenta configrar el cifrado
+en caso de tener más de una cuenta disponible en su cliente. Una vez seleccionada, entre en la 
+sección "End to end encryption" o Cifrado extremo a extremo. Tras esto, selecciona "Add key"
+
+*acceso_configuracion_TB*
+*pantallazo_accountsettings.png*
