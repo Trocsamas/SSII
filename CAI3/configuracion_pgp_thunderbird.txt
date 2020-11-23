@@ -15,5 +15,12 @@ En la pestaña de inicio de thunderbird, arriba a la derecha, haga click en el b
 en caso de tener más de una cuenta disponible en su cliente. Una vez seleccionada, entre en la 
 sección "End to end encryption" o Cifrado extremo a extremo. Tras esto, selecciona "Add key"
 
-*acceso_configuracion_TB*
+*acceso_configuracion_TB.png*
 *pantallazo_accountsettings.png*
+
+Una vez que seleccione "Add Key" aparecerá una ventana solicitando qué clave utilizar para el correo 
+que se ha elegido. En caso de no tener ninguna lave previamente configurada, se puede crear una 
+clave con thunderbird si se hace click en Create a new OpenPGP key.
+
+*creacion_seleccion_TB.png*
+
