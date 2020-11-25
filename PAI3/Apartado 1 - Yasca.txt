@@ -1,0 +1,43 @@
+Yasca es un programa de código abierto que busca vulnerabilidades de seguridad, 
+revisa la calidad de código, el rendimiento y la conformidad con las mejores 
+prácticas existentes en el código fuente del programa. Básicamente se trata de 
+un juego de herramientas multi-lenguaje de análisis estático.
+
+Yasca puede escanear el código fuente escrito en Java, C/C++, HTML, JavaScript, 
+ASP, ColdFusion, PHP, COBOL, .NET y otros lenguajes. Además puede integrarse 
+fácilmente con otras herramientas como:
+-FindBugs
+-PMD
+-JLint
+-JavaScript Lint
+-PHPLint
+-CppCheck
+-ClamAV
+-RATS
+-Pixy
+
+Yasca se puede utilizar para escanear determinados tipos de archivos y también 
+contiene muchos escáneres personalizados desarrollados para cada uno de ellos. 
+Es una herramienta en línea de comandos que genera informes en HTML, CSV, XML, 
+SQLite y otros formatos. Es fácilmente extensible a través de una arquitectura 
+basada en plugins, de tal forma que escanear cualquier archivo en particular 
+es tan simple como poner la regla correspondiente o integrarlo con una 
+herramienta externa. Yasca también cuenta con un plugin para expresiones 
+regulares que permite escribir nuevas reglas en menos de un minuto.
+
+Tienen un uso muy sencillo, basta con poner en un terminal : yasca C:\Direccion_codigo_a_analizar
+
+[yasca_terminal.PNG]
+
+Y despues de analizar todo el codigo, genera en el escritorio una carpeta con
+un .html dentro donde indica los tipos de gravedad mediante una escala de 
+colores:
+Rojo -> Critico
+Naranja -> Alto
+Amarillo -> Medio (predeterminado)
+Azul -> Bajo
+Verde -> Informativo
+
+[yasca_muestra.PNG]
+
+
