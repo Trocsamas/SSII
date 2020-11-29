@@ -1,0 +1,22 @@
+Hemos realizado un informe sobre la aplicación de mensajería utilizada entre los empleados, Signal App. Lo encontrará a continuación, junto 
+a una pequeña introducción.
+Signal App es una aplicación de mensajería instantanea similar a las conocidas Whatsapp y Telegram, pero cuya diferencia radica en una mayor 
+seguridad, y menor almacenamiento de información del usuario en la aplicación.
+Respecto a la seguridad, la App utiliza un protocolo de cifrado extremo a extremo, adoptado por Whatsapp posteriormente, por lo que si estos 
+mensajes se interceptan por el camino, no será posible leerlos. Telegram por su parte, solo aplica este tipo de cifrado en conversaciones privadas.
+Al hacer uso por primera vez de la aplicación, nos requerirá la creación de un PIN de seguridad. Con esto, nuestra cuenta quedará cifrada en
+los servidores de la propia aplicación, y podremos acceder a ella si cambiamos de dispositivo. Al ser un PIN personalizado por nosotros mismos, 
+nadie tedrá acceso a la cuenta.
+Comparte algunas características con Telegram, como ser una aplicación de código abierto y poder usar mensajes que se autodestruyen, pero 
+también algunas diferencias relacionadas con la seguridad.
+En Signal, no se pueden tomar capturas de pantalla mientras se usa la aplicación, para así mantener seguras las conversaciones. También se 
+puede especificar un tamaño máximo de longitud para las conversaciones, y más importante, los datos guardados en la apliación corresponden 
+exclusivamente al número de teléfono del usuario, y el día de su última conexión. Por su parte, Telegram y Whatsapp almacenan el número,
+la última conexión, la lista de contactos del usuario, el nombre y el estado o biografia. De esta forma, la retención de información que
+pudiera ser comprometedora por parte de Signal, es mínima.
+El resto de utilidades de la aplicación son las mismas que las dos mencionadas, permitiendo enviar mensajes, llamadas de voz, audios, fotos
+y todo lo usual.
+
+Desde este equipo no recomendamos la utilización de esta aplicación para enviar mensajes y compartir archivos que puedan contener información
+relacionada con el Hospital, puesto que aunque se use un protocolo de cifrado extremo a extremo bastante extendido y seguro que garantiza
+la privacidad, no utiliza un método de firma o similar que asegure la autenticación de los mensajes.
