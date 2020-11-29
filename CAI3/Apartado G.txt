@@ -6,11 +6,11 @@ Respecto a la seguridad, la App utiliza un protocolo de cifrado extremo a extrem
 mensajes se interceptan por el camino, no será posible leerlos. Telegram por su parte, solo aplica este tipo de cifrado en conversaciones privadas.
 Al hacer uso por primera vez de la aplicación, nos requerirá la creación de un PIN de seguridad. Con esto, nuestra cuenta quedará cifrada en
 los servidores de la propia aplicación, y podremos acceder a ella si cambiamos de dispositivo. Al ser un PIN personalizado por nosotros mismos, 
-nadie tedrá acceso a la cuenta.
+nadie tendrá acceso a la cuenta.
 Comparte algunas características con Telegram, como ser una aplicación de código abierto y poder usar mensajes que se autodestruyen, pero 
 también algunas diferencias relacionadas con la seguridad.
 En Signal, no se pueden tomar capturas de pantalla mientras se usa la aplicación, para así mantener seguras las conversaciones. También se 
-puede especificar un tamaño máximo de longitud para las conversaciones, y más importante, los datos guardados en la apliación corresponden 
+puede especificar un tamaño máximo de longitud para las conversaciones, y más importante, los datos guardados en la aplicación corresponden 
 exclusivamente al número de teléfono del usuario, y el día de su última conexión. Por su parte, Telegram y Whatsapp almacenan el número,
 la última conexión, la lista de contactos del usuario, el nombre y el estado o biografia. De esta forma, la retención de información que
 pudiera ser comprometedora por parte de Signal, es mínima.
