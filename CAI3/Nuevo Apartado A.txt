@@ -1,0 +1,55 @@
+
+Para la fotografía:
+   ---------------------------------------------------------------------------------
+   |       Cifrado         |       7.zip        |    VeraCrypt    |   AxCrypt      |
+   ---------------------------------------------------------------------------------
+   |         TAMAÑO        |    KB      | ms    |   KB     | ms   | KB      |  ms   |
+   ---------------------------------------------------------------------------------
+   |  Tamaño 1 (100 KB)    |   102 KB   | 1000  |  102KB   | 1000 | 103 KB  |  500  |
+   ---------------------------------------------------------------------------------
+   |  Tamaño 2 (500 KB)    |   555 KB   | 1000  | 556 KB   | 1000 | 533 KB  | 500   |
+   ---------------------------------------------------------------------------------
+   |  Tamaño 3 (1000 KB)   |   1000 KB  | 1000  |  1001 KB | 1000 | 1000 KB |  500  |
+   ---------------------------------------------------------------------------------
+   |  Tamaño 4 (1500 KB)   |   1579 KB  | 1000  | 1563 KB  | 1000 | 1539 KB | 500   |
+   ---------------------------------------------------------------------------------
+
+
+   ----------------------------------------------------------------------------------
+   |       Descrifrado     |       7.zip        |    VeraCrypt    |   AxCrypt       |
+   ----------------------------------------------------------------------------------
+   |         TAMAÑO        |    KB      | ms    |   KB     | ms   | KB      |  ms   |
+   ----------------------------------------------------------------------------------
+   |  Tamaño 1 (100 KB)    |  100 KB    |  1000 |  100 KB  | 1000 |  100 KB | 500   |
+   ----------------------------------------------------------------------------------
+   |  Tamaño 2 (500 KB)    |   543 KB   | 1000  |  545 KB  | 1000 |  544 KB | 500   |
+   ---------------------------------------------------------------------------------
+   |  Tamaño 3 (1000 KB)   |   959 KB   | 1000  |  960 KB  | 1000 |  959 KB | 500   |
+   ----------------------------------------------------------------------------------
+   |  Tamaño 4 (1500 KB)   |  1543 KB   | 1000  | 1545 KB  | 1000 | 1543 KB | 500   |
+   ----------------------------------------------------------------------------------
+
+
+
+ALG1 -> 7.zip que utiliza el AES-256
+
+ALG2 -> VeraCrypt -> 5 nuevas cascadas de algoritmos de cifrado: 
+Camellia-Kuznyechik, Camellia-Serpent, Kuznyechik-AES, 
+Kuznyechik-Serpent-Camellia y Kuznyechik-Twofish. Estos agregan más opciones 
+al soporte de cifrado múltiple de VeraCrypt.
+Camellia es un cifrado de bloque de clave simétrico con un tamaño de 
+bloque de 128 bits y tamaños de clave de 128, 192 y 256 bits.
+EL volumen de VeraCrypt está completamente encriptado (incluyendo nombres de 
+archivos,tablas de asignación, espacio libre, etc.) y se comporta como un disco 
+real. Puede guardar (o copiar, mover, etc.) archivos en este disco virtual y se 
+cifrarán sobre la marcha a medida que se escriben.
+
+ALG3 -> AxCrypt : Permite codificar, comprimir, decodificar, ver y editar 
+archivos mediante el uso del algoritmo AES-128 y SHA-1. Los archivos codificados
+ poseen la extensión *.axx y se muestran con un icono diferente.
+
+
+
+
+https://www.veracrypt.fr/en/Beginner%27s%20Tutorial.html
+
