@@ -44,3 +44,23 @@ Tras esto, aparecerá por pantalla un aviso explicando que la generación de la 
 minutos y que no interumpamos Thunderbird en el proceso. Confirmamos el aviso y esperamos. 
 Finalmente, obtendremos nuestra clave y la cuenta estará configurada para trabajar con cifrado de 
 punto a punto.
+
+Sin embargo, es necesario dar una serie de pasos adicionales para poder establecer una configuración
+óptima que permita la comunicación segura. Para poder establecer comunicaciones cifradas por correo
+es necesario conocer la clave pública del correspondiente y aceptarla. Destacamos aceptarla, ya que
+Thunderbird entiende que al aceptar una clave, estás confiando en la identidad del poseedor de la 
+clave. Por tanto, se recomienda encarecidamente comprobar la identidad del poseedor de la clave que
+se reciba en el correo.
+
+La manera más directa de obtener la clave de un correspondiente es que se mande un correo con la 
+clave pública adjuntada, bien directamente o de manera regular, o bien en una cabecera escondida.
+Para ello, seleccione la opción de redactar en su bandeja principal cree un correo para el
+correspondiente al que desea transmitir información privada. Una vez redactado el correo, haga click
+en la pestaña de seguridad y active la opción "adjuntar clave pública".
+
+*envio_clavepublica_TB*
+
+una vez se recibe el correo, podemos guardar las claves en un lugar seguro para poder acceder a 
+ellas posteriormente.
+
+*guardar_asc_TB.png*
