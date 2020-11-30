@@ -24,3 +24,23 @@ clave con thunderbird si se hace click en Create a new OpenPGP key.
 
 *creacion_seleccion_TB.png*
 
+Una vez seleccionado "Continue" con la opción de generar una nueva key, nos aparecerá una pantalla
+en la que configurar qué parámetros deseamos que tenga nuestra key. Además del parámetro identidad,
+Thunderbird nos solicitará 2 parámetros esenciales de nuestra key. 
+El primero es el periodo de expiración de la key. Por defecto Thunderbird lo marca en 3 años, pero 
+en función de las necesidades del cliente, se puede configurar para que el periodo sea menor, mayor
+o, en caso de ser necesario, que la key nunca expire. 
+El segundo de los parámetros a configurar es el tipo de key que se va a utilizar en los procesos de
+comunicación. Por defecto, Thunderbird indica que la key será de tipo RSA y su tamaño será de 3072
+bits, pero se puede configurar para que el tamaño sea de 4096 bits o que se utilice el algoritmo de 
+cifrado de curva elíptica (Eliptic Curve Crypography o ECC). 
+
+Para nuestro ejemplo, usaremos la configuración por defecto excepto la fecha de caducidad de la key,
+que la configuraremos como perenne (sin caducidad) y haremos click en "Generate Key"
+
+*paratros_key_TB.png*
+
+Tras esto, aparecerá por pantalla un aviso explicando que la generación de la clave tomará varios
+minutos y que no interumpamos Thunderbird en el proceso. Confirmamos el aviso y esperamos. 
+Finalmente, obtendremos nuestra clave y la cuenta estará configurada para trabajar con cifrado de 
+punto a punto.
