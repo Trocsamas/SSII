@@ -55,8 +55,8 @@ se reciba en el correo.
 La manera más directa de obtener la clave de un correspondiente es que se mande un correo con la 
 clave pública adjuntada, bien directamente o de manera regular, o bien en una cabecera escondida.
 Para ello, seleccione la opción de redactar en su bandeja principal cree un correo para el
-correspondiente al que desea transmitir información privada. Una vez redactado el correo, haga click
-en la pestaña de seguridad y active la opción "adjuntar clave pública".
+correspondiente al que desea transmitir información privada. Una vez redactado el correo, despliege
+la pestaña de seguridad y active la opción "adjuntar clave pública".
 
 *envio_clavepublica_TB*
 
@@ -64,3 +64,18 @@ una vez se recibe el correo, podemos guardar las claves en un lugar seguro para 
 ellas posteriormente.
 
 *guardar_asc_TB.png*
+
+Para importar la clave del usuario, haga click derecho en la clave publica adjuntada y seleccione
+"import openPGP key", acepte al usuario y ya podrá pasar al siguiente paso del proceso.
+Cuando vaya a redactar un mensaje cifrado, haga click en el boton de seguridad. Obtendrá una ventana
+que le mostrará que no tiene la calve aceptada para el destinatario. Haga click en "Manage keys for
+selected recipient...":
+
+*manage_keys_TB.png*
+
+Tras esto,obtendrá una nueva ventana, en la que haciendo click en "Open details and edit acceptance"
+podrá decidir si Aceptar o no la clave del sujeto al que desea escribir. Una vez eliga la opción de 
+que su clave está verificada y confía en el emisario de dicha clave, ya podrá usted enviar correos
+cifrados de punto a punto a dicha persona usando openPGP
+
+*edit_acceptance_TB.png*
