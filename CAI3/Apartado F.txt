@@ -1,0 +1,1 @@
+El cliente ha solicitado una verifiación de que la configuración de PGP se ha confiugrado correctamente en los clientes de mozilla Thunderbird. 
