@@ -1,1 +1,28 @@
-El cliente ha solicitado una verifiación de que la configuración de PGP se ha confiugrado correctamente en los clientes de mozilla Thunderbird. 
+El cliente ha solicitado una verifiación de que la configuración de PGP se ha confiugrado correctamente en los clientes de mozilla Thunderbird. Para ello, debemos comprobar que la comunicación se mantiene confidencial durante el envío de dos tipos de correo: Un primer tipo de correo que no contenga imágenes, sino texto plano, y un segundo tipo que adjunte adicionalmente una imagen.
+
+Analizando el primer tipo de correo, el formato que se ha decidido usar para el mensaje es el siguiente:
+
+*mail_ejemplo_1.png*
+
+Previamente al envío del correo, se ha puesto a escuchar el software de Sniffing Wireshark para intentar capturar la información del correo durante el envío. Dado que la configuración ha sido correcta, aunque se intenten filtrar las tramas por IMAP, POP3 o SMTP no se va a encotrar ningún tipo de información, ya que la comunicación se ha producido a través de TLS. Para información más detallada de las capturas, se adjunta en el proyecto un fichero con las capturas realizadas durante el envío.
+
+*fichero "captura envío mail.pcapng" de wireshark con todas las tramas capturadas*
+
+*"filtro captura imap_pop_smtp.png"*
+
+Otra manera de revisar que el correo se ha enviado correctamente utilizando PGP es intentar abrir el correo en cuestión, por ejemplo a través de otro cliente de correo. Si se abre el correo original a través del cliente de correos de gmail, se encontrará con el contenido del documento totalmente cifrado, inaccesible. 
+
+*correo_enviado_ext1.png*
+*correo_enviado_ext2.png*
+
+Analizando el segundo tipo de correo, se utilizará un formato similar al que se ha utilizado en el primer correo, añadiendo a los ficheros adjuntos alguna de las radiografías de ejmplo que se han utilizado en apartados previos del dossier:
+
+*mail_ejemplo_2.png*
+
+De nuevo, al analizar la captura "captura envío mail 2.pcapng" volvemos a encontrar que la información referente a IMAP, POP o SMTP no existe, pues se ha vuelto a utilizar el protocolo TLSv1_3 y la información queda totalmente cifrada en inaccesible a personas externas.
+Si examinamos mediante el cliente de correos externo (gmail) el correo recibido por el usuario, se comprueba que el contenido cifrado ha aumentado significativamente (incluye un total de 12252 lineas de texto cifrado) ya que ahora se incluye la radiografía de muestra en los archivos adjuntos del correo:
+
+*correo_enviado1_ext2.png*
+*correo_enviado2_ext2.png*
+
+Se concluye por tanto que la comunicación se ha realizado correctamente a través del uso de PGP en los clientes de correo Thunderbird, quedando reflejado en las evidencias gráficas y técnicas que se ha configurado correctamente openPGP en ambos clientes.
