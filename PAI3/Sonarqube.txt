@@ -2,7 +2,15 @@ Sonarqube, anteriormente conocido como Sonar, es una herramienta de análisis de
 
 Estudiando las alternativas que ofrece el producto, existe una versión open source totalmente gratuita que incluye una serie de lenguajes para analizar, bien sea por defecto o gracias a extensiones gratuitas del mismo software: Java, JavaScript, C#, TypeScript, Kotlin, Ruby, Go, Scala, Flex, Python, PHP, HTML, CSS, XML y VB.NET. Esta opción nos permite cubrir una parte de los requerimientos del cliente, el código en Java. Sin embargo, para poder acceder al análisis de código estático de C, se requiere adquirir la versión "Developer" de Sonarqube. El equipo de análisis puede acceder a una prueba gratuita de 14 días gracias a que Sonarqube facilita claves de 14 días para hacer pruebas y comprobar si el usuario está satisfecho con el producto. No obstante, de cara al estudio de alternativas para el cliente es necesario remarcarlo, ya que en última instancia resulta en una inversión monetaria que debe ser estudiada por el cliente.
 
-Configuración para Proyectos Java-Maven 
+Evaluación del Proyecto de Java-Maven 
+
+Tras ejecutar un análisis del código sobre el proyecto de ejemplo facilitado, el reporte que ha facilitado la herramienta describe la situación del proyecto como muy peligrosa. Siguiendo la guía de conceptos de sonarqube (https://docs.sonarqube.org/latest/user-guide/concepts/), en un vistazo general el proyecto presenta 10 bugs (problemas que directamente rompen el código o lo romperán futuramente y que requieren atención inmediata), 10 vulnerabilidades críticas, 45 puntos clave de seguridad (código que es sensible a problemas de seguridad y que necesita revisión manual para revisar si resultan una amenaza) y una deuda técnica (tiempo estimado para solucionar todos los problemas del proyecto) de 4 días y 6 horas
+
+*sonarqube_snaps/snap1.png*
+
+Un vistazo al apartado de "issues" muestra información más detallada sobre los problemas detectados por Sonarqube, indicando que existen 22 problemas de tipo blocker (problemas con un gran impacto y con gran posibilidad de ocurrir), 33 problemas críticos (gran impacto pero posibilidad de fallo baja), 118 problemas mayores y 108 problemas menores. 
+
+*sonarqube_snaps/snap2.png*
 
 
 
