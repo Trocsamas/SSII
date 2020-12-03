@@ -4,13 +4,17 @@ Estudiando las alternativas que ofrece el producto, existe una versión open sou
 
 Evaluación del Proyecto de Java-Maven 
 
-Tras ejecutar un análisis del código sobre el proyecto de ejemplo facilitado, el reporte que ha facilitado la herramienta describe la situación del proyecto como muy peligrosa. Siguiendo la guía de conceptos de sonarqube (https://docs.sonarqube.org/latest/user-guide/concepts/), en un vistazo general el proyecto presenta 10 bugs (problemas que directamente rompen el código o lo romperán futuramente y que requieren atención inmediata), 10 vulnerabilidades críticas, 45 puntos clave de seguridad (código que es sensible a problemas de seguridad y que necesita revisión manual para revisar si resultan una amenaza) y una deuda técnica (tiempo estimado para solucionar todos los problemas del proyecto) de 4 días y 6 horas
+Tras ejecutar un análisis del código sobre el proyecto de ejemplo facilitado, el reporte que ha facilitado la herramienta describe la situación del proyecto como muy peligrosa. Siguiendo la guía de conceptos de sonarqube (https://docs.sonarqube.org/latest/user-guide/concepts/), en un vistazo general el proyecto presenta 10 bugs (problemas que directamente rompen el código o lo romperán futuramente y que requieren atención inmediata), 10 vulnerabilidades críticas, 45 puntos clave de seguridad (código que es sensible a problemas de seguridad y que necesita revisión manual para revisar si resultan una amenaza y solucionarlo en caso de resultar crítico) y una deuda técnica (tiempo estimado para solucionar todos los problemas del proyecto) de 4 días y 6 horas
 
 *sonarqube_snaps/snap1.png*
 
 Un vistazo al apartado de "issues" muestra información más detallada sobre los problemas detectados por Sonarqube, indicando que existen 22 problemas de tipo blocker (problemas con un gran impacto y con gran posibilidad de ocurrir), 33 problemas críticos (gran impacto pero posibilidad de fallo baja), 118 problemas mayores y 108 problemas menores. 
 
 *sonarqube_snaps/snap2.png*
+
+Atendiendo los "Security Hotspots"(S.H de aquí en adelante), que resultarán ser nuestro principal interés dentro de todos los problemas del proyecto, encontramos que este contiene 29 S.H. susceptibles de exploits del tipo CSRF o falsificación de petición en sitios cruzados, 1 S.H. relacionado con inyecciones SQL y 3 S.H. relacionados con exploits XSS o secuencia de comandos en sitios cruzados. Adicionalmente, existen 12 S.H. relacionados con problemas de configuración insegura y otros problemas.
+
+*sonarqube_snaps/snap3.png*
 
 
 
