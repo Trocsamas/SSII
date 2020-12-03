@@ -38,6 +38,4 @@ Amarillo -> Medio (predeterminado)
 Azul -> Bajo
 Verde -> Informativo
 
-[yasca_muestra.PNG]
-
 
