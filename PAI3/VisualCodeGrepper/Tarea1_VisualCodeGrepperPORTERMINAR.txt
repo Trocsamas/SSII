@@ -1,0 +1,34 @@
+Vulnerabilidad 1: Tipo CRITICAL: Potential SQL Injection.
+Encontramos esta vulnerabilidad en el fichero CsrfAccessDeniedHandler.java, exactamente en la línea 27, la cual es:
+	logger.info("[-] URL: " + request.getRequestURL() + "?" + request.getQueryString() + "\t" +
+
+Vulnerabilidad 2: Tipo CRITICAL: Potential SQL Injection.
+Se encuentra en el ficherto SQLI.java, línea 107 del código.
+	PreparedStatement st = con.prepareStatement(sql);
+
+Vulnerabilidad 3: Tipo CRITICAL: Potential SQL Injection.
+Aparece, de nuevo, en el fichero SQLI.java, en la línea 66.
+	ResultSet rs = statement.executeQuery(sql);
+
+Podemos observar que la herramienta califica estas tres vulnerabilidades como criticas, por lo que debe ser prioritario que las resolvamos. Esto se debe a que las tres
+presentan un peligro muy alto, pues permitirían SQL injection. A continuación una breve explicación del termino:
+
+Una vulnerabilidad de tipo SQL injection es una puerta trasera para todo aquel atacante que quiera obtener información de una base de datos, además de permitirle añadir,
+modificar y borrar contenido a voluntad. Encontrando estos fallos de seguridad en las aplicaciones y paginas web, un atacante es capaz de evitar las medidas de seguridad
+que controlan el acceso a dicha base de datos.
+
+Ahora pasamos a vulnerabilidades cuya prioridad vendría tras las tres anteriores, pero que siguen siendo importantes.
+Vulnerabilidad 4: Tipo HIGH: Poor Input Validation.
+Situada en el fichero OriginFilter.java, línea 43.
+	"\tCurrent url:" + request.getRequestURL());
+
+Vulnerabilidad 5: Tipo HIGH: Poor Input Validation.
+La encontramos en LoginFailureHandler.java, en la línea 24.
+	logger.info("Login failed. " + request.getRequestURL() +
+
+Vulnerabilidad 6: Tipo HIGH: Poor Input Validation.
+El fichero que la contiene es CRLFInjection.java, línea 25.
+	String author = request.getParameter("test3");
+
+Estas tres vulnerabilidades son calificadas con riesgo alto, debido a que la aplicación hace una petición request de datos, sin que estos sean validados. La herramienta no ha 
+localizado complementos de validación en los archivos XML de la aplicación que estamos analizando.
