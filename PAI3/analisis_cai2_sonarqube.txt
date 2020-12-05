@@ -1,0 +1,23 @@
+Análisis de la CAI 2 con Sonarqube
+=============================================
+
+Tras realizar un análisis intensivo con la herramienta de análisis de código estático Sonarqube, y siguiendo la guía de conceptos de sonarqube (https://docs.sonarqube.org/latest/user-guide/concepts/), el software nos informa de que la situación general del proyecto es la siguiente: 7 bugs (problemas que directamente rompen el código o lo romperán futuramente y que requieren atención inmediata), 0 vulnerabilidades del código, 5 "Security Hotspots" (código que es sensible a problemas de seguridad y que necesita revisión manual para revisar si resultan una amenaza y solucionarlo en caso de resultar crítico. Serán nuestro foco de estudio durante este análisis) y una deuda técnica (tiempo estimado para solucionar todos los problemas del proyecto) de 3 horas y 56 minutos.
+
+*sonarqube_snaps/snap1.png*
+
+Un vistazo al apartado de "issues" muestra información más detallada sobre los problemas detectados por Sonarqube, indicando que existen 3 problemas de tipo blocker (problemas con un gran impacto y con gran posibilidad de ocurrir dentro del código y que pueden dificultar el desarrollo), 4 problemas críticos (gran impacto pero posibilidad de fallo baja), 13 problemas mayores y 13 problemas menores.
+
+*sonarqube_snaps/snap2.png*
+
+Atendiendo los "Security Hotspots" (S.H de aquí en adelante), la herramienta determina que el proyecto presenta 5 problemas de seguridad de tipo bajo, englobando cuatro de esos problemas en la categoría de "configuración insegura" y el quinto resultando ser un problema relacionado con los ataques de tipo "log injection". 
+
+*sonarqube_snaps/snap3.png*
+
+A continuación, se tratarán cada una de estas potenciales vulnerabilidades.
+
+1) Problemas de configuración insegura
+
+Estas 4 potenciales vulnerabilidades están todas relacionadas con un mismo tipo de problema: imprimer por pantalla trazas del código o del flujo de información del código. Más concretamente dentro del código, el problema se esconde en la llamada al método printStackTrace(), que se puede encontrar dentro de los ficheros src/codigo/IntegrityVerifierServer.java, src/codigo/IntegrityVerifierClient.java y src/codigo/CreacionLog.java. 
+
+*sonarqube_snaps/snap4.png*
+
