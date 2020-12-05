@@ -1,0 +1,102 @@
+Después de hacer el analisis al protecto en C, nos da las siguientes vulnerabilidades:
+
+1) User After Free (UAF)
+
+Es una vulnerabilidad relacionada con el uso incorrecto de la memoria dinámica durante la 
+operación del programa. Si después de liberar una ubicación de memoria, un programa no borra 
+el puntero a esa memoria, un atacante puede usar el error para hackear el programa.
+
+Las vulnerabilidades de UAF provienen del mecanismo de asignación de memoria dinámica. 
+A diferencia de la pila , la memoria dinámica (también conocida como montón) está diseñada para 
+almacenar grandes cantidades de datos. Los programadores pueden asignar bloques de tamaño 
+arbitrario en él, cuyas tareas dentro de un programa pueden luego modificar o liberar y volver 
+al montón para su uso posterior por otras tareas en el mismo programa.
+
+Debido a que la memoria dinámica se reasigna repetidamente, los programas deben verificar 
+constantemente qué secciones del montón están libres y cuáles están ocupadas. Aquí, los 
+encabezados ayudan al hacer referencia a áreas de memoria asignadas. Cada encabezado contiene 
+la dirección inicial del bloque correspondiente. Los errores de UAF surgen cuando los programas 
+no administran estos encabezados correctamente.
+
+Las posibles consecuencias de la explotación de UAF incluyen:
+-Corrupción de datos,
+-El programa se bloquea,
+-Ejecución de código arbitrario.
+
+Un atacante puede usar UAF para pasar código arbitrario, o una referencia a él, a un programa y 
+navegar hasta el principio del código usando un puntero colgante. De esta manera, la ejecución 
+del código malicioso puede permitir que el ciberdelincuente controle el sistema de la víctima.
+
+
+
+2) Unsafe/Banned Function
+
+Este tipo de vulnerabilidad se está dando en este código por el uso de la funcion strlen().
+
+Strlen escanea hasta encontrar un carácter nulo.Puede escanear fuera del búfer si la cadena no 
+tiene terminación nula. Puede resultar en una falla de segmentación o un error de bus.
+
+Strlen () continua atravesando la memoria hasta que encuentre un carácter NULL arbitrario en 
+la pila, lo que da como resultado un valor de longitud que es mucho mayor que el tamaño de buf 
+y puede causar un desbordamiento del búfer en usos posteriores de este valor.
+Tradicionalmente, las cadenas se representan como una región de memoria que contiene datos 
+terminados con un carácter NULL. Los métodos más antiguos de manejo de cadenas se basan con 
+frecuencia en este carácter NULL para determinar la longitud de la cadena. Si un búfer que no 
+contiene un terminador NULL se pasa a una de estas funciones, la función leerá más allá del 
+final del búfer.
+
+Los usuarios malintencionados suelen aprovechar este tipo de vulnerabilidad inyectando datos 
+con un tamaño o contenido inesperados en la aplicación. Pueden proporcionar la entrada 
+maliciosa directamente como entrada al programa o indirectamente modificando los recursos de la 
+aplicación, como los archivos de configuración. En el caso de que un atacante haga que la 
+aplicación lea más allá de los límites de un búfer, el atacante puede usar un desbordamiento de 
+búfer resultante para inyectar y ejecutar código arbitrario en el sistema.
+
+3) Potentially Sensitive Data Visible
+
+La exposición de datos sensibles difiere de una violación de datos, en la que un atacante 
+accede y roba información.
+
+La exposición de datos sensibles ocurre como resultado de no proteger adecuadamente una base 
+de datos donde se almacena la información. Esto puede ser el resultado de una multitud de 
+cosas, como un cifrado débil, falta de cifrado, fallas de software o cuando alguien carga datos 
+por error en una base de datos incorrecta.
+
+4) Potential Sensitive Information Leak via realloc()
+
+Los datos confidenciales almacenados en recursos reutilizables pueden filtrarse 
+inadvertidamente a un usuario o atacante con menos privilegios si no se eliminan correctamente. 
+Ejemplos de recursos reutilizables incluyen:
+
+-Memoria asignada dinámicamente
+-Memoria asignada estáticamente
+-Memoria asignada automáticamente (pila)
+-Cachés de memoria
+-Disco
+-Cachés de disco
+
+El uso de realloc () para cambiar el tamaño de los búferes que almacenan información 
+confidencial puede dejar la información confidencial expuesta a ataques, ya que no se 
+elimina de la memoria.
+Reasignar el uso de memoria  realloc() puede tener el mismo problema que liberar memoria.
+
+T llama a realloc()para cambiar el tamaño de la memoria dinámica puede exponer inadvertidamente 
+información sensible, o puede permitir la inspección de esa misma información.
+
+5) Double Free
+
+Los errores Double Free ocurren cuando free()se llama más de una vez con la misma dirección de 
+memoria como argumento.
+
+Llamar free()dos veces al mismo valor puede provocar una pérdida de memoria. Cuando un programa 
+llama free()dos veces con el mismo argumento, las estructuras de datos de administración de 
+memoria del programa se corrompen y podrían permitir que un usuario malintencionado escriba 
+valores en espacios de memoria arbitrarios. Esta corrupción puede hacer que el programa se 
+bloquee o, en algunas circunstancias, altere el flujo de ejecución. Al sobrescribir registros o 
+espacios de memoria particulares, un atacante puede engañar al programa para que ejecute el 
+código de su elección, lo que a menudo resulta en un shell interactivo con permisos elevados.
+
+Puede tener de consecuencia el control de acceso: el double free de memoria puede resultar en 
+una condición de escritura en qué lugar, lo que permite que un atacante ejecute código 
+arbitrario.
+ 
