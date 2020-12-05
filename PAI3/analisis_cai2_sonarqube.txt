@@ -17,7 +17,40 @@ A continuación, se tratarán cada una de estas potenciales vulnerabilidades.
 
 1) Problemas de configuración insegura
 
-Estas 4 potenciales vulnerabilidades están todas relacionadas con un mismo tipo de problema: imprimer por pantalla trazas del código o del flujo de información del código. Más concretamente dentro del código, el problema se esconde en la llamada al método printStackTrace(), que se puede encontrar dentro de los ficheros src/codigo/IntegrityVerifierServer.java, src/codigo/IntegrityVerifierClient.java y src/codigo/CreacionLog.java. 
+Estas 4 potenciales vulnerabilidades están todas relacionadas con un mismo tipo de problema: imprimer por pantalla trazas del código o del flujo de información del código. Más concretamente dentro del código, el problema se esconde en la llamada al método printStackTrace(), que se puede encontrar dentro de los ficheros src/codigo/IntegrityVerifierServer.java, src/codigo/IntegrityVerifierClient.java y 2 veces dentro de src/codigo/CreacionLog.java. 
 
 *sonarqube_snaps/snap4.png*
 
+Este tipo de problemas, aunque leves, resultan una potencial amenaza para el sistema. Esto se debe a que este tipo de métodos, que ayudan a los desarrolladores a encontrar bugs y problemas en el código, pueden ser utilizados por agentes externos maliciosos, ya que pueden facilitar mucha información detallada acerca del sistema que corre la aplicación o los usuarios de la misma. Se engloban dentro de la categoría A3 dell top 10 de 2017 de vulnerabilidades de la OWASP (https://owasp.org/www-project-top-ten/2017/A3_2017-Sensitive_Data_Exposure.html).
+Existen varias maneras de solventar estos problemas. La primera y más sencilla sería eliminar estas llamadas antes de llevarlas a la fase de producción del proyecto, y consecuentemente no activar prestaciones de debugging dentro del proyecto en esta fase. Otra alternativa es utilizar loggers en vez de realizar llamadas al método de printStackTrace() a la hora de imprimir "throwables". Adicionalmente, en caso de utilizar notación EnableWebSecurity, configurar el parámetro de debug como falso.
+
+*sonarqube_snaps/snap5.png*
+
+2)Log Injection
+
+Los ataques de Log Injection (https://owasp.org/www-community/attacks/Log_Injection) se describen brevemente como escrituras de input de usuarios no válidas en un log que permiten a un atacante escribir contenido no deseado dentro de un log, como entradas dentro del log o contenido malicioso, o adquirir información sensible de los mismo. Por tanto, una mala configuración de los loggers puede llevar a distintas vulnerabilidades, como las siguientes:
+
+CVE-2018-0285(http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0285)
+CVE-2000-1127(http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2000-1127)
+CVE-2017-15113(http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-15113)
+CVE-2015-5742(http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5742)
+
+
+Analizando el código vulnerable, se detecta que el problema reside en el fichero src/codigo/CreacionLog.java, más concretamente en la llamada al método "lg.addHandler(f)":
+
+*sonarqube_snaps/snap6.png*
+
+La solución más directa a esta vulnerabilidad es intentar modificar los métodos de gestión de loggers dentro del fichero para añadir capas de seguridad. A la hora de solucionar problemas relacionados con loggers, Sonarqube propone una serie de recomendaciones que traduciremos en el informe:
+
+- Comprobar que los loggers de la fase de producción no se encuentran en modo "debug".
+- Guardar logs de la fase de producción en un lugar seguro, solo accesible a administradores de sisttemas.
+- Configurar los loggers para que muestren toda la información relevante de avisos, errores e información.
+- Elegir un formato de log que sea facil de analizar y automatizar. Cuanto más rapido se pueda analizar un log, más ventaja se tiene para conocer el impacto del ataque y sus repercusiones.
+- Comprobar que los logs de seguridad tienen bien configurados los permisos de acceso.
+- Añadir un límite al tamaño de los logs y asegurar que no se pueden llenar repetidanmente los contenedores de información con logs.
+- No contener información sensible dentro de los logs en la medida de lo posible (p.ej. datos de usuarios como contraseñas o tarjetas de crédito).
+- Sanizar todas las entradas de información de usuario antes de incluirlas en los logs.
+- Incluir suficiente información dentro de los logs para detectar actividad sospechosa y detenerla a tiempo.
+- Relacionado con el punto anterior, monitorizar regularmente los logs en busca de estas actividades.
+
+*sonarqube_snaps/snap7.png*
