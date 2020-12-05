@@ -1,6 +1,34 @@
 APARTADO 2
 ===========================
 
+Introducción
+
 Sonarqube, anteriormente conocido como Sonar, es una herramienta de análisis de códgo fuente libre. Su funcionamiento se basa en el uso de múltiples métricas de análisis de código estático para determinar vulnerabilidades del códgio y mejorar la calidad del mismo. Adicionalmente, resulta un software muy práctico ya que facilita mecanismos de Integración Continua (CI/CD).
 
-Estudiando las alternativas que ofrece el producto, existe una versión open source totalmente gratuita que incluye una serie de lenguajes para analizar, bien sea por defecto o gracias a extensiones gratuitas del mismo software: Java, JavaScript, C#, TypeScript, Kotlin, Ruby, Go, Scala, Flex, Python, PHP, HTML, CSS, XML y VB.NET. Esta opción nos permite cubrir una parte de los requerimientos del cliente, el código en Java. Sin embargo, para poder acceder al análisis de código estático de C, se requiere adquirir la versión "Developer" de Sonarqube. El equipo de análisis puede acceder a una prueba gratuita de 14 días gracias a que Sonarqube facilita claves de 14 días para hacer pruebas y comprobar si el usuario está satisfecho con el producto. No obstante, de cara al estudio de alternativas para el cliente es necesario remarcarlo, ya que en última instancia resulta en una inversión monetaria que debe ser estudiada por el cliente.
+Estudiando las alternativas que ofrece el producto, existe una versión open source totalmente gratuita que incluye una serie de lenguajes para analizar, bien sea por defecto o gracias a extensiones gratuitas del mismo software: Java, JavaScript, C#, TypeScript, Kotlin, Ruby, Go, Scala, Flex, Python, PHP, HTML, CSS, XML y VB.NET. Esta opción nos permite cubrir una parte de los requerimientos del cliente, el código en Java. Sin embargo, para poder acceder al análisis de código estático de C, se requiere adquirir la versión "Developer" de Sonarqube. De cara al estudio de alternativas para el cliente es necesario remarcarlo, ya que en última instancia resulta en una inversión monetaria que debe ser estudiada por el cliente.
+
+Estudio del rendimiento de la herramienta
+
+A la hora de estudiar el rendimiento de Sonarqube es necesario obtener una idea aproximada de una serie de parámetros: eficiencia (tiempo  necesario), eficacia (número de vulnerabilidades obtenidas), tasa de falsos positivos, usabilidad, y el informe de resultados obtenidos. 
+
+Afortunadamente, un desarrollador del equipo de Sonarqube en su página de posts de comunidad redactó una entrada con muchos datos aclaradores acerca de varios de los parámetros que hemos listado previamente (eficacia, eficiencia y tasa de FP). El equipo explica que para las pruebas se utilizó el OWASP Benchmark (https://github.com/OWASP/Benchmark), un java test suite con más de 2740 casos de prueba designado para probar la velocidad y la efectividad de una herramienta de detección de vulnerabilidades. Para muchas entidades es considerado el standard para estudiar si una herramienta es digna de uso o no.
+ 
+Los resultados que obtuvo la herramienta tras realizar el benchmark fue el siguiente:
+- Puntuación del OWASP Benchmark: 84/100
+- Tasa de Verdaderos Positivos (TPR): 85%
+- Tasa de Falsos Positivos: 1%
+
+Una descripción de como se computa la nota del benchmark es la siguiente:
+TP - True-Positive 	Existe un problema y se detecta
+FN - False-Negative Existe un problema y no se detecta
+TN - True-Negative 	No se espera un problema y el programa no lo considera un problema
+FP - False-Positive No se espera un problema y el programa sí lo considera un problema
+TPR - True-Positive Rate 	(TPR) = TP / ( TP + FN )
+FPR - False-Positive Rate 	(FPR) = FP / ( FP + TN )
+OWASP Benchmark Score 	TPR - FPR
+
+A nivel de eficiencia y rendimiento, las pruebas de este benchmark indican que, de media, con una máquina con un Intel Core i5 3570 con un reloj de 3.40 GHz y una memoria RAM total de 16 Gigabytes se debería de analizar todo el benchmark en aproximadamente 3 minutos, lo cual es un tiempo considerablemente pequeño para un proyecto que contiene 2740 casos de prueba con todo tipo de vulnerabilidades (Inyecciones SQL, Cross-Site Scripts, Inyecciones de Comandos, problemas de hashing o generadores de números aleatorios débiles entre otros ejemplos).
+
+Para más información acerca del benchmark realizado, puede consultar el post original con sus correspondientes consideraciones aquí [https://community.sonarsource.com/t/takeaways-from-building-a-sast-product-and-why-owasp-benchmark-is-not-enough/15126].
+
+Tratando la usabilidad, Sonarqube presenta un formato muy cómodo a nivel de interfaz. Solo en la versión community ya se puede obtener una idea aproximada de las funcionalidades del producto. Sonarqube se puede configurar para uso local como para uso en servidores, lo cual permite ajustarse al cliente en función de sus necesidades. 
