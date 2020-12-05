@@ -1,6 +1,5 @@
-Sonarqube, anteriormente conocido como Sonar, es una herramienta de análisis de códgo fuente libre. Su funcionamiento se basa en el uso de múltiples métricas de análisis de código estático para determinar vulnerabilidades del códgio y mejorar la calidad del mismo. Adicionalmente, resulta un software muy práctico ya que facilita mecanismos de Integración Continua (CI/CD).
-
-Estudiando las alternativas que ofrece el producto, existe una versión open source totalmente gratuita que incluye una serie de lenguajes para analizar, bien sea por defecto o gracias a extensiones gratuitas del mismo software: Java, JavaScript, C#, TypeScript, Kotlin, Ruby, Go, Scala, Flex, Python, PHP, HTML, CSS, XML y VB.NET. Esta opción nos permite cubrir una parte de los requerimientos del cliente, el código en Java. Sin embargo, para poder acceder al análisis de código estático de C, se requiere adquirir la versión "Developer" de Sonarqube. El equipo de análisis puede acceder a una prueba gratuita de 14 días gracias a que Sonarqube facilita claves de 14 días para hacer pruebas y comprobar si el usuario está satisfecho con el producto. No obstante, de cara al estudio de alternativas para el cliente es necesario remarcarlo, ya que en última instancia resulta en una inversión monetaria que debe ser estudiada por el cliente.
+APARTADO 1
+===========================
 
 Evaluación del Proyecto de Java-Maven 
 
@@ -16,5 +15,9 @@ Atendiendo los "Security Hotspots"(S.H de aquí en adelante), que resultarán se
 
 *sonarqube_snaps/snap3.png*
 
+APARTADO 2
+===========================
 
+Sonarqube, anteriormente conocido como Sonar, es una herramienta de análisis de códgo fuente libre. Su funcionamiento se basa en el uso de múltiples métricas de análisis de código estático para determinar vulnerabilidades del códgio y mejorar la calidad del mismo. Adicionalmente, resulta un software muy práctico ya que facilita mecanismos de Integración Continua (CI/CD).
 
+Estudiando las alternativas que ofrece el producto, existe una versión open source totalmente gratuita que incluye una serie de lenguajes para analizar, bien sea por defecto o gracias a extensiones gratuitas del mismo software: Java, JavaScript, C#, TypeScript, Kotlin, Ruby, Go, Scala, Flex, Python, PHP, HTML, CSS, XML y VB.NET. Esta opción nos permite cubrir una parte de los requerimientos del cliente, el código en Java. Sin embargo, para poder acceder al análisis de código estático de C, se requiere adquirir la versión "Developer" de Sonarqube. El equipo de análisis puede acceder a una prueba gratuita de 14 días gracias a que Sonarqube facilita claves de 14 días para hacer pruebas y comprobar si el usuario está satisfecho con el producto. No obstante, de cara al estudio de alternativas para el cliente es necesario remarcarlo, ya que en última instancia resulta en una inversión monetaria que debe ser estudiada por el cliente.
