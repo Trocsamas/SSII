@@ -1,0 +1,14 @@
+
+  Herramienta       | TP | TN | FP | FN 
+    SonarQube       |
+VisualCodeGrepper   |
+ OWASPCodeCrawler   |
+ Devskim            |
+
+ Lenguajes cubiertos por(versión gratuita):
+ - SonarQube        :
+ - VisualCodeGrepper:
+ - OWASPCodeCrawler :
+ - Devskim          :
+
+ 
