@@ -1,0 +1,52 @@
+Puesto que hemos utilizado esta VisualCodegrepper como herramienta de análisis, desde el quipo hemos visto conveniente la creación de este manual de instalación y uso
+de dicha herramienta.
+
+Para comenzar, descargamos el .zip de la herramienta desde el siguiente enlace (https://github.com/nccgroup/VCG) y ejecutamos el archivo VCG-setup.msi. En la ventana de
+bienvenida, pulsamos Next y, a continuación, seleccionamos la carpeta donde queremos instalar la herramienta, y para que usuarios.
+
+*InstallationFolder.png*
+
+Tras pulsar Next, nos confirma que el programa está listo para instalarse, y volvemos a pulsar en Next. Tras la instalación completa, pulsamos Close, y nos fijamos en 
+nuestro escritorio, puesto que debe haberse creado un acceso directo para la aplicación. Lo ejecutamos, aceptamos el recordatorio de seleccionar un lenguaje antes de 
+analizar, y ya tenemos disponible la herramienta.
+
+Nos aparece la siguiente ventana, de la cual explicaremos cada pestaña:
+
+*VCG.png*
+
+La pestaña File nos permite seleccionar el directorio que contiene los archivos que queremos analizar, elegir y analizar un único archivo, guardar los resultados en un fichero
+de texto, importar y exportar en formato XML, importar y exportar en formato CSV, y exportar metadatos de código en XML.
+La pestaña Edit proporciona edición simple, tal como cortar, copiar, pegar, y buscar.
+La pestaña View permite agrupar los resultados con texto enriquecido por su tipo de problema o por fichero al que afecte, además de poder seleccionar si queremos ver texto
+enriquecido que ofrezca más información de los resultados.
+La pestaña Scan es donde podremos seleccionar el tipo de escaneo que queramos realizar, desde un escaneo completo, sólo de código ignorando comentarios o únicamente comentarios,
+además de otras opciones. También podemos ordenar los resultados por severidad de la vulnerabilidad, o por el nombre del fichero que se analiza. Por último, aparece una opción
+para filtrar los resultados por importancia de vulnerabilidad.
+En la pestaña Settings elegiremos el tipo de lenguaje que queremos analizar, ya sea C/C++, java, o cualquier otro soportado por la herramienta.
+La última pestaña, Help, muestra información sobre su creador, y versión de la herramienta que se está ejecutando.
+
+Para su correcto uso, lo primero que haremos será seleccionar el tipo de lenguaje que vamos a analizar.
+
+*Settings.png*
+
+A continuación, elegimos un directorio o fichero a analizar.
+
+*Directorio.png*
+
+Y activamos el escaneo que necesitemos, en este caso Full Scan. En la ventana que aparece, Visual Breakdown, podemos seleccionar que nos aparezca un gráfico informativo del análisis,
+tras cada escaneo.
+
+*Resultados.png*
+
+Aparecerán dos ventanas, la primera con las vulnerabilidades encontradas en el código, cuya severidad queda marcada por un rango de colores, y un gráfico general del escaneo.
+En la ventana con las vulnerabilidades, podremos observar el tipo de vulnerabilidad que presenta cada parte del código, el motivo, su localización y la línea afectada.
+Para finalizar, el rango de colores que aplica la herramienta para los problemas encontrados, es el siguiente:
+Magenta -> Vulnerabilidad crítica
+Red -> Riesgo alto
+Naranja -> Riesgo medio
+Amarillo -> Riesgo estándar o normal
+Azul claro -> Riesgo bajo
+Verde -> Problema en potencia
+Azul oscuro -> Comentario sospechoso que indica fallos en el código.
+
+Esta información se puede encontrar en el propio enlace de descarga, y está proporcionada por el creador.
