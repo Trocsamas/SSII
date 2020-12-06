@@ -1,0 +1,175 @@
+--Critical: Unsafe Use of strcpy Allows Buffer Overflow
+
+Se produce una vulnerabilidad de desbordamiento del búfer cuando los datos se pueden escribir 
+fuera de la memoria asignada para un búfer, ya sea más allá del final o antes del comienzo.
+
+Los desbordamientos de búfer pueden ocurrir en la pila, en el montón, en el segmento de datos o 
+en el segmento BSS (el área de memoria que usa un programa para datos globales no inicializados) 
+y pueden sobrescribir de uno a muchos bytes de memoria fuera del búfer.
+
+Las vulnerabilidades de desbordamiento del búfer a menudo permiten a los atacantes remotos 
+ejecutar código arbitrario en un servidor víctima o bloquear el software del servidor y 
+realizar un ataque de denegación de servicio (DoS).
+
+El desbordamiento del búfer ocurre normalmente en lenguajes que no tienen control de puntero 
+ni comprobación de límites inherentes. Por ejemplo, C y C ++.
+
+Técnicas generales de prevención:
+
+Varias técnicas generales para evitar desbordamientos de búfer incluyen:
+
+-Auditoría de código (automatizada o manual)
+-Capacitación para desarrolladores: verificación de límites, uso de funciones inseguras y 
+estándares de grupo
+-Pilas no ejecutables: muchos sistemas operativos tienen al menos algo de soporte para esto
+-Herramientas del compilador: StackShield, StackGuard y Libsafe, entre otras
+-Funciones seguras: use strncat en lugar de strcat, strncpy en lugar de strcpy, etc.
+-Parches: asegúrese de mantener sus servidores web y de aplicaciones completamente parcheados y 
+esté al tanto de los informes de errores relacionados con las aplicaciones de las que depende 
+su código.
+-Escanee periódicamente su aplicación con uno o más de los escáneres comúnmente disponibles que 
+buscan fallas de desbordamiento de búfer en sus productos de servidor y sus aplicaciones web 
+personalizadas.
+-Evite usar strcpy () porque no realiza verificación de límites. Use una función alternativa 
+que realice la misma función con la verificación de límites o verifique los límites manualmente 
+para cualquier uso de strcpy () .
+
+La biblioteca estándar de C generalmente ofrece strncpy () que permite al programador 
+especificar el número máximo de caracteres para copiar en el búfer. También tenga en cuenta que 
+existen muchas otras funciones de reemplazo. Utilice strncpy () con cuidado también, debido a 
+cómo se comporta. No garantiza un '\ 0' al final de la cadena de destino, y tener una cadena 
+truncada puede introducir otros problemas al programa.
+
+
+--Critical: Unsafe Use of sprintf Allows Buffer Overflow
+
+Este código es peligroso porque si un usuario ingresa un primer argumento que es muy grande, la 
+función sprintf() podría escribir más allá del final de la memoria asignada buff. Esto se llama 
+desbordamiento de búfer .
+
+Los posibles resultados de un desbordamiento del búfer son: volcado del núcleo, caída del 
+sistema o, lo peor de todo, una vulnerabilidad de seguridad.
+
+Si nuestro programa es un programa raíz y el desbordamiento del búfer se crea cuidadosamente de 
+modo que termine conteniendo /bin/sh, entonces el hacker ha logrado un compromiso de nivel 
+raíz del sistema.
+
+Una posible solucion a este problema es que nunca escriba datos proporcionados por un usuario 
+en una cadena sin antes verificar el tamaño de los datos.
+
+
+--Critical: Unsafe Use of sprintf Allows Buffer Overflow
+
+La función sprintf() no es seguro porque no comprueba la longitud del búfer de destino. Esto 
+puede hacer que la función desborde el búfer de destino cuando el resultado de la cadena de 
+formato es inesperadamente largo, lo que genera problemas de seguridad e inestabilidad de la 
+aplicación.
+
+Se pueden dar las siguientes alternativas, para la sustitucion de sprintf():
+-snprintf()
+-sprintf_s()
+
+snprintf():
+Compone una cadena con el mismo texto que se imprimiría si se usara el formato en printf , 
+pero en lugar de imprimirse, el contenido se almacena como una cadena C en el búfer señalado 
+por s (tomando n como la capacidad máxima de búfer para llenar).
+
+Si la cadena resultante tiene más de n-1 caracteres, los caracteres restantes se descartan y no 
+se almacenan, pero se cuentan por el valor devuelto por la función.
+
+Un carácter nulo de terminación se agrega automáticamente después del contenido escrito.
+
+Después del parámetro de formato , la función espera al menos tantos argumentos adicionales 
+como sea necesario para el formato .
+
+
+sprintf_s():
+sprintf_s devuelve el número de bytes almacenados en el búfer , sin contar el carácter nulo de 
+terminación.
+
+
+
+--Medium: Dangerous Use of realloc()
+
+Los datos confidenciales almacenados en recursos reutilizables pueden filtrarse 
+inadvertidamente a un usuario o atacante con menos privilegios si no se eliminan correctamente. 
+Ejemplos de recursos reutilizables incluyen:
+
+-Memoria asignada dinámicamente
+-Memoria asignada estáticamente
+-Memoria asignada automáticamente (pila)
+-Cachés de memoria
+-Disco
+-Cachés de disco
+
+El uso de realloc() para cambiar el tamaño de los búferes que almacenan información 
+confidencial puede dejar la información confidencial expuesta a ataques, ya que no se 
+elimina de la memoria.
+Reasignar el uso de memoria  realloc() puede tener el mismo problema que liberar memoria.
+
+T llama a realloc() para cambiar el tamaño de la memoria dinámica puede exponer inadvertidamente 
+información sensible, o puede permitir la inspección de esa misma información.
+
+
+--Medium: strcat()
+
+La función estándar strcat agrega una cadena de origen a una cadena de destino. 
+Si no verifica el tamaño de la cadena de origen, no puede garantizar que agregar los datos a la 
+cadena de destino no provocará un desbordamiento del búfer. Los desbordamientos de búfer pueden 
+provocar cualquier cosa, desde un error de segmentación hasta una vulnerabilidad de seguridad.
+
+Podemos dar como recomendación que se compruebe cuidadosamente las llamadas a funciones 
+resaltadas para asegurarse de que no sea posible un desbordamiento del búfer. Para una solución 
+más robusta, considere agregar verificaciones de rango explícitas o usar la función strcat en 
+su lugar.
+
+
+
+--Medium: memcpy()
+
+Copia los valores de num bytes de la ubicación apuntada por la fuente directamente al bloque de 
+memoria apuntado por el destino. El tipo subyacente de los objetos apuntados por los punteros 
+de origen y destino son irrelevantes para esta función; El resultado es una copia binaria de 
+los datos. La función no verifica ningún carácter nulo de terminación en la fuente; siempre 
+copia exactamente num bytes.
+Para evitar desbordamientos, el tamaño de las matrices a las que apuntan los parámetros de 
+origen y destino debe ser al menos num.bytes, y no deben superponerse (para bloques de memoria 
+superpuestos, memmove es un enfoque más seguro).
+
+La primera opción es proporcionar una función "safe" para memcpy.También se requiere que todos 
+los parámetros estén validados y todos los parámetros estén confirmados. Si safe_memcpy devuelve 
+un valor distinto de 0, entonces hubo un error como un parámetro incorrecto o un posible 
+desbordamiento del búfer.
+
+La segunda opción es utilizar funciones "más seguras" proporcionadas por el Estándar C. C tiene 
+funciones "más seguras" a través de ISO / IEC TR 24731-1, Interfaces de verificación de límites. 
+En plataformas compatibles, simplemente puede llamar gets_sy sprintf_s. Ofrecen un 
+comportamiento consistente (como asegurarse siempre de que una cadena NULLfinalice) y valores 
+de retorno consistentes (como 0 en caso de éxito o an errno_t).
+
+
+--Standard: strlen
+
+Strlen escanea hasta encontrar un carácter nulo.Puede escanear fuera del búfer si la cadena no 
+tiene terminación nula. Puede resultar en una falla de segmentación o un error de bus.
+
+Strlen () continua atravesando la memoria hasta que encuentre un carácter NULL arbitrario en 
+la pila, lo que da como resultado un valor de longitud que es mucho mayor que el tamaño de buf 
+y puede causar un desbordamiento del búfer en usos posteriores de este valor.
+Tradicionalmente, las cadenas se representan como una región de memoria que contiene datos 
+terminados con un carácter NULL. Los métodos más antiguos de manejo de cadenas se basan con 
+frecuencia en este carácter NULL para determinar la longitud de la cadena. Si un búfer que no 
+contiene un terminador NULL se pasa a una de estas funciones, la función leerá más allá del 
+final del búfer.
+
+Los usuarios malintencionados suelen aprovechar este tipo de vulnerabilidad inyectando datos 
+con un tamaño o contenido inesperados en la aplicación. Pueden proporcionar la entrada 
+maliciosa directamente como entrada al programa o indirectamente modificando los recursos de la 
+aplicación, como los archivos de configuración. En el caso de que un atacante haga que la 
+aplicación lea más allá de los límites de un búfer, el atacante puede usar un desbordamiento de 
+búfer resultante para inyectar y ejecutar código arbitrario en el sistema.
+
+Como solución podemos utilizar la función strnlen () que devuelve el número de bytes en una 
+cadena apuntado por s , excluyendo el byte nulo de terminación ('\ 0'), pero en la mayoría de 
+maxlen. Al hacer esto, strnlen () mira solo los primeros caracteres maxlen en la cadena 
+apuntada por sy nunca más allá de s + maxlen .
