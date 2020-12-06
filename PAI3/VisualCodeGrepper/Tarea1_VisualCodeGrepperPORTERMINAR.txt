@@ -1,3 +1,8 @@
+Al usar la herramienta para el análisis del código fuente, hemos obtenido el siguiente resultado por pantalla, del cual rescataremos las vulnerabilidades que estimamos más 
+conflictivas, para su análisis y solución recomendada.
+
+*VulnerabilidadesEjemploJava.png*
+
 Vulnerabilidad 1: Tipo CRITICAL: Potential SQL Injection.
 Encontramos esta vulnerabilidad en el fichero CsrfAccessDeniedHandler.java, exactamente en la línea 27, la cual es:
 	logger.info("[-] URL: " + request.getRequestURL() + "?" + request.getQueryString() + "\t" +
@@ -11,11 +16,14 @@ Aparece, de nuevo, en el fichero SQLI.java, en la línea 66.
 	ResultSet rs = statement.executeQuery(sql);
 
 Podemos observar que la herramienta califica estas tres vulnerabilidades como criticas, por lo que debe ser prioritario que las resolvamos. Esto se debe a que las tres
-presentan un peligro muy alto, pues permitirían SQL injection. A continuación una breve explicación del termino:
+presentan un peligro muy alto, pues permitirían SQL injection. A continuación una breve explicación del término:
 
 Una vulnerabilidad de tipo SQL injection es una puerta trasera para todo aquel atacante que quiera obtener información de una base de datos, además de permitirle añadir,
 modificar y borrar contenido a voluntad. Encontrando estos fallos de seguridad en las aplicaciones y paginas web, un atacante es capaz de evitar las medidas de seguridad
 que controlan el acceso a dicha base de datos.
+Para solucionar estas debilidades, se recomienda realizar previamente a la comunicación con la base de datos, la creación de declaraciones parametrizadas. Estas garantizan que 
+los parámetros de entrada que se pasan a las declaraciones SQL sean seguras. Por ejemplo, evitaríamos crear la declaración para la base de datos mediante concatenaciones con
+parámetros, y en su lugar, especificaríamos el parámetro que deseamos al crear la declaración, y lo usarímos al ejecutarla.
 
 Ahora pasamos a vulnerabilidades cuya prioridad vendría tras las tres anteriores, pero que siguen siendo importantes.
 Vulnerabilidad 4: Tipo HIGH: Poor Input Validation.
@@ -32,3 +40,7 @@ El fichero que la contiene es CRLFInjection.java, línea 25.
 
 Estas tres vulnerabilidades son calificadas con riesgo alto, debido a que la aplicación hace una petición request de datos, sin que estos sean validados. La herramienta no ha 
 localizado complementos de validación en los archivos XML de la aplicación que estamos analizando.
+Recomendamos validar y sanear el uso de datos obtenidos mediante los request, puesto que pueden poner en riesgo la aplicación. La validación consiste en comprobar si los valores
+que recibimos son adecuados y dentro de los márgenes que son coherentes con lo que necesitamnos. EL saneamiento trata de analizar el código y eliminar todas aquellas llamadas
+input por parte del usuario, que sean peligrosas.
+
