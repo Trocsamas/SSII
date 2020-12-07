@@ -1,0 +1,37 @@
+Desde el equipo hemos estimado conveniente, para el análisis del código suministrado, realizarlo mediante herramientas gratuitas con un rápido acceso y facilidad de uso.
+Una de ellas es VisualCodeGreeper, una herramienta open source, y por tanto de acceso libre. Se basa en el análisis del código fuente, tanto de manera contextual como de
+posibles problemas potenciales o fallos de seguridad, incluso comentarios que indiquen código en mal estado. Además proporciona un gráfico circular para mayor interacción por 
+parte del usuario. Su origen, según proclama su creador, parte de producir una herramienta que no devuelva un gran número de falsos positivos, así como identificar 
+desbordamientos de buffer y otras vulnerabilidades.
+Esta herramienta soporta lenguajes tales como C/C++, Java, PL/SQL, C#, VB, PHP y COBOL, por lo que podemos cubrir las peticiones del cliente en lo que se refiere a lenguaje
+para analizar.
+Como objetivo de valorar la futura eficacia de la aplicación, hemos considerado respaldarnos en una serie de benchmarks que los desarrolladores de OWASP realizaron a esta
+herramienta, usando un paquete de 2740 test de pruebas, para medir su eficacia. De el se extrae lo siguiente:
+
+*Bencharmk.png*
+
+Puntuación Total -> 14,78/100
+Ratio de True Positive -> 53,51%
+Ratio de False Positivo -> 38,73%
+Resultado -> 14,78%
+
+Se toma en consideración los siguientes parámetros para el cálculo.
+True Positive (TP), False Negative (FN), True Negative (TN), False Positive (FP)
+Por tanto, True Positive Rate (TPR) = TP / ( TP + FN ) y False Positive Rate (FPR) = FP / ( FP + TN ). Finalmente, Score = TPR - FPR
+
+Como se puede observar, VisualCodeGrepper detectó más del 50% de las vulnerabilidades que se encontraban en los test, pero también falló un casi un 40% en alertar de positivos
+que no lo eran, por lo que no posee credibilidad muy elevada. Es también reseñable que los Falsos Negativos presentes en los resultados pueden ocurrir debido a la no configuración de 
+la herramienta con la regla correspondiente a la vulnerabilidades que se hallan en cada test.
+
+El coste temporal que presenta la aplicación, lo conformará el tiempo necesario para ejecutar el paquete de pruebas anterior. Ejecuntando los test en una máquina cuyas características
+son un i5 8250U y 12GB de RAM DDR4, se ha obtenido un tiempo de ejecución necesario de 6 minutos y 23 segundos. Se trata de un tiempo adecuado dada la cantidad de test analizados y 
+su proporción de vulnerabilidades.
+
+En cuanto a la usabilidad que presenta la herramienta, desde el equipo podemos asegurar que es su punto fuerte, debido a simplicidad notable a simple vista. La instalación es 
+fácil y de cortos pasos, su interfaz en forma de tabla es sencilla, y para ejecutarlo solo hace falta elegir lenguaje, fichero con las fuentes, y lanzar el escaner.
+Además, su repositorio y código recibió actualizaciones hace un año, por lo que no es un herramienta tan olvidada por sus desarrolladores como otras presentes, para el análisis
+de código.
+
+Como conclusión de este informe y, poniendolo en contexto con la otra aplicación analizada SonarQube, VisualCodeGrepper es una herramienta gratis, accesible, muy fácil de usar y con
+muchos lenguajes soportados. Está un paso por detrás en cuanto a fiabilidad, en comparación con SonarQube, pero el hecho de que esta no pueda ejecutarse de manera gratuita para lenguaje
+C, y VisualCodeGrepper si lo permite, la convierte en una herramienta más polivalente que su contrapartida presente en este informe.
