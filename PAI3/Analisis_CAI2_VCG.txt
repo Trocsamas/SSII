@@ -1,0 +1,45 @@
+Estudio de vulnerabilidades con VisualCode Grepper
+
+Tras realizar un análisis del proyecto de la CAI 2 con VCG, se han encontrado una serie de vulnerabilidades que analizaremos a continuación. Iremos desglosándolas por orden de prioridad de resolución.
+
+A nivel de severidad Standard encontramos:
+
+STANDARD: FileInputStream 
+
+Line: 4 - Filename: \Consultoria2_SSII\src\codigo\CreacionLog.java
+import java.io.FileInputStream;
+
+STANDARD: java.io.File 
+
+Line: 4 - Filename: \Consultoria2_SSII\src\codigo\CreacionLog.java
+import java.io.FileInputStream;
+
+STANDARD: FileInputStream
+
+Line: 52 - Filename: \Consultoria2_SSII\src\codigo\CreacionLog.java
+FileInputStream fstream = new FileInputStream(ruta);
+
+Estas 3 vulnerabilidades están relacionadas con el uso de FileInputStream y java.io.File. Estas llamadas generan problemas principalmente por 2 razones:
+
+1) No controlan la gestión de los recursos de forma correcta por sobreescritura de las llamadas de close() o finalize(), pudiendo generar vulnerabilidades de liberación de recursos (unreleased resources). Este tipo de vulnerabilidades pueden ser aprovechadas para realizar ataques de denegación de servicio por vaciado de piscina de recursos (denial of service attack by depleting the resource pool).
+
+2) Resultan una vía de entrada que puede ser explotada por atacantes para realizar exploits del tipo Path Injection Attack.
+
+Existen varias soluciones a este tipo de problemas. La más común es el uso de otras librerías o métodos más seguros para el tratado de objetos y de datos entrantes, como Files.newInputStream(...) y Files.newOutputStream(...). Adicionalmente, se recomienda tener una capa adicional a nivel de implementación que vigile que la entrada de datos es segura y valida y se sanean correctamente los recursos, a parte de prestar especial atención a la modificación del nombre o path de ficheros.
+
+En el nivel de seguridad LOW, encontramos 10 vulnerabilidades del tipo "Operation on Primitive Data Type". Se seleccionarán 3 de ellas para mostrar claramente qué tipo de vulnerabilidad indica la herramienta:
+
+LOW: Operation on Primitive Data Type
+
+Line: 57 - Filename: \Consultoria2_SSII\src\codigo\VerificadorMac.java
+return hexDigits[d1] + hexDigits[d2];
+
+Line: 63 - Filename: \Consultoria2_SSII\src\codigo\IntegrityVerifierServer.java
+mensajesTotales++;
+
+Line: 54 - Filename: \Consultoria2_SSII\src\codigo\VerificadorMac.java
+n = 256 + n;
+
+Este tipo de vulnerabilidad puede resultar en vulnerabilidades del tipo Integer Overflow o Wraparound (El software realiza cálculos que pueden generar un overflow cuando la lógica indica que el resultado va a ser mayor que los operandos) o en comportamientos no deseados en la ejecución del programa.
+
+Pese a que leve, se recomienda el uso de tipos más seguros que lididen con los problemas de overflow. Algunos lenguajes como C/C++ incorporan métodos del tipo SafeInt o IntegerLib para lidiar con este pequeño inconveniente.
