@@ -1,0 +1,117 @@
+--Critical: Unsafe Use of strcpy Allows Buffer Overflow
+
+Encontramos esta vulnerabilidad en la linea 19 dentro de Curso2018\ruta\marca.c
+
+	strcpy(cp,in);
+
+
+--Critical: Unsafe Use of sprintf Allows Buffer Overflow
+
+Encontramos esta vulnerabilidad en la linea 426 dentro de Curso2018\types\itebales.c
+
+	if(st==NULL) sprintf(ms,"no se encuentra el fichero %s",file);
+
+y vuelve a aparecer en la linea 220 dentro de Curso2018\types\tokenizer.c
+
+	sprintf(m,"caracter %c no reconocido",c);
+
+
+
+--Medium: Dangerous Use of realloc()
+
+Encontramos esta vulnerabilidad en la linea 442 dentro de Curso2018\types\types.c
+
+		out->data = realloc(out->data,tm);
+
+
+
+--Medium: strcat()
+
+Encontramos esta vulnerabilidad en la linea 160 dentro de Curso2018\types\tree.c
+	
+		strcat(out, "_");
+
+
+vuelve a aparecer en las líneas 163 y 166
+
+	strcat(out, tree->type_label.tostring(binary_tree_label(tree), mem));
+
+en la línea 54 y 55
+
+	strcpy(t.text_token,op);
+	strcat(t.text_token,nb);
+
+en las líneas 160 y 411
+
+	strcat(out, "_");
+
+y en la línea 414
+	strcat(out,tree->type_label.tostring(tree_label(tree), mem));
+
+
+--Medium: memcpy()
+
+Encontramos esta vulnerabilidad en la linea 34 Curso2018\types\memory_heap.c
+
+	memcpy(element,source,size_element);
+y en las líneas 622, 630, 638, 647, 648 y 649 dentro de Curso2018\types\types.c
+
+	 memcpy(out,in,size);
+ 	 memcpy(r,in,size);
+ 	 memcpy(element, in, size);
+         memcpy(tmp,in,size);
+         memcpy(in,out,size);
+         memcpy(out,tmp,size);
+
+
+
+--Standard: strlen
+
+Encontramos esta vulnerabilidad en la linea 439 Curso2018\types\types.c
+
+	int n = strlen(s);
+
+en las lineas 424 y 420 
+
+	 return strlen(in->data) > 0;
+ 	 return strlen(in->data) == 0;
+
+en la linea 428
+
+	return strlen(in->data);
+
+en las lineas 568 y 565 
+
+	 return strlen(in) > 0;
+ 	 return strlen(in) == 0;
+
+en la linea 519 
+
+	to = MIN(strlen(in),to);
+
+en la linea 494
+
+	int len = strlen(in);
+
+en la linea 16
+
+	while( hashval < ULONG_MAX && i < strlen( key ) ) {
+
+Tambien nos lo podemos encontrar en la linea 17 dentro de Curso2018\ruta\marca.c
+
+	int n = strlen(in);
+
+En la linea 114 dentro de Curso2018\types\tokenizer.c
+
+	int n = strlen(text);
+
+En las linea377 y 378 dentro de Curso2018\types\iterables.c
+
+	ds.size_text = strlen(text)+2;
+	ds.size_delimiters = strlen(delimiters)+2;
+
+
+
+
+
+
