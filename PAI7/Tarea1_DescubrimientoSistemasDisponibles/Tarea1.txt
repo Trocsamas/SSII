@@ -1,0 +1,72 @@
+Como punto de partida para el análisis de la seguridad en sistemas con conectividad a red, es necesario descubrir tales sistemas o reducir el número de ellos, 
+proporcionado a través de un rango de direcciones IP, a una lista que contenga solo los sistemas activos o interesantes para nuestro propósito.
+Para tal cometido, disponemos de una serie de técnicas ofrecidas por la herramienta Nmap en Linux, y ejecutables como comandos en un terminal. En el proceso,
+empezaremos con una consulta DNS reversa de la dirección IP proporcionada, y a partir de ese punto nos centraremos en averiguar si es sistema objetivo está 
+activo o no. A continuación se muestra el resultado al ejecutar los comandos correspondientes para aplicar las técnicas:
+
+	· nmap -sL 150.214.167.13 -> 	El sondeo de lista o sL, es un tipo de descubrimiento de sistemas que lista cada equipo de la red especificada, sin enviar
+				     	paquetes de ningún tipo, realizando una resolución DNS inversa en los equipos, para obtener sus nombres.
+		
+					*NombreIP_nmapsL.png*
+
+				     	Se ha obtenido el nombre del sistema cuya dirección IP corresponde a la proporcionada. Podemos comprobar que es correcto 
+				     	usando el comando host para obtener la dirección IP de ese nombre y ver si coinciden.
+
+	· nmap -sP uhu.es -> 		Esta opción indica a Nmap que desarrolle exclusivamente descubrimiento de sistemas mediante sondeo ping, para posteriormente 
+					emitiruna lista de los equipos que respondieron. Esta técnica, a diferencia de la anterior, si envía paquetes a los objetivos. 
+					Por omisión, se tratan de una solicitud eco ICMP y un paquete TCP al puerto 80.
+
+					*nmapsP.png*
+
+			     		Tras la ejecución, observamos la línea 'Host is up', lo que nos indica que el sistema destino está activo.
+
+	· nmap -PS uhu.es -> 		Esta técnica, envía un paquete TCP vacío con la bandera SYN activada, al puerto 80 por omisión. SYN indica al sistema objetivo 
+					que se quiere iniciar una conexión, e independientemente de si el puerto responde con un Reset o con parte del saludo en tres 
+					pasos TCP, la importancia reside en haber obtenido una propia respuesta del sistema. Con esto sabemos que está disponible y responde.
+
+					*TCPSYN_nmapPS.png*
+
+					Obtenemos de nuevo la línea 'Host is up', indicando que el sistema está activo. Además, aparecen dos puertos TCP abiertos en el sistema
+					destino, 80 y 443, que proporcionan los servicios http y https. También se indica que hay 998 puertos filtrados y no mostrados. 
+
+	· nmap -PA uhu.es ->		PA es un tipo de ping TCP ACK parecido al TCP SYN anterior, cuya diferencia es que se envía un paquete con la bandera ACK activa, en lugar
+					de la SYN. Con esto, se indica que se han recibido datos en una conexión TCP ya establecida, pero sabiendo que la conexión no existe. Los 
+					sistemas deberían responder con un paquete RST, lo que sirve para determinar que están vivos.
+			     
+					*TCPACK_nmapPA.png*
+
+					Aparece nuevamente la línea 'Host is up', por lo que el sistema está activo. Como en el caso anterior, aparecen dos puertos TCP abiertos, 
+					80 y 443.
+
+	· sudo nmap -PU uhu.es ->	Esta opción, el ping UDP, envía un paquete UDP vacío al puerto indicado por omisión, el 31338 en este caso. Se utiliza un puerto alto y 
+					poco común ya que no es deseable enviar este sondeo a otros puertos. El ping genera un paquete ICMP de puerto no alcanzable si llega a
+					un puerto cerrado en el equipo objetivo. Si vuelve esto, entonces Nmap puede identificar ese sistema como vivo y alcanzable. Otros errores 
+					ICMP, como el de sistema o red inalcanzables o TTL excedido indican lo mismo. Si no llega ninguna respuesta, se entiende que el sistema no 
+					está disponible.
+
+					*UDP_nmapPU.png*
+
+					En este caso, tras realizar la prueba aparece 'Host seems down', por lo que es probable que no haya llegado ninguna respuesta.
+
+	· nmap -PE uhu.es ->		Con esta técnica, Nmap envía paquetes ICMP tipo 7 («echo request») a las direcciones IP objetivos y espera recibir un tipo 0 («Echo Reply») 
+					de los sistemas que estén disponibles. Sin embargo, muchos sistemas y cortafuegos ahora bloquean esos paquetes en lugar de responder.
+					Por este motivo, los sondeos que sólo utilizan el protocolo ICMP no son muy fiables para analizar sistemas desconocidos en Internet.
+
+					*ICMP_nmapPE.png*
+
+					Volvemos a obtener la línea 'Host is up', indicando que el sistema está activo. También aparecen de nuevo, los dos puertos TCP disponibles
+					y los servicios que proporcionan.
+	
+	· nmap -PR uhu.es ->		El ping ARP hace que sea Nmap y su algoritmo optimizado el que se encargue de las solicitudes ARP. Si recibe una respuesta, no se tiene 
+					que preocupar de los paquetes IP dado que ya sabe que el sistema está activo. Esto hace que el sondeo ARP sea mucho más rápido y fiable 
+					que los sondeos basados en IP. Nmap utiliza ARP para objetivos en la misma red local aún cuando se utilicen distintos tipos de ping.
+
+					*ARP_nmapPR.png*
+
+					La respuesta vuelve a ser 'Host is up', indicando sistema disponible, y los dos puertos TCP disponibles.
+
+Por tanto, y tras las prubebas realizadas, el sistema correspondiente a la dirección IP 150.214.167.13 cuyo nombre es www.uhu.es, está disponible y activo como muestran las diferentes
+técnicas utilizadas, salvo UDP. Además, ofrecen información de los puertos disponibles respecto a TCP y los servicios que ofrecen, mientras que el resto de puertos están filtrados y no
+se muestran.
+
+
