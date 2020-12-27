@@ -1,1 +1,19 @@
 En la primera tarea se nos solicita que se configure un cortafuegos de una estación de trabajo que no va a proporcionar ningún servicio pero consumirá servicios disponibles en la red. 
+
+Si se estudia lo que necesita filtrar el cortafuegos, sería conveniente aplicar una política por defecto que descarte todas las comunicaciones entrantes. Adicionalmente, es necesario que las comunicaciones que ya se hayan establecido (ya mantenidas o que haya iniciado la estación de trabajo) se permitan. Para estas especificaciones se pueden ejecutar los siguientes comandos:
+
+$ sudo iptables -P INPUT DROP
+
+$ sudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+Mediante estos dos comandos se obtiene la configuración más básica pero efectiva para obtener los resultados que se solicitan. Siempre se descartará cualquier paquete entrante a los procesos locales a no ser que la estación de trabajo desee conectarse voluntariamente a un servidor web, en cuyo caso lo tendrá permitido. Sin embargo, esta configuración no es muy realista con respecto a la usabilidad que requiere un usuario promedio. Cualquier usuario normal que desee investigar cualquier cosa en un buscador o acceder a un sistema del que no conozca la dirección IP va a pasar un mal rato. Es por eso que es necesario introducir una regla adicional para permitir que el sistema pueda trabajar conjuntamente con el servidor DNS. Para ello, se introduce el siguiente comando:
+
+$ sudo iptables -A INPUT -m state --state NEW -p udp --dport 53 -j ACCEPT
+
+Una vez introducido esto el sistema ya está configurado para cumplir los requisitos que se solicitan. Para que quede constancia de la configuración, si se introduce el comando iptables -S para mostrar las reglas y políticas establecidas se obtiene lo siguiente por pantalla:
+
+:INPUT DROP 
+:FORWARD ACCEPT 
+:OUTPUT ACCEPT 
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -p udp -m state --state NEW -m udp --dport 53 -j ACCEPT
