@@ -1,0 +1,1 @@
+En la primera tarea se nos solicita que se configure un cortafuegos de una estación de trabajo que no va a proporcionar ningún servicio pero consumirá servicios disponibles en la red. 
