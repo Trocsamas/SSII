@@ -1,0 +1,5 @@
+En primer lugar se solicita que comparemos la salida del siguiente comando, ejecutado en el sistema tanto con los filtros de iptables como sin ellos, y obtener conclusiones:
+
+$ sudo nmap -sT -p- dirección_ip (En nuestro caso, dado que vamos a realizarlo sobre el mismo sistema, nuestra ip será la 127.0.0.1 o la ip por defecto de la interfaz de loopback)
+
+En primer lugar se plasmará aquí el resultado de la salida de dicho comando para el sistema con los filtros ya descritos
