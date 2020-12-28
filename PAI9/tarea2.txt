@@ -43,4 +43,18 @@ Pasamos ahora a eliminar todas las reglas establecidas previamente. Esto nos lle
 -P FORWARD ACCEPT
 -P OUTPUT ACCEPT
 
+Tras volver a ejecutar el comando de nuevo, la salida que se obtiene es distinta:
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2020-12-28 16:22 CET
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000051s latency).
+Not shown: 65533 closed ports
+PORT      STATE SERVICE
+631/tcp   open  ipp
+42005/tcp open  unknown
+
+Nmap done: 1 IP address (1 host up) scanned in 1.91 seconds
+
+Esta salida demuestra que no se está aplicando ningún tipo de filtro. Exceptuando dos puertos que funcionan a través de TCP que mantienen dos servicios (los cuales están activos), el resto de puertos esan cerrdos. Esto quiere decir que los puertos devuelven un paquete TCP reset impidiendo cualquier comunicación tcp.
+
 
