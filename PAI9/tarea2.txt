@@ -2,4 +2,45 @@ En primer lugar se solicita que comparemos la salida del siguiente comando, ejec
 
 $ sudo nmap -sT -p- dirección_ip (En nuestro caso, dado que vamos a realizarlo sobre el mismo sistema, nuestra ip será la 127.0.0.1 o la ip por defecto de la interfaz de loopback)
 
-En primer lugar se plasmará aquí el resultado de la salida de dicho comando para el sistema con los filtros ya descritos
+En primer lugar se plasmará aquí el resultado de la salida de dicho comando para el sistema con los filtros ya descritos. Recordamos de nuevo la configuración previa del sistema para que quede constancia del trabajo:
+
+:INPUT DROP [137172:8244266]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [154528:10001903]
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -p udp -m state --state NEW -m udp --dport 53 -j ACCEPT
+
+Una vez que se lanza el comando y se espera a que termine su ejecución, se obtiene la siguiente salida:
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2020-12-28 12:14 CET
+Stats: 0:00:08 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 0.05% done
+Stats: 0:00:45 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 0.34% done
+Stats: 0:03:10 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 1.44% done; ETC: 15:54 (3:36:26 remaining)
+Stats: 0:04:01 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 1.83% done; ETC: 15:54 (3:35:21 remaining)
+Stats: 0:19:42 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 9.00% done; ETC: 15:53 (3:19:18 remaining)
+Stats: 2:37:38 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 72.03% done; ETC: 15:53 (1:01:13 remaining)
+Stats: 3:08:20 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 86.06% done; ETC: 15:53 (0:30:30 remaining)
+Stats: 3:33:09 elapsed; 0 hosts completed (1 up), 1 undergoing Connect Scan
+Connect Scan Timing: About 97.41% done; ETC: 15:53 (0:05:41 remaining)
+Nmap scan report for localhost (127.0.0.1)
+Host is up.
+All 65535 scanned ports on localhost (127.0.0.1) are filtered
+
+Nmap done: 1 IP address (1 host up) scanned in 13131.56 seconds
+
+Como cabía esperar, todos los puertos que se han intentado escanear mediante TCP Connect Scan no han respondido al intento de comunicación TCP por parte de nmap, por lo que la herramienta ha considerado que todos los puertos escaneados están "filtrados". Esto se debe a nuestra política por defecto de rechazar cualquier paquete de estado NEW dentro de INPUT.
+
+Pasamos ahora a eliminar todas las reglas establecidas previamente. Esto nos llevará a tener como política por defecto aceptar cualquier paquete dentro de cualquiera de las fases de la pila TCP-IP:
+
+-P INPUT ACCEPT
+-P FORWARD ACCEPT
+-P OUTPUT ACCEPT
+
+
