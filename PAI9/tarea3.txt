@@ -1,0 +1,25 @@
+La tarea 3 pide que se complete el cortafuegos ya configurado con los estados RELATED e INVALID. Previamente a cualquier desarrollo, vamos a describir brevemente dichos estados, tomando como referencia la página del manual de iptables(8) [Para más información, consulte el siguiente enlace: https://linux.die.net/man/8/iptables].
+
+- El estado INVALID se asigna a cualquier paquete que esté relacionado con cualquier conexión que no se haya establecido previamente, ya sea para empezar una conexión nueva o no.
+- El estado RELATED se asigna a paquetes que realizan una conexión nueva pero que están relacionados con una conexíón ya establecida. Dentro de esta descripción encajan transferencias de datos mediante FTP o errores de ICMP
+
+Teniendo esto en cuenta, ya se ha podido comprobar en las otras dos tareas que ya se ha hecho uso del estaod RELATED a la hora de aplicar la primera regla para la cadena INPUT:
+
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+Dentro de esta relga ya se incluyó el estado RELATED, pues completaba convenientemente algunas relaciones dentro de la cadena de INPUT. Por tanto no se estima necesario realizar ninguna configuuración adicional referente a este estado. 
+
+Respecto al estado INVALID, la configuración que existe por defecto ya establecida lidia bastante bien con los paquetes de este tipo de estados (-P INPUT DROP). Dadas las circunstancias del enunciado, si los paquetes están relacionados con comunicaciones que no se han establecido previamente se pueden descartar sin mucha consideración. Sin embarrgo, en caso de que se desee poner especial atención a este tipo de paquetes, se puuede configurar una regla relativamente sencilla que los descarte o en el peor de los casos devolverlo. Para ello, con ejectuar el comando siguiente se obtiene el resultado deseado:
+
+$ sudo iptables -A INPUT -m state --state INVALID -j [DROP,RETURN] --> (esto se ha puesto entre corchetes para marcar que cualquiera de las dos opciones puede ser válida)
+
+Tras todas estas consideraciones, si ejecutamos el comando sudo iptables -S se debería obtener la siguiente salidad, que mostrará el estado de nuestro cortafuego acutal:
+
+-P INPUT DROP 
+-P FORWARD ACCEPT 
+-P OUTPUT ACCEPT 
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -p udp -m state --state NEW -m udp --dport 53 -j ACCEPT
+-A INPUT -m state --state INVALIDA -j RETURN 
+
+
