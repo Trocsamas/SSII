@@ -57,4 +57,37 @@ Nmap done: 1 IP address (1 host up) scanned in 1.91 seconds
 
 Esta salida demuestra que no se está aplicando ningún tipo de filtro. Exceptuando dos puertos que funcionan a través de TCP que mantienen dos servicios (los cuales están activos), el resto de puertos esan cerrdos. Esto quiere decir que los puertos devuelven un paquete TCP reset impidiendo cualquier comunicación tcp.
 
+Una vez concluida la comparación entre las dos salidas del comando ya explicado, se solicita realizar una preuba de "ping" desde un sistema externo al sistema que tenemos configurado con cortafuegos y plasmar la salida obtenida. Para ello, vamos a hacer ping desde un sistema windows externo a nuestro sistema a configurar. Tras ejectuar el comando desde el ya mencionado sistema, se obtiene la siguiente salida:
+
+Haciendo ping a 192.168.1.14 con 32 bytes de datos:
+Tiempo de espera agotado para esta solicitud.
+Tiempo de espera agotado para esta solicitud.
+Tiempo de espera agotado para esta solicitud.
+Tiempo de espera agotado para esta solicitud.
+
+Estadísticas de ping para 192.168.1.14:
+    Paquetes: enviados = 4, recibidos = 0, perdidos = 4
+    (100% perdidos)
+
+De nuevvo, se vuelve a comprobar empíricamente que nuestro cortafuegos ha funcionado correctamente, pues ha bloqueado cualquier intento de comunicación externa no establecida previamente por el usuario.
+
+Finalmente, se exige también realizar una prueba de ping al servidor de nombres de Google con IP 8.8.8.8 desde el sistema configurado previamente. Tras ejecutar el comando $ ping 8.8.8.8 -c 8 se obtiene la siguiente salida desde la consola:
+
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=115 time=31.0 ms
+64 bytes from 8.8.8.8: icmp_seq=2 ttl=115 time=30.6 ms
+64 bytes from 8.8.8.8: icmp_seq=3 ttl=115 time=26.0 ms
+64 bytes from 8.8.8.8: icmp_seq=4 ttl=115 time=27.1 ms
+64 bytes from 8.8.8.8: icmp_seq=5 ttl=115 time=26.0 ms
+64 bytes from 8.8.8.8: icmp_seq=6 ttl=115 time=28.6 ms
+64 bytes from 8.8.8.8: icmp_seq=7 ttl=115 time=29.7 ms
+64 bytes from 8.8.8.8: icmp_seq=8 ttl=115 time=26.1 ms
+
+--- 8.8.8.8 ping statistics ---
+8 packets transmitted, 8 received, 0% packet loss, time 7011ms
+rtt min/avg/max/mdev = 26.067/28.204/31.081/1.971 ms
+
+Esta salida confirma que los filtros de cara a comunicaciones externas se han configurado correctamente. Dado que nuestra estación de trabajo ha iniciado la comunicación a través de icmp con el servidor de Google, los paquetes que recibamos se entenderán como ESTABLISHED, por lo que podrán pasar los filtros inpuestos sin ningún problema y en este caso concreto permitirán realizar la prueba de conectividad sin inconvenientes.
+
+
 
