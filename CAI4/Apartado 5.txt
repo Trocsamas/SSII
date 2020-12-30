@@ -1,0 +1,101 @@
+BEAST -> Browser Exploit Against SSL/TLS
+POODLE -> Padding Oracle On Downgraded Legacy Encryption
+FREAK -> Factoring RSA Export Keys
+SWEET32 
+SLOTH -> Security Losses from Obsolete and Truncated Transcript Hashes 
+
+
+
+BEAST
+
+-Causa del ataque: Se incrusta código en el navegador que obliga a enviar texto
+                   sin formato por un canal SSL, se captura el tráfico del usuario
+                   mediante rastreador o Man In The Middle.
+
+-Efecto del ataque: El atacante tiene la capacidad de descifrar parte de los 
+                    mensajes codificados y es capaz de averiguar las cookies.
+
+-Contramedidas recomendadas:
+
+	·Usuario:
+          -Se necesita tiempo para el decodificado, si la cookie expira antes de terminar,
+           el ataque va a fallar.
+	  -Cerrar la sesión al terminar.
+	  -El atacante necesita acceso al sistema del usuario, el software de seguridad es
+	   útil para evitar este tipo de ataque.
+
+	·Administrador:
+	  -Asociar las cookies de la sesión a la dirección IP con la que inicia conexión.
+	  -Invalidar las cookies al cerrar la sesión.
+	  -No modificar el codigo SSL sin medir los riesgos.
+
+POODLE
+
+-Causa del ataque: Uso de cifrado CBC y servidor indica padding OK/incorrecto. 
+
+-Efecto del ataque: Se obtiene el texto plano a partir del texto cifrado.
+
+-Contramedidas recomendadas: 
+	·No uso de SSL, sino TLS. 
+	·Uso de GCM.
+
+
+
+FREAK
+
+-Causa del ataque: Usa pares de claves públicas RSA de 512 bits o menos. También
+                   ocurre que en equipos de gama media-baja, el ataque es capaz de
+                   desencriptar ese tipo de claves.
+
+-Efecto del ataque: Los atacantes pueden acceder a la seguridad de la web mediante 
+                    recursos, relativamente limitados.
+
+-Contramedidas recomendadas: 
+	·No usar el cifrado tipo EXPORT.
+	·Utilizar navegadores invulnerables, como puede ser Firefox.
+	·Usar TLS 1.2 o posterior, desacctivando antes SSL.
+
+
+
+SWEET32
+
+-Causa del ataque: Sistemas que cifran por bloques, como AES, para encriptar datos
+                   cliente-servidor. Si son bloques de poco tamaño, se van a considerar
+                   vulnerables a ataques de tipo 'BIRTHDAY'. Esto puede usarse si la 
+                   clave que quieren averiguar es enviada en cada petición. Un Man In
+                   The Middle puede generar muchos mensajes con las caracteristicas 
+                   dichas anteriormente.
+                   Ataque a los cifrados simétricos de bloques de 64-bit, TLS y OpenVPN
+                   están afectados.
+
+-Efecto del ataque: Para efectuar el ataque en cifrado por bloques de 64 bits, se necesitan 
+                    capturar por lo menos 32 GB en la red. En caso de SSL/TLS esto significaría 
+                    una versión SSL/TLS individual. (Para las demás sesiones, SSL/TLS regenera 
+                    las llaves simétricas). Por lo tanto, las conexiones de larga duración podrían 
+                    ser vulnerables. Se puede acabar descifrando partes de los bloques enviados entre
+                    el cliente y el servidor.
+
+
+
+-Contramedidas recomendadas:
+	·Actualizar las claves con frecuencia, para que no sean vulnerables.
+	·Aumentar el tamaño de los bloques de 64 bits y actualizar el codigo.
+
+
+SLOTH
+
+-Causa del ataque: Este ataque aprovecha el uso de algoritmos de hash que estén 
+                   obsoletos, como son MD5 o SHA-1, en base a una serie de ataques 
+                   complejos.
+
+-Efecto del ataque: Como tiene partes vulnerables los sistemas que usen MD5 o SHA-1, se consigue acceso al
+                    sistema y esto puede producir la vulnerabilidad de las partes más importantes del 
+                    sistema y con eso, hacen al sistema mas inseguro.
+
+-Contramedidas recomendadas:
+	·Usar TLS posterior a 1.3
+	·No usar MD5 o SHA-1 al estar obsoletos, y actualizar las partes es las que
+         usen por código.
+
+
+
