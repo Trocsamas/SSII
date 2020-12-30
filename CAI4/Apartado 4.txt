@@ -1,0 +1,137 @@
+CHROME 
+
+Para asegurar este navegador con una seguridad en general, podemos tener en cuentas
+las siguientes opciones:
+
+-Iconos de chrome
+
+Seguridad-Google.png
+
+Chrome estableció una conexión segura:
+Si Chrome ha establecido una conexión segura con el sitio que estás visitando, entonces 
+aparecerá un candado verde en la Barra de direcciones, antecediendo a la dirección web. 
+Al ingresar la información en la web, como el número de tu tarjeta de crédito o tu fecha 
+de nacimiento, verifica siempre que este ícono aparezca. Una conexión segura hace que sea 
+mucho más difícil que otras personas puedan tener acceso a tu información personal o 
+confidencial, especialmente si junto al ícono tiene el nombre de la organización dentro de 
+un rectángulo de color verde.
+
+
+El sitio no usa SSL:
+En la mayoría de las páginas te aparecerá un hoja blanca antes de la dirección web. Significa 
+que el sitio no está utilizando una conexión segura. Esto no es importante para muchos sitios web, 
+como una página de noticias o un canal musical, pero debes evitar escribir información personal 
+en estas páginas.
+SSL significa "Capa de conexión segura" o Secure Sokcet Layer, que es un protocolo criptográfico 
+que te proporciona comunicaciones seguras en internet.
+
+
+Chrome ha detectado contenido no seguro:
+Te saldrá un candado con un triángulo  amarillo sobrepuesto cuando ingreses a una página en la que 
+Chrome detecta contenido peligroso, a pesar de que tiene SSL. Ten mucho cuidado al introducir información 
+personal en esta página. Ese contenido peligroso podría ser la puerta de entrada para que alguien 
+obtenga los datos que ingreses allí.
+
+Riesgo alto de contenido no seguro:
+No introduzca ningún tipo de información en páginas que aparezca un candado con una X roja encima. Puede 
+indicar que alguien está intentado manipular tu conexión al sitio web.
+
+
+-Malware y protección contra Phishing.
+Con el fin de mantenerte a ti y a tu equipo protegidos contra sitios web dañinos, Chrome descarga automáticamente 
+una lista de sitios web peligrosos y maliciosos, almacenando esa lista en tu computador. Cada vez que vayas a 
+una página web, esa página se comparará con la lista.
+
+Si hay sospechas de que una página web es un "malware" o un sitio de "phishing", Chrome mostrará una página de 
+advertencia en lugar de entrar a la página web. Si ves esta página de advertencia, haz clic en Ir atrás para 
+ir a la última página visitada.
+
+Es importante tener en cuenta que Chrome no tiene una lista de todos los sitios web que visitas en Google. 
+Debido a que la lista de sitios web peligrosos se almacenan en tu equipo, Google no necesita saber cuál 
+página estás visitando para advertirte que puede ser peligrosa. Este proceso mantiene el historial de 
+navegación privado y seguro.
+
+-Certificados digitales para verificar la seguridad de la pagina.
+
+En la pagina que queramos operar, pulsando F12 o inspeccionando la pagina con los comandos
+Ctrl + Mayús + I, podemos observar si la pagina es o no segura y si tiene certificados.
+
+Captura-1.PNG
+
+Como vemos en ese ejemplo (https://ev.us.es), vemos la seguridad que tiene la página, el cirtificado,
+la conexión segura que está encriptada y auntenticada usando TLS 1.2 y que los recursos de la pagina
+son seguros.
+
+Al abrir ese certificado, nos detalla la versión del certificado digital, la fecha de emisión y duración,
+clave pública, el algoritmo que se ha utilizado ... 
+
+Captura-2.png
+
+-Configuración de privacidad
+Chrome te permite controlar parte de la información que compartes en la web, mediante la Configuración de Privacidad.
+
+Sin embargo, te recomendamos dejar los valores preestablecidos en Chrome, ya que te permiten tener un equilibrio entre privacidad y seguridad.
+
+Para ingresar a la configuración de privacidad del navegador sigue estos pasos:
+
+Paso 1:
+Haz clic en el botón Configurar que está en la esquina superior derecha del navegador.
+
+Paso 2:
+Se abrirá un menú desplegable. Allí, haz clic en la opción Configuración.
+
+Paso 3:
+Se abrirá el panel de configuración del navegador. Allí busca y haz clic sobre la opción Mostrar configuración avanzada, 
+que estará al final de la página.
+
+Paso 4:
+Apareceran diversas opciones para configurar tu navegador, entre las que encontrarás la opción Privacidad y seguridad.
+
+Para modificar la configuración básica de privacidad, como permitir el envío detallado de tu uso de Chrome a Google, 
+haz clic en las casillas junto a cada opción.
+
+Para modificar opciones específicas de configuración de privacidad, como permitir que el navegador guarde cookies de 
+las páginas web que visitas o éstas accedan a tu ubicación, haz clic en el botón de Configuración de sitios web.
+
+Captura-3.jpeg
+
+
+FIREFOX
+
+-Seguridad de conexión
+
+Cuando visitas una página, el icono de un candado en la barra de direcciones suele indicar que la conexión a la página es completamente segura. 
+Para saber más sobre la seguridad de la conexión, haz clic en el botón 'Site Info button' para acceder al Centro de control. La sección 
+superior del panel te informa si la conexión actual está clasificada y es segura y si hay algún contenido no seguro que Firefox esté 
+bloqueando en una página que se presupone segura.
+
+Para saber más sobre el emisor de certificados de conexión segura y el propietario de una página (en el caso de que la información esté disponible) 
+o para desactivar el bloqueo de contenido no seguro en una página, haz clic en la flecha de la derecha del Centro de control.
+
+Captura-4.PNG
+
+
+-Bloqueo de contenido
+
+Cuando la función de bloqueo de contenido está activada, el Centro de control indica si una página contiene o no elementos que pueden rastrearte, 
+además de información sobre la conexión. La función de bloqueo de contenido de Firefox también detecta y bloquea automáticamente los rastreadores conocidos. 
+El Centro de control te permite deshabilitar la función, si quieres.
+
+ ·No se detectan rastreadores 
+
+Captura-5.PNG
+
+ ·Se detectan rastreadores (con la opción de desactivar)
+
+Captura-6.PNG
+
+
+-Permisos
+La sección de permisos del Centro de control te muestra cualquier permiso especial que hayas garantizado a una página en el pasado y te permite administrarlos.
+
+Para poder editar cualquier otro permiso a una página, haz clic en la flecha derecha del Centro de control y haz clic en el botón 'Más información'. 
+Se abrirá la página de información, que incluye la sección de permisos.
+
+
+
+
