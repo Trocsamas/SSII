@@ -1,1 +1,32 @@
-El cliente en primer lugar solicita que se realice un estegoanálisis sobre la evidencia proporcionada en la imagen "dibujo.bmp"
+El cliente en primer lugar solicita que se realice un estegoanálisis sobre la evidencia proporcionada en la imagen "dibujo.bmp". Para ello se da total libertad a la hora de realizar el proceso de análisis, siempre y cuando se recoja el proceso seguido para llegar a las conclusiones que se estimen oportunas.
+
+Al comienzo de la investigación se decidió optar por la herramienta VSL 1.1, la cual permite analizar dos tipos de análisis distintos: Análisis LSB-RS, proporcionado por J. Fridrich et al. por la universidad de Binghamton en Nueva York, y el análisis BSM-SVM propuesto por I. avicbas et al en la universidad de Uludag en Bursa. Sin embargo, tras un proceso de búsqueda de alternativas el equipo de análisis encontró un paper (A Comparison Study Using StegExposefor Steganalysis by Eric Olson, Larry Carter, and Qingzhong Liu) que recomendaba una alternativa mejor: StegExpose. Por ser breves resumiendo el documento, esta alternativa resultaba ser mucho más viable de cara a realizar estegoanálisis ya que VSL tiene muchos problemas para detectar mensajes ocultos en estego objetos no confeccionados con VSL. Partiendo de aquí, el plan de acción resultó ser utilizar esta nueva herramienta para obtener resultados.
+
+Siguiendo los pasos que indican los desarrolladores de la herramienta en el README del repositorio de la misma (https://github.com/b3dk7/StegExpose), es necesario clonar el repositorio para obtener una aplicación java ejecutable del programa o bien compliar el código desde 0 para obtener un ejecutable. Una vez obtenido dicho ejecutable,  el módo de empleo es el siguiente:
+
+java -jar StegExpose.jar [directory] [speed] [threshold] [csv file]
+
+donde directory es el directorio donde se encuentran las imágenes a analizar para detectar si son sospechosas o no, speed permite configurar la intensidad del análisis, treshold es un parámetro que indica a partir de qué punto el fichero es susceptible de contener información oculta (por defecto configurado a 0.2), y csv file es el fichero que generará el ejecutable tras realizar el análisis.
+
+Tras colocar la evidencia "dibujo.bmp" en una carpeta conveniente y ejecutar el comando siguiente se obtuvo el informe en formato csv que se mostrará posteriormente (retocado por motivos estéticos):
+
+java -jar StegExpose.jar carpeta_analisis default default analisis
+
+RESULTADOS
+
+File name 		dibujo.bmp
+Above stego
+threshold?	 	true	
+Secret message
+size in bytes
+(ignore for 
+clean files)	36406
+Primary Sets	0.31364411892356336
+Chi Square		0.3496662168559932
+Sample Pairs	0.2975282472564884
+RS analysis		0.3111286214276572
+Fusion (mean)	0.3179918011159255
+
+Observando la salida de la aplicación, se puede concluir que dentro de la evidencia presentada existe un mensaje oculto, pues todos los analizadores de la herramienta han sobrepasado el umbral para determinar que dentro de la imagen estudiada se encuentra un posible mensaje oculto. Por tanto, se recomienda tomar las medidas oportunas para cortar de lleno las transmisiones de información mediante este canal.
+
+Una vez que se ha decretado que se está produciendo una comunicación oculta mediante esteganografía, se procede a intentar extraer el mensaje/imagen oculta dentro de la imagen proporcionada como evidencia.
