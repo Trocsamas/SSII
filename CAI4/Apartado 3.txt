@@ -1,0 +1,1 @@
+El cliente en primer lugar solicita que se realice un estegoanálisis sobre la evidencia proporcionada en la imagen "dibujo.bmp"
