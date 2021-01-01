@@ -1,0 +1,77 @@
+Se ha demostrado, usando las técnicas de detección de sistemas que ofrece Nmap, que el sistema cuya dirección IP es 150.214.167.13 está disponible y activo. El siguiente
+paso al que se debe proceder en cualquier auditoria de seguridad técnica sobre un sistema conectado a una red, es obtener los servicios abiertos de dicho sistema. Estos
+puertos abiertos son un vector de ataque en lo relacionado a la seguridad, por lo que es muy importante su control.Volvemos a contar con la herramienta Nmap y sus diferentes 
+técnicas para realizar este cometido, ejecutándolas en una máquina Linux. Describiremos a continuación, las técnicas y resultados en la investigación y obtención de servicios 
+activos.
+
+	· nmap -sT www.uhu.es ->	Escaneo de puertos TCP Connect(). En este escaneo, se realiza la conexión completa TCP 3-way handshake con el servidor objetivo, cuya
+					estructura en un mensaje SYN desde nuestro sistema, un mensaje de respuesta SYN-ACK por parte del servidor, y un mensaje ACK por nuestra 
+					parte estableciendo la conexión. Tras su uso, pueden aparecer tres resultados para los puertos detectados: open, closed y filtered. 
+					Open indica que una aplicación está configurada en ese puerto para aceptar peticiones TCP.
+					Closed es un puerto cerrado, accesible ya que recibe y responde sondeos Nmap, pero que no tiene ninguna aplicación escuchando en el.
+					Filtered o puerto filtrado, como su nombre indica, es un puerto que no se ha podido determinar si está abierto o cerrado, puesto que
+					no responde a la conexión TCP realizada. Seguramente exista un cortafuegos interrumpiendo nuestro intento de conexión.
+
+					*TCP_NmapST.png*
+
+					Tras la ejecución de la técnica, podemos observar la estructura en la que se presentan los resultados, consistiendo en una tabla donde la
+					primera columna PORT corresponde al número de puerto, la segunda STATE presenta como se encuentra el puerto, y la tercera SERVICEA indica
+					el tipo de servicio que presta ese puerto.
+					Se ha detectado por tanto dos puertos TCP, el 80 y 443, como abiertos y prestando los servicios de http y https, respectivamente.
+
+	· sudo nmap -sS www.uhu.es ->	Escaneo de puertos TCP SYN o SYN scan. Al contrario que el caso anterior, en este escaneo se comienda de nuevo la estructura de conexión
+					TCP 3-way handshake, con un mensaje TCP SYN por parte del cliente. El servidor responde con un TCP SYN-ACK, pero ahí termina el intento de
+					conexión, el cliente no responde a este último mensaje con un TCP ACK, por lo que queda incompleto. Requiere permisos de administrados, ya 
+					que hace uso de una API de sockets especifica.
+					
+					*TCP_NmapSS.png*
+
+					Como podemos ver en el resultado, aparecen de nuevo los dos puertos TCP 80 y 443, abiertos y prestando los mismos servicios que en el otro 
+					escaneo, http y https respectivamente.
+
+
+	Según la RFC de TCP, si el estado de un puerto es cerrado, un mensaje entrante conteniendo un Reset determina un envío Reset de respuesta. Cuando se escanenan sistemas que 
+	cumplen eso, cualquier paquete que no contenga los bits SYS, RST o ACK dará como resultado lo siguiente: Si se recibe un mensaje RST como respuesta, se considera que el puerto
+	está cerrado. Si por el contrario no se recibe ningún tipo de respuesta por parte del servidor, se marca el puerto como abierto|filtrado. Dos técnicas que usan esto, serían las 
+	siguientes:
+
+	· sudo nmap -sN www.uhu.es ->	Escaneo TCP Null. No fija ningún bit, por lo que la cabecera de banderas TCP es 0.
+					
+					*TCP_NmapSN.png*
+					
+					La línea 'All 1000 scanned ports on www.uhu.es are closed' nos indica que se han recibido un mensaje RST de todos los puertos, por tanto la	
+					herramienta los considera cerrados. Esto difiere con los resultados de los dos escaneos anteriores, donde aparecian dos abiertos. Es una 
+					posibilidad que el servidor sea basado en UNIX, ya que este tipo de sondeos no funciona en ellos.		
+
+	· sudo nmap -sF www.uhu.es ->	Escaneo TCP FIN. Solo fija el bit TCP FIN.
+
+					*TCP_NmapSF.png*
+					
+					Aparece la misma línea que en el caso anterior, por lo que la herramienta considera todos los puertos cerrados al recibir RST.
+
+	· sudo nmap -sA www.uhu.es ->	Escaneo de puertos TCP ACK. Es diferente a los otros que hemos utilizado hasta ahora, ya que no puede identificar puertos abiertos. Su uso 
+					principalmente es detectar reglas de cortafuegos, si usan inspección de estados y puertos filtrados. Solo tiene la bandera ACK fija.
+					Al escanear sistemas no filtrados, los puertos abiertos y cerrados devuelven RST, y Nmap los muestra como no filtrados, lo que significa que
+					son alcanzables mediante el mensaje ACK, pero no se puede identificar su estado.
+
+					*TCP_NmapSA.png*
+
+					La línea 'All 1000 scanned ports on www.uhu.es' are unfiltered' confirma lo mencionado antes, los mensajes ACK llegan a los puertos, por lo
+					tanto son alcanzables, pero no es posible determinar con esta técnica su estado.
+
+	· sudo nmap -sU www.uhu.es ->	Escaneo de puertos UDP. Funcionan mediante el envío sin de una cabecera UDP a cada puerto objetivo. UDP no tiene estructura de conexión 3-way
+					handshake, por lo que envía directamente los datos, existiendo el riesgo de pérdida de paquetes. Tras un escaneo UDP, podemos obtener dos
+					resultados: Clossed y Open|Filtered.
+					Clossed aparece cuando se recibe un error ICMP port unrecheable, indicando que el puerto es inalcanzable.
+					Open|Filtered es usado cuando no se recibe ninguna respuesta del puerto, pudiendo haber recibido los datos por una aplicación en escucha, o 
+					haber sido desechados por un cortafuegos presente. No hay forma, a priori, de determinar con UDP si el puerto es open o filtered. Es necesario
+					usar otro tipo de escaneos para tener tal información.
+						
+					*TCP_NmapSU.png*
+
+					'All 1000 scanned ports on www.uhu.es are open|filtered' nos indica lo comentado antes, los puertos escaneados son alcanzables, pero no podemos 
+					determinar su estado con UDP.
+
+Tras las pruebas realizadas, el sistema identificado como www.uhu.es cuya dirección IP es 150.214.167.13 posee dos puertos TCP abiertos, según ha identificado la herramienta utilizando
+las dos primeras técnicas. Estos puertos son el 80 y 443, y los servicios que proporcionan son http y https, respectivamente.
+					

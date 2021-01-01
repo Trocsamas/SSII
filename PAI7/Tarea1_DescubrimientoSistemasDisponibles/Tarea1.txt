@@ -1,7 +1,7 @@
 Como punto de partida para el análisis de la seguridad en sistemas con conectividad a red, es necesario descubrir tales sistemas o reducir el número de ellos, 
 proporcionado a través de un rango de direcciones IP, a una lista que contenga solo los sistemas activos o interesantes para nuestro propósito.
 Para tal cometido, disponemos de una serie de técnicas ofrecidas por la herramienta Nmap en Linux, y ejecutables como comandos en un terminal. En el proceso,
-empezaremos con una consulta DNS reversa de la dirección IP proporcionada, y a partir de ese punto nos centraremos en averiguar si es sistema objetivo está 
+empezaremos con una consulta DNS reversa de la dirección IP proporcionada, y a partir de ese punto nos centraremos en averiguar si el sistema objetivo está 
 activo o no. A continuación se muestra el resultado al ejecutar los comandos correspondientes para aplicar las técnicas:
 
 	· nmap -sL 150.214.167.13 -> 	El sondeo de lista o sL, es un tipo de descubrimiento de sistemas que lista cada equipo de la red especificada, sin enviar
