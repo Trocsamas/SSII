@@ -29,4 +29,18 @@ Fusion (mean)	0.3179918011159255
 
 Observando la salida de la aplicación, se puede concluir que dentro de la evidencia presentada existe un mensaje oculto, pues todos los analizadores de la herramienta han sobrepasado el umbral para determinar que dentro de la imagen estudiada se encuentra un posible mensaje oculto. Por tanto, se recomienda tomar las medidas oportunas para cortar de lleno las transmisiones de información mediante este canal.
 
-Una vez que se ha decretado que se está produciendo una comunicación oculta mediante esteganografía, se procede a intentar extraer el mensaje/imagen oculta dentro de la imagen proporcionada como evidencia.
+Una vez que se ha decretado que se está produciendo una comunicación oculta mediante esteganografía, se procede a intentar extraer el mensaje/imagen oculta dentro de la imagen proporcionada como evidencia. Para cumplir con este objetivo, se utilizará la herramienta de esteganografía VSL 1.1, la cual proporciona 3 métodos de decodificación distintos, entre ellos un decodificador de LSB.
+
+El procedimiento de extracción es simple. Una vez abierta la aplicación, se colocan dentro del panel de trabajo un módulo de input, un módulo de LSB.D y finalmente un módulo de output, de una forma similar a la que se presenta en la siguiente captura:
+
+"capturas apartado 3\captura1.png"
+
+Tras esto, seleccionamos como input la imagen proporcionada como evidencia:
+
+"capturas apartado 3\captura2.png"
+
+Una vez seleccionada la imagen a decodificar, ejecutamos el workflow haciendo click sobre la flecha verde de la barra de iconos situada abajo a la izquierda de la ventana de la aplicación. A partir de aquí el software se encargará de desvelar el mensaje oculto, colocando el resultado en la carpeta "results" dentro del directorio de la aplicación, donde se encuentran los logs y otros archivos de configuración. VSL tras realizar esta decodificación deja como resultado un archivo plano, el cual si se abre con una herramienta de edición de texto mostrará un texto ilegible en casi su totalidad. Sin embargo, se proporciona una pista importante en la primera linea del fichero: %PNG. A partir de esta pista se deduce que el mensaje oculto se trataba de una imagen en formato PNG. Al abrir el fichero con un programa de edición de imágenes (Paint, GIMP, etc.) podemos obtener la imagen oculta en la evidencia proporcionada:
+
+"capturas apartado 3\resultado decodificación.png"
+
+Por tanto, se concluye que las sospechas del cliente sobre las filtraciones de información mediante esteganografía eran fundamentadas, y se presenta en este informe el mensaje descubierto, así como los motivos para fundamentar la sospecha.
