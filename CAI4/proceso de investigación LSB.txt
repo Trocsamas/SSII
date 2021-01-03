@@ -29,4 +29,24 @@ Pueden existir casos en los que la imagen portadora del mensaje oculto por el he
 
 2) Seleccionar los bits de ocultación: si se realiza una conveniente elección de un subconjunto de pixeles en los que ocultar el mensaje se puede camuflar mucho mejor el inconveniente que se genera por defecto al utilizar este algoritmo. Por lo general se suele utilizar una semilla para generar posiciones pseudoaleatorias para alcanzar esta manipulación. 
 
-En tercer lugar es necesario estudiar el tiempo que tarda en embeber y en extraer las firmas ocultas dentro de las imágenes. Para ello 
+En tercer lugar es necesario estudiar el tiempo que tarda en embeber y en extraer las firmas ocultas dentro de las imágenes. A día de hoy, gracias a las capacidades de computación actuales, embeber un mensaje dentro de cualquier imagen no resulta en absolto una tarea compleja y se pueden obtener resultados deseados en tiempos muy reducidos. Es por ello que medir el tiempo que tarda el algoritmo LSB en esconder o extraer un mensaje resulta una tarea un poco complicada. Es por ello que vamos a aplicar un proceso estadístico con la herramienta VSL 1.1. Suponiendo que para una misma imagen y un mismo mensaje se utilizará un tiempo similar, si acumulamos varias imágenes y medimos el tiempo que se tarda en embeber un mismo mensaje en varias imágenes y dividimos entre el número de imágenes deberíamos obtener el tiempo medio para una imagen. Utilizaremos distintos mensajes para obtener distintos puntos de vista, así como mantendremos una misma imagen de 640x426px en formato bmp que se utilizará varias veces.
+
+Tras realizar varias pruebas, se ha confeccionado la siguiente tabla que relaciona los valores ya expuestos para el proceso de CODIFICACIÓN:
+
+			número de imágenes	5			10			15			20
+tamaño fichero(Bytes)  
+128								1 s 610 ms	1 s 710 ms	2 s 250 ms	2 s 710 ms
+512								0 s 91 ms 	1 s 550 ms	2 s 290 ms	3 s 120 ms
+
+Siguiendo un método similar, realizaremos un estudio estadístico del tiempo que tarda en rendir el software a la hora de la EXTRACCIÓN de los mensajes codificados:
+
+			número de imágenes	5			10			15			20
+tamaño fichero 
+128								0 s 360 ms	0 s 830 ms	1 s 110 ms	1 s 600 ms
+512								0 s 450 ms	1 s 040 ms	1s 100 ms	1 s 470 ms
+
+Como se puede observar, incluso para tamaños del problema considerables secuencialmente (del orden de 20 imágenes consecutivas) el tiempo de ocultación y extracción sigue siendo bastante pequeños, teniendo en cuenta que para la experimentación se ha utilizado como recurso tecnológico un procesador Intel Core i5 8250U, una tarjeta gráfica Nvidia GeForce 940MX y una capacidad de memoria RAM de 12 GB DDR4.
+
+En búsqueda de información relevante acerca de la compejidad en tiempo del algoritmo LSB no se han podido encontrar muchas fuentes asequibles. La mayoría de los casos son redirecciones a papers de determinadas universidades que no abordan completamente una formulación específica de la complejidad de dicho algoritmo. 
+
+ 
