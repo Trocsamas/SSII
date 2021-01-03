@@ -1,0 +1,66 @@
+Como último paso, es indispensable analizar en profundidad los servicios a nivel de aplicación que proporciona un sistema, con el objetivo de obtener las distintas versiones
+disponibles que sostienen los servicios proporcionados. Este análisis de las vulnerabilidades propias de versiones de Software puede ayudar mucho a la hora de determinar qué 
+ataques pueden afectar a un sistema. Algunas técnicas de la herramienta Nmap nos permiten obtener esta información tan crucial.
+
+	· nmap -sV www.uhu.es ->	Activa la detección de versiones de Nmap. A efectos prácticos, añade a la estructura de presentación en forma de tabla de técnicas 
+					anteriores, una nueva columna. Así, además de las existentes PORT, STATE Y SERVICE, aparecerá una nueva llamada VERSION que indicará
+					la version de software que está siendo usada en dicho sistema.
+
+					*Nmap_SV.png*
+
+					Aparecen dos puertos abiertos como resultado, el 80 y 443. El puerto 80 ofrece servicio http sostenida por una version de nginx. Por
+					otra parte, el puerto 443 implementa el servicio ssl/http sobre nginx, de nuevo.
+
+					Nginx es un servidor web que puede ser usado como proxy inverso, balanceador de carga y proxy para protocolos de correo.
+					Está enfocado para obtener una alta concurrencia y un uso reducido de memoria. Su creación intenta solucionar las principales limitaciones 
+					de rendimiento de Apache. Actualmente, Nginx tiene el 20% de la cuota de mercado de servidores web.
+
+	· nmap -O -sV www.uhu.es ->	Añadiendo la opción -O, activamos la detección de sistemas operativos presentes en los sistemas objetivos. Esto es muy util para averiguar
+					la versión de SO, si está actualizado y su tiempo de vida para comenzar a estr obsoleto.
+	
+					*Nmap_SVO.png*
+
+					Además de los dos puertos ya mencionados y su versión, ahora aparece el sistema operativo que se está usando en el sistema objetivo del 
+					escaneo. La línea 'OS CPE' indica mediante /o: que el sistema operativo ejecutandose en el sistema analizado es Oracle Virtualbox, y el 
+					/a: que se está utilizando la aplicación qemu sobre ese SO.
+					La línea 'Aggressive OS guesses' aparece cuando la herramienta no es capaz de determinar perfectamemte el sistema operativo que se está 
+					ejecutando. En este caso, estima en un 98% que es Oracle VirtualBox, un software de virtualización, lo que se está ejecutando en el sistema,
+					seguido con un 92% de estimación por Qemu, otro emulador y software de virtualización.
+	
+	· sudo nmap -sV -O -T2 
+	  -p 80 www.uhu.es-> 		Al añadir la opción -T2, le indicamos a la herramienta el tiempo e intensidad del análisis, siendo -T0 el más costoso temporalmentey -T5 el que 
+					menos, sacrificando este último la fiabilidad por velocidad. Al reducir la velocidad de escaneo y los recursos usados del sistema objetivo, es más
+					problable que nos detecten las herramientas de seguridad que controlen las conexiones. En este caso, se ha aplicado exclusivamente al puerto 80 para
+					que la herramienta no tarde demasiado.
+
+					*Nmap_SVT2.png*
+
+					Obtenemos los mismos resultados anteriores, siendo Oracle VirtualBox el SO mejor posicionado para ser el ejecutado en el sistema, además de estar el
+					puerto 80 abierto, con el servicio de http y versión nginx. La diferencia radica en el tiempo tomado para la ejecución de la herramienta, siendo de
+					30 segundos aproximadamente para un solo puerto, demostrando que la velocidad de escaneo se ha reducido.  
+
+	· sudo nmap -A www.uhu.es ->	Con esta opción, se realiza un escaneo más intensivo del sistema especificado, activando tanto la detección de versiones como del sistema
+					operativo. Añade a todo lo visto anteriormente, una tabla traceroute que proporciona la ruta que han tomado los paquetes enviados y la latencia
+					de tránsito.
+
+					*Nmap_A.png*
+			
+					Los resultados vuelven a ser los mismos, no pudiendo determinar la herramienta inequivocamene, el SO en ejecución en el sistema. Por ello, 
+					vuelve a dar porcentajes que colocan en primer lugar a Oracle VirtualBox, y detrás Qemu.
+
+	· sudo nmap -sR www.uhu.es ->	Esta técnica es de poco uso, ya que la detección de versiones -sV la activa automáticamente, y es más completa. Nos proporciona los mismos
+					resultados que -sV.
+					
+					*Nmap_SR.png*
+
+Como conclusión al análisis de servicios y versiones, podemos ver como no hemos obtenido información suficiente acerca del software que se está ejecutando en el sistema analizado.
+La herramienta no ha podido determinar perfectamente el Sistema Operativo presente, por lo que ha hecho uso de estimaciones, que reunimos a continuación:
+En el sistema escaneado, podemos encontrar dos puertos tcp abiertos, el 80 y 443, que proporcionan los servicios http y ssl/http, respectivamente. Ambos poseen nginx como versión
+de software, y podriamos determinar con una estimación superior al 90%, que el sistema objetivo se está ejecutando en un virtualizador, Oracle VirtualBox, y sobre el otro software
+de virtualización, Qemu.
+Por tanto, y dado que no hemos podido obtener información de las versiones usadas del software usado en el sistema, la seguridad ante amenazas vendrá dada por la actualidad de las 
+versiones de Oracle VirtualBox, Qemu , nginx que se han usado para montar el sistema.
+
+
+
+
