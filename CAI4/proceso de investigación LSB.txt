@@ -18,4 +18,15 @@ Podría apurarse más la reducción de tamaño mediante más reescalado de las i
 
 Partiendo de los resultados (visibles en las carpeta "resultados lsb vsl"), para mantener un aspecto razonable y discreto, se recomienda el uso de imágenes de 640x267 o 1280x853 gracias a su relación calidad-peso.
 
-Una vez estudiado el tamaño de las imágenes recomendables para la esteganografía, se solicita el estudio de la confidencialidad de las firmas ocultas. Como se ha explicado previamente, al aplicar el algoritmo de LSB en las imagenes anteriores a primera vista no se puede observar ningún tipo de distorsión grave. Sin embargo, es cierto que las firmas pueden ser descubiertas una vez que se utiliza un proceso de decodificación. La resistencia a dichos procesos de decodificación se estudiará en otro apartado. En este apartado se proporcionarán algunas sugerencias de cómo mejorar la confidencialidad.
+Una vez estudiado el tamaño de las imágenes recomendables para la esteganografía, se solicita el estudio de la confidencialidad de l-as firmas ocultas. Como se ha explicado previamente, al aplicar el algoritmo de LSB en las imagenes anteriores a primera vista no se puede observar ningún tipo de distorsión grave. Sin embargo, es cierto que las firmas pueden ser descubiertas por defectos en el algrotimo o una vez que se utiliza un proceso de decodificación. La resistencia a dichos procesos de decodificación se estudiará en otro apartado. En este apartado se proporcionarán algunas sugerencias de cómo mejorar la confidencialidad. Para ello, se tomará inspiración a partir del paper "Analysis of LSB based image steganography techniques" redactado por Rajarathnam Chandramouli y Nasir D. Memon. 
+
+Pueden existir casos en los que la imagen portadora del mensaje oculto por el hecho de aplicarle el algoritmo sufra modificaciones que resulten signos evidentes de uso de esteganografía para cualquier estegoanalista con un mínimo de experiencia en el campo. Es por ello que se suelen dar 2 recomendaciones para fortalecer la confidencialidad del proceso de comunicación:
+
+1) Cifrar el mensaje a ocultar: El proceso del algoritmo LSB consiste en la sustitución del último bit de cada pixel para ocultar un mensaje. Sin embargo, cuando este mensaje sigue un patrón muy evidente (por ejemplo, cadenas de texto similares) el estego objeto deja marcas evidentes de dichos patrones. Es por ello que se recomienda cifrar el mensaje a ocultar previamente al proceso de esteganografía. De esta forma se obtienen dos metas importantes:
+
+- Añadir una falsa aleatoriedad para camuflar posibles patrones
+- Añadir una capa extra de confidencialidad en caso de que se extraiga con éxito el mensaje oculto 
+
+2) Seleccionar los bits de ocultación: si se realiza una conveniente elección de un subconjunto de pixeles en los que ocultar el mensaje se puede camuflar mucho mejor el inconveniente que se genera por defecto al utilizar este algoritmo. Por lo general se suele utilizar una semilla para generar posiciones pseudoaleatorias para alcanzar esta manipulación. 
+
+En tercer lugar es necesario estudiar el tiempo que tarda en embeber y en extraer las firmas ocultas dentro de las imágenes. Para ello 
