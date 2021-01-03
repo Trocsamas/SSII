@@ -1,0 +1,49 @@
+Para el uso de estas aplicaciones, se ha utilizado la imagen de 200x133 y la de prueba
+proporcionada por el profesor (338x338) ya que al ser herramientas gratuitas tienen un 
+límite de tamaño.
+
+
+XIAO STEGANOGRAPHY
+Es un software gratuito que se puede utilizar para ocultar archivos en imágenes BMP o en 
+archivos WAV. El uso de la herramienta es muy sencillo, puede simplemente abrir el 
+software, cargar cualquier imagen BMP o archivo WAV en su interfaz. A continuación, 
+agregue un archivo, que desea ocultar. También es compatible con el cifrado. Por lo 
+tanto, puede seleccionar entre varios algoritmos como RC4, Triple DES, DES, Triple DES 
+112, RC2 y hash SHA, MD4, MD2, MD5. Seleccione cualquiera o el que mejor se ajuste a lo 
+que requiere y luego guarde el archivo de destino. Para leer el mensaje oculto de este 
+archivo, tendrá que volver a utilizar este software. Este software leerá el archivo y 
+decodificará el archivo oculto de él. No puede extraer el archivo oculto de ningún otro 
+software
+
+Xiao Steganography pone a tu alcance este tipo de comunicaciones secretas mediante un 
+sencillo proceso que vas siguiendo paso a paso. Elige la imagen o fichero de sonido donde 
+ocultarás la información, selecciona los ficheros que quieres ocultar y ajusta después las 
+opciones de configuración necesarias: algoritmo de encriptación, contraseña, etc.
+
+[Sin título 1.png]
+
+
+El resultado es una imagen o fichero de sonido idéntico al original, sólo que en su 
+interior se oculta un mensaje que sólo el destinatario, con Xiao Steganography y sabiendo 
+la contraseña correspondiente, podrá descifrar.
+
+[Resultado-Extraccion.PNG]
+
+Puede adjuntar cualquier tipo de archivo solo limitado por el tamaño de la imagen que 
+cargara los archivosAgregado mudulo de seguridad, Encripta / Desencripta con algoritmos 
+RC2, RC4, DES, Triple DES , Triple Des 112 y Hashing MD2, MD4, MD5, SHA a traves de la 
+proteccion de clave secretaCiertas cosas mejoradas y corregidas
+
+rSteg
+Esta herramienta basada en Java le permite ocultar datos de texto dentro de una imagen. 
+Tiene dos botones: uno para encriptar y el segundo para descifrar el texto. Simplemente 
+seleccione el archivo de imagen, ingrese el PIN y luego ingrese el texto que desea ocultar 
+en la imagen. Generará un archivo de imagen de destino con texto oculto dentro. Si desea 
+volver a leer ese texto, use esta herramienta y seleccione la opción de descifrado.
+
+[Herramienta-2-Encriptado.PNG]
+
+[Herramienta-2-Desencriptado.png]
+
+
+--Conclusion final comparando con el apartado 1
