@@ -1,0 +1,471 @@
+Greenbone Security Assistant
+Logged in as  Admin  
+Fri Jan 8 21:55:45 2021 UTC
+
+ID:	52f5699b-13e8-4da6-8e76-6eb674f3fd1f
+Modified:	Fri Jan 8 21:40:22 2021
+Created:	Fri Jan 8 21:07:48 2021
+Owner:	admin
+
+    Report: Results
+
+
+Vulnerability
+=======================================================================================================================================================================================================	
+Host 150.214.167.13 (phpmyadmin.uhu.es)
+Location 443/tcp
+
+Summary
+
+This routine attempts to guess which service is running on the remote ports. For instance, it searches for a web server which could listen on another port than 80 or 443 and makes this information available for other check routines.
+
+Vulnerability Detection Result
+
+A TLScustom server answered on this port
+
+Log Method
+
+Details: Services (OID: 1.3.6.1.4.1.25623.1.0.10330)
+
+Version used: $Revision: 13541 $
+
+Vulnerability
+=======================================================================================================================================================================================================
+Host 150.214.167.13 (phpmyadmin.uhu.es)
+Location 80/tcp
+
+Summary
+
+This routine attempts to guess which service is running on the remote ports. For instance, it searches for a web server which could listen on another port than 80 or 443 and makes this information available for other check routines.
+
+Vulnerability Detection Result
+
+A web server is running on this port
+
+Log Method
+
+Details: Services (OID: 1.3.6.1.4.1.25623.1.0.10330)
+
+Version used: $Revision: 13541 $
+
+Vulnerability
+=======================================================================================================================================================================================================
+Host 150.214.167.13 (phpmyadmin.uhu.es)
+Location 443/tcp
+
+Summary
+
+This routine attempts to guess which service is running on the remote ports. For instance, it searches for a web server which could listen on another port than 80 or 443 and makes this information available for other check routines.
+
+Vulnerability Detection Result
+
+A web server is running on this port through SSL
+
+Log Method
+
+Details: Services (OID: 1.3.6.1.4.1.25623.1.0.10330)
+
+Version used: $Revision: 13541 $
+
+Vulnerability
+=======================================================================================================================================================================================================
+Host 150.214.167.13 (phpmyadmin.uhu.es)
+Location 443/tcp
+
+Summary
+
+This detects the HTTP Server's type and version.
+
+Vulnerability Detection Result
+
+The remote web server type is :
+
+nginx 
+
+Solution
+
+- Configure your server to use an alternate name like 'Wintendo httpD w/Dotmatrix display'
+
+- Be sure to remove common logos like apache_pb.gif.
+
+- With Apache, you can set the directive 'ServerTokens Prod' to limit the information emanating from the server in its response headers.
+Log Method
+
+Details: HTTP Server type and version (OID: 1.3.6.1.4.1.25623.1.0.10107)
+
+Version used: $Revision: 11585 $
+
+Vulnerability
+=======================================================================================================================================================================================================
+Host 150.214.167.13 (phpmyadmin.uhu.es)
+Location 80/tcp
+
+Summary
+
+This detects the HTTP Server's type and version.
+
+Vulnerability Detection Result
+
+The remote web server type is :
+
+nginx 
+
+Solution
+
+- Configure your server to use an alternate name like 'Wintendo httpD w/Dotmatrix display'
+
+- Be sure to remove common logos like apache_pb.gif.
+
+- With Apache, you can set the directive 'ServerTokens Prod' to limit the information emanating from the server in its response headers.
+Log Method
+
+Details: HTTP Server type and version (OID: 1.3.6.1.4.1.25623.1.0.10107)
+
+Version used: $Revision: 11585 $
+
+Vulnerability
+=======================================================================================================================================================================================================
+Host 150.214.167.13 (phpmyadmin.uhu.es)
+Location 443/tcp
+
+Summary
+
+The script consolidates various information for CGI scanning.
+
+This information is based on the following scripts / settings:
+
+- HTTP-Version Detection (OID: 1.3.6.1.4.1.25623.1.0.100034)
+
+- No 404 check (OID: 1.3.6.1.4.1.25623.1.0.10386)
+
+- Web mirroring / webmirror.nasl (OID: 1.3.6.1.4.1.25623.1.0.10662)
+
+- Directory Scanner / DDI_Directory_Scanner.nasl (OID: 1.3.6.1.4.1.25623.1.0.11032)
+
+- The configured 'cgi_path' within the 'Scanner Preferences' of the scan config in use
+
+- The configured 'Enable CGI scanning', 'Enable generic web application scanning' and 'Add historic /scripts and /cgi-bin to directories for CGI scanning' within the 'Global variable settings' of the scan config in use
+
+If you think any of this information is wrong please report it to the referenced community portal.
+Vulnerability Detection Result
+
+The Hostname/IP "phpmyadmin.uhu.es" was used to access the remote host.
+
+Generic web application scanning is disabled for this host via the "Enable generic web application scanning" option within the "Global variable settings" of the scan config in use.
+
+Requests to this service are done via HTTP/1.1.
+
+This service seems to be able to host PHP scripts.
+
+This service seems to be NOT able to host ASP scripts.
+
+The User-Agent "Mozilla/5.0 [en] (X11, U; OpenVAS-VT 9.0.3)" was used to access the remote host.
+
+Historic /scripts and /cgi-bin are not added to the directories used for CGI scanning. You can enable this again with the "Add historic /scripts and /cgi-bin to directories for CGI scanning" option within the "Global variable settings" of the scan config in use.
+
+The following directories were used for CGI scanning:
+
+https://phpmyadmin.uhu.es/
+
+While this is not, in and of itself, a bug, you should manually inspect these directories to ensure that they are in compliance with company security standards
+
+Log Method
+
+Details: CGI Scanning Consolidation (OID: 1.3.6.1.4.1.25623.1.0.111038)
+
+Version used: $Revision: 13679 $
+References
+
+Other:	https://community.greenbone.net/c/vulnerability-tests
+
+Vulnerability
+=======================================================================================================================================================================================================
+Host 150.214.167.13 (phpmyadmin.uhu.es)
+Location 80/tcp
+
+Summary
+
+The script consolidates various information for CGI scanning.
+
+This information is based on the following scripts / settings:
+
+- HTTP-Version Detection (OID: 1.3.6.1.4.1.25623.1.0.100034)
+
+- No 404 check (OID: 1.3.6.1.4.1.25623.1.0.10386)
+
+- Web mirroring / webmirror.nasl (OID: 1.3.6.1.4.1.25623.1.0.10662)
+
+- Directory Scanner / DDI_Directory_Scanner.nasl (OID: 1.3.6.1.4.1.25623.1.0.11032)
+
+- The configured 'cgi_path' within the 'Scanner Preferences' of the scan config in use
+
+- The configured 'Enable CGI scanning', 'Enable generic web application scanning' and 'Add historic /scripts and /cgi-bin to directories for CGI scanning' within the 'Global variable settings' of the scan config in use
+
+If you think any of this information is wrong please report it to the referenced community portal.
+Vulnerability Detection Result
+
+The Hostname/IP "phpmyadmin.uhu.es" was used to access the remote host.
+
+Generic web application scanning is disabled for this host via the "Enable generic web application scanning" option within the "Global variable settings" of the scan config in use.
+
+Requests to this service are done via HTTP/1.1.
+
+This service seems to be able to host PHP scripts.
+
+This service seems to be NOT able to host ASP scripts.
+
+The User-Agent "Mozilla/5.0 [en] (X11, U; OpenVAS-VT 9.0.3)" was used to access the remote host.
+
+Historic /scripts and /cgi-bin are not added to the directories used for CGI scanning. You can enable this again with the "Add historic /scripts and /cgi-bin to directories for CGI scanning" option within the "Global variable settings" of the scan config in use.
+
+The following directories were used for CGI scanning:
+
+http://phpmyadmin.uhu.es/
+
+While this is not, in and of itself, a bug, you should manually inspect these directories to ensure that they are in compliance with company security standards
+
+Log Method
+
+Details: CGI Scanning Consolidation (OID: 1.3.6.1.4.1.25623.1.0.111038)
+
+Version used: $Revision: 13679 $
+References
+
+Other:	https://community.greenbone.net/c/vulnerability-tests
+
+Vulnerability
+=======================================================================================================================================================================================================
+Host 150.214.167.13 (phpmyadmin.uhu.es)
+Location 443/tcp
+
+Summary
+
+Detection of nginx.
+
+The script sends a connection request to the server and attempts to extract the version number from the reply.
+
+Vulnerability Detection Result
+
+Detected nginx
+
+Version:  unknown
+Location: 443/tcp
+CPE:      cpe:/a:nginx:nginx
+
+Log Method
+
+Details: nginx Detection (OID: 1.3.6.1.4.1.25623.1.0.100274)
+
+Version used: $Revision: 13859 $
+
+Vulnerability
+=======================================================================================================================================================================================================
+Host 150.214.167.13 (phpmyadmin.uhu.es)
+Location 80/tcp
+
+Summary
+
+Detection of nginx.
+
+The script sends a connection request to the server and attempts to extract the version number from the reply.
+
+Vulnerability Detection Result
+
+Detected nginx
+
+Version:  unknown
+Location: 80/tcp
+CPE:      cpe:/a:nginx:nginx
+
+Log Method
+
+Details: nginx Detection (OID: 1.3.6.1.4.1.25623.1.0.100274)
+
+Version used: $Revision: 13859 $
+
+Vulnerability
+=======================================================================================================================================================================================================
+Host 150.214.167.13 (phpmyadmin.uhu.es)
+Location general/tcp
+
+Summary
+
+This script consolidates the OS information detected by several NVTs and tries to find the best matching OS.
+
+Furthermore it reports all previously collected information leading to this best matching OS. It also reports possible additional information which might help to improve the OS detection.
+
+If any of this information is wrong or could be improved please consider to report these to the referenced community portal.
+
+Vulnerability Detection Result
+
+No Best matching OS identified. Please see the NVT 'Unknown OS and Service Banner Reporting' (OID: 1.3.6.1.4.1.25623.1.0.108441) for possible ways to identify this OS.
+
+Log Method
+
+Details: OS Detection Consolidation and Reporting (OID: 1.3.6.1.4.1.25623.1.0.105937)
+
+Version used: $Revision: 14244 $
+References
+
+Other:	https://community.greenbone.net/c/vulnerability-tests
+
+Vulnerability
+=======================================================================================================================================================================================================
+Host 150.214.167.13 (phpmyadmin.uhu.es)
+Location general/tcp
+
+Summary
+
+A traceroute from the scanning server to the target system was conducted. This traceroute is provided primarily for informational value only. In the vast majority of cases, it does not represent a vulnerability. However, if the displayed traceroute contains any private addresses that should not have been publicly visible, then you have an issue you need to correct.
+Vulnerability Detection Result
+
+Here is the route from 172.17.0.2 to 150.214.167.13:
+
+172.17.0.2
+10.0.2.2
+150.214.167.13
+
+Solution
+
+Block unwanted packets from escaping your network.
+Log Method
+
+Details: Traceroute (OID: 1.3.6.1.4.1.25623.1.0.51662)
+
+Version used: $Revision: 10411 $
+
+Vulnerability
+=======================================================================================================================================================================================================
+Host 150.214.167.13 (phpmyadmin.uhu.es)
+Location 443/tcp
+
+Summary
+
+This plugin uses wapiti to find web security issues.
+
+Make sure to have wapiti 2.x as wapiti 1.x is not supported.
+
+See the preferences section for wapiti options.
+
+Note that the scanner is using limited set of wapiti options. Therefore, for more complete web assessment, you should use standalone wapiti tool for deeper/customized checks.
+
+Note: The plugin needs the 'wapiti' binary found within the PATH of the user running the scanner and needs to be executable for this user. The existence of this binary is checked and reported separately within 'Availability of scanner helper tools' (OID: 1.3.6.1.4.1.25623.1.0.810000).
+
+Vulnerability Detection Result
+
+The wapiti report filename is empty. That could mean that a wrong version of wapiti is used or tmp dir is not accessible. Make sure to have wapiti 2.x as wapiti 1.x is not supported.
+In short: Check the installation of wapiti and the scanner.
+
+Log Method
+
+Details: wapiti (NASL wrapper) (OID: 1.3.6.1.4.1.25623.1.0.80110)
+
+Version used: $Revision: 13985 $
+
+Vulnerability
+=======================================================================================================================================================================================================
+Host 150.214.167.13 (phpmyadmin.uhu.es)
+Location 80/tcp
+
+Summary
+
+This plugin uses wapiti to find web security issues.
+
+Make sure to have wapiti 2.x as wapiti 1.x is not supported.
+
+See the preferences section for wapiti options.
+
+Note that the scanner is using limited set of wapiti options. Therefore, for more complete web assessment, you should use standalone wapiti tool for deeper/customized checks.
+
+Note: The plugin needs the 'wapiti' binary found within the PATH of the user running the scanner and needs to be executable for this user. The existence of this binary is checked and reported separately within 'Availability of scanner helper tools' (OID: 1.3.6.1.4.1.25623.1.0.810000).
+
+Vulnerability Detection Result
+
+The wapiti report filename is empty. That could mean that a wrong version of wapiti is used or tmp dir is not accessible. Make sure to have wapiti 2.x as wapiti 1.x is not supported.
+In short: Check the installation of wapiti and the scanner.
+
+Log Method
+
+Details: wapiti (NASL wrapper) (OID: 1.3.6.1.4.1.25623.1.0.80110)
+
+Version used: $Revision: 13985 $
+
+Vulnerability
+=======================================================================================================================================================================================================
+Host 150.214.167.13 (phpmyadmin.uhu.es)
+Location 443/tcp
+
+Summary
+
+This script uses DIRB to find directories and files on web applications via brute forcing. See the preferences section for configuration options.
+
+Note: The plugin needs the 'dirb' binary found within the PATH of the user running the scanner and needs to be executable for this user. The existence of this binary is checked and reported separately within 'Availability of scanner helper tools' (OID: 1.3.6.1.4.1.25623.1.0.810000).
+
+Vulnerability Detection Result
+
+This are the directories/files found with brute force:
+
+https://phpmyadmin.uhu.es:443/
+
+Log Method
+
+Details: DIRB (NASL wrapper) (OID: 1.3.6.1.4.1.25623.1.0.103079)
+
+Version used: $Revision: 13985 $
+
+Vulnerability
+=======================================================================================================================================================================================================
+Host 150.214.167.13 (phpmyadmin.uhu.es)
+Location 80/tcp
+
+Summary
+
+This script uses DIRB to find directories and files on web applications via brute forcing. See the preferences section for configuration options.
+
+Note: The plugin needs the 'dirb' binary found within the PATH of the user running the scanner and needs to be executable for this user. The existence of this binary is checked and reported separately within 'Availability of scanner helper tools' (OID: 1.3.6.1.4.1.25623.1.0.810000).
+
+Vulnerability Detection Result
+
+This are the directories/files found with brute force:
+
+https://phpmyadmin.uhu.es:443/
+http://phpmyadmin.uhu.es:80/
+http://phpmyadmin.uhu.es:80/0.exe
+http://phpmyadmin.uhu.es:80/00.exe
+http://phpmyadmin.uhu.es:80/01.exe
+http://phpmyadmin.uhu.es:80/02.exe
+http://phpmyadmin.uhu.es:80/03.exe
+http://phpmyadmin.uhu.es:80/1.exe
+http://phpmyadmin.uhu.es:80/10.exe
+
+Log Method
+
+Details: DIRB (NASL wrapper) (OID: 1.3.6.1.4.1.25623.1.0.103079)
+
+Version used: $Revision: 13985 $
+
+Vulnerability
+=======================================================================================================================================================================================================
+Host 150.214.167.13 (phpmyadmin.uhu.es)
+Location general/CPE-T	
+
+Summary
+
+This routine uses information collected by other routines about CPE identities of operating systems, services and applications detected during the scan.
+
+Vulnerability Detection Result
+
+150.214.167.13|cpe:/a:nginx:nginx
+
+Log Method
+
+Details: CPE Inventory (OID: 1.3.6.1.4.1.25623.1.0.810002)
+
+Version used: $Revision: 14324 $
+References
+
+Other:	http://cpe.mitre.org/
+
+Backend operation: 0.75s
+Greenbone Security Assistant (GSA) Copyright 2009 - 2018 by Greenbone Networks GmbH, www.greenbone.net
+
