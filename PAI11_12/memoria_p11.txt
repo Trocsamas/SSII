@@ -1,0 +1,127 @@
+==================================================
+Objetivo de la practica
+==================================================
+
+El objetivo a cumplir es desarrollar con la ayuda de Scapy uno de los 4 siguientes escáneres:
+
+•Syn Stealth e ICMP scan
+•Syn Stealth y UDP scan
+•Syn Stealth y DNS scan
+•UDP scan e ICMP scan
+
+Dada la posibilidad de elegir cualquiera de ellos, el equipo de desarrollo ha optado por la primera opción: Desarrollar el Syn Stealth e ICMP Scan.
+
+Para explicar cómo se realiza un Syn stealth scan nos basaremos en el documento desarrollado por Angélica Pérez Hernandez de la Universidad Veracruzana sobre "Port basics". 
+
+Stealth Scanning es un tipo de escaner TCP, y se basa en no realizar una conexión completa TCP como se haría en un 3-way handshake. Tras enviar un paquete SYN al servidor en cuestión, en función de la respuesta del servidor se determina el estado del puerto a escanear. Si se recibe un SYN-ACK, el puerto está abierto. En el caso de recibir un paquete RST, el puerto está definitivamente cerrado. Finalmente, si no se recibe un RST pero existe un error ICMP dentro del paquete, se determina que el puerto está filtrado.
+
+*insertar imagen1_p11.png*
+
+==================================================
+Desarrollo de SYN Stealth scan e ICMP scan
+==================================================
+
+Para cumplir con éxito el objetivo de la práctica se ha desarrollado el script en python synsteatlh_icmp.py en python utilizando las librerías de scapy para dicho lenguaje.
+
+Analizando el código, primero se ha desarrollado la sección del scan ICMP:
+
+[python]
+
+ip = input("Introduce la dirección IP:\n")
+print("Realizando scan ICMP...")
+
+'''Para realizar un ICMP scan, envíamos un paquete ICMP y estudiamos la respuesta que nos ha facilitado el sistema'''
+
+paquete=IP(dst=ip)/ICMP()
+
+respuesta_icmp= sr1(paquete,timeout=1, verbose=0)
+
+if respuesta_icmp == None:
+	print("El host en",ip,"no está disponible o no existe\n")
+else:
+	print("El host en",ip,"está disponible\n")
+
+[/python]
+
+En este fragmento se observa claramente que tras la solicitud de la IP a escanear, se genera un envío y devolución de un oaquete ICMP con destino la IP solicitada. Tras esto, se escanea la respuesta, y en función de si el contenido es nulo o no se determina que el host está disponible (up) o no (down)
+
+Tras esto, la siguiente sección del código muestra la implementación del Syn Stealth scan:
+[python]
+
+puertos=[80,23,443,21,22,25,3389,110,445,139,143,53,135,3306,8080,1723,111,995,993,5900]
+abiertos=[]
+filtrados=[]
+cerrados=[]
+if respuesta_icmp != None:
+	print("Realizando SYN Stelath scan...")
+	for puerto in puertos:
+		p = IP(dst=ip)/TCP(sport=RandShort(), dport=puerto, flags='S')
+		respuesta = sr1(p, timeout=2)
+		if(respuesta is None):
+			filtrados.append(puerto)
+			continue;
+		elif respuesta.haslayer(TCP):
+			if respuesta.getlayer(TCP).flags == 0x14:
+				cerrados.append(puerto)
+				continue;
+			elif respuesta.getlayer(TCP).flags == 0x12:
+				abiertos.append(puerto)
+				continue;            
+			elif (int(respuesta.getlayer(ICMP).type)==3 and int(respuesta.getlayer(ICMP).code) in [1,2,3,9,10,13]):
+				filtrados.append(puerto)
+				continue;
+else:
+	print("Fin del scanner")
+	
+[/python]
+
+Estudiando el código anterior, se han agrupado los 20 puertos tcp más populares (descritos en la propia documentación de NMAP) en una lista sobre la que se iterará a la hora de estudiar los puertos del objetivo del scan. A partir de aquí, se itera sobre cada puerto creando un paquete TCP que se envía y del que se obtiene una respuesta con sr1(). Estudiando la respuesta, en caso de ser None catalogamos el puerto directamente como filtrado. Si no, estudiamos la capa TCP del paquete para extraer los flags del paquete. En caso de que el flag sea 0x14, se puede determinar que el puerto está abierto, mientras que en el caso de que se trate de 0x12 está definitivamente cerrado. Si no es ninguna de estas dos flags, se intenta extraer el código de la capa ICMP del paquete respuesta. A partir de aquí, si el tipo es 3 y el código se encuentra en la lista [1,2,3,9,10,13] determinamos que el puerto está filtrado.
+
+==================================================
+Comparación de resultados
+==================================================
+
+Una vez demostrada la ejecución de los scans solicitados, se muestra aquí una comparativa de los resultados de realizar este scan contra los que se obtendrían de ejecutar nmap -sP -PE (ICMP scan) y nmap -sS (Syn stelath scan) sobre la IP 150.214.167.13, la cual se examinó en la práctica referente a NMAP.
+
+Los resultados que se obtienen con nmap son los siguientes:
+
+sudo nmap -sP -PE 150.214.167.13
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2021-01-26 19:43 CET
+Nmap scan report for www.c3it.uhu.es (150.214.167.13)
+Host is up (0.030s latency). 
+Nmap done: 1 IP address (1 host up) scanned in 0.21 seconds
+
+sudo nmap -sS 150.214.167.13
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2021-01-26 18:40 CET
+Nmap scan report for www.c3it.uhu.es (150.214.167.13)
+Host is up (0.013s latency).
+Not shown: 998 filtered ports
+PORT    STATE SERVICE
+80/tcp  open  http
+443/tcp open  https
+
+El host a analizar se encuentra activo y los puertos abiertos son el 80 y el 443, resultando el resto filtrados.
+
+Para nuestro script en python se obtiene la siguiente salida:
+
+sudo python3 synstealth_icmp.py 
+
+WARNING: No route found for IPv6 destination :: (no default route?). This affects only IPv6
+Introduce la dirección IP:
+150.214.167.13
+
+Realizando scan ICMP...
+El host en 150.214.167.13 está disponible
+
+Realizando SYN Stelath scan...
+
+... salida de log de scapy no relevante ...
+
+Los puertos abiertos son [80, 443]
+Los puertos filtrados son [23, 21, 22, 25, 3389, 110, 445, 139, 143, 53, 135, 3306, 8080, 1723, 111, 995, 993, 5900]
+Los puertos cerrados son []
+
+Como se puede observar, el host se muestra como disponible y los puertos 80 y 443 se encuentran abiertos, resultando en resto en estado filtrado. Concluimos por tanto que el desarrollo del script se ha completado con éxito a nivel práctico al obtener los mismos resultados que la herramienta profesional nmap. 
+
